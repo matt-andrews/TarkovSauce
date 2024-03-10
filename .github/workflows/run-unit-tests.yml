@@ -24,6 +24,11 @@ jobs:
         with:
           dotnet-version: ${{ env.DOTNET_VERSION }}
 
+      - name: 'Install MAUI workload'
+        shell: pwsh
+        run: |
+          dotnet workload install maui 
+
       - name: 'Install dependencies'
         shell: pwsh
         run: |
