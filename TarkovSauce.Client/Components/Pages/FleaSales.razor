@@ -1,0 +1,36 @@
+﻿<h3>FleaSales</h3>
+<br />
+
+<table class="flea-sales-table">
+    <tr>
+        <th>Type</th>
+        <th>Item</th>
+        <th>Quantity</th>
+        <th>Value</th>
+    </tr>
+
+    @foreach (var item in FleaSalesProvider.Events)
+    {
+        <tr>
+            <td>@item.Type</td>
+            <td>@item.ItemName</td>
+            <td>@item.Quantity</td>
+            <td>@(item.Currency)@(item.Reward)</td>
+        </tr>
+    }
+</table>
+
+<style>
+    table.flea-sales-table {
+        width: 100%;
+        border: 1px solid black;
+    }
+
+        table.flea-sales-table th {
+            border: 1px solid black;
+        }
+
+        table.flea-sales-table td {
+            border: 1px solid black;
+        }
+</style>

@@ -1,0 +1,14 @@
+﻿@page "/"
+
+@if(StateContainer.State.Value == Services.State.Home)
+{
+    <Home />
+}
+else if(StateContainer.State.Value == Services.State.RawLogs)
+{
+    <RawLog />
+}
+else if(StateContainer.State.Value == Services.State.FleaSales)
+{
+    <FleaSales />
+}
