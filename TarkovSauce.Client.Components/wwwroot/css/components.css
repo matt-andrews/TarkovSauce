@@ -4,12 +4,11 @@ html, body {
     font-size: 0.93rem;
 }
 
-
-button {
+.tsbutton button {
     color: var(--font-l1);
     background-color: var(--gray-90);
     border: solid 1px var(--gray-FF);
-    border-radius: 0.13rem;
+    border-radius: var(--border-radius-l1);
     padding: 0.3rem;
     padding-left: 0.625rem;
     padding-right: 0.625rem;
@@ -19,28 +18,88 @@ button {
     box-shadow: var(--drop-shadow);
 }
 
-    button:hover {
+    .tsbutton button:hover {
         color: var(--font-l1);
         background-color: var(--gray-40);
         transition-duration: 0.4s;
     }
 
-    button.primary {
-        background-color: var(--primary-90);
-        border: solid 1px var(--primary-FF);
+.tsbutton.primary button {
+    background-color: var(--primary-90);
+    border: solid 1px var(--primary-FF);
+}
+
+    .tsbutton.primary button:hover {
+        background-color: var(--primary-40);
+        color: var(--primary-FF);
     }
 
-        button.primary:hover {
-            background-color: var(--primary-40);
-            color: var(--primary-FF);
-        }
+.tsbutton.warning button {
+    background-color: var(--warning-90);
+    border: solid 1px var(--warning-FF);
+}
 
-    button.warning {
-        background-color: var(--warning-90);
-        border: solid 1px var(--warning-FF);
+    .tsbutton.warning button:hover {
+        background-color: var(--warning-40);
+        color: var(--warning-FF);
     }
 
-        button.warning:hover {
-            background-color: var(--warning-40);
-            color: var(--warning-FF);
+
+.tsinput {
+    width: 100%;
+    display: flex;
+    flex-flow: wrap;
+}
+
+    .tsinput .input-placeholder {
+        font-size: 0.8rem;
+        width: 100%;
+    }
+
+    .tsinput input {
+        background-color: var(--background-l2);
+        color: var(--font-l1);
+        border: 1px solid var(--primary-40);
+        border-radius: var(--border-radius-l1);
+        box-shadow: var(--drop-shadow);
+        outline: none;
+        width: 100%;
+        transition-duration: 0.4s;
+        padding: 0.3rem;
+    }
+
+        .tsinput input:focus {
+            border: 1px solid var(--primary-90);
+            transition-duration: 0.4s;
         }
+
+.tshint {
+    font-style: italic;
+    color: slategray;
+}
+
+
+
+::-webkit-input-placeholder {
+    /* WebKit browsers */
+    color: transparent;
+}
+
+:-moz-placeholder {
+    /* Mozilla Firefox 4 to 18 */
+    color: transparent;
+}
+
+::-moz-placeholder {
+    /* Mozilla Firefox 19+ */
+    color: transparent;
+}
+
+:-ms-input-placeholder {
+    /* Internet Explorer 10+ */
+    color: transparent;
+}
+
+input::placeholder {
+    color: transparent;
+}

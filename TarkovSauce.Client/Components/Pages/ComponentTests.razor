@@ -13,10 +13,24 @@
             <TSButton Content="Warning" IsPrimary=false Css="warning" />
         </li>
     </ul>
+    <p>Inputs</p>
+    <ul>
+        <li>
+            <div style="display:flex;flex-direction:column">
+                <TSInput @bind-Value=_inputVal Placeholder="I am a placeholder for an input field" />
+                <small class="tshint">Binding: @_inputVal</small>
+            </div>
+
+        </li>
+    </ul>
 </div>
 
 <style>
-    .component-tests ul button{
+    .component-tests ul button {
         margin: 4px;
     }
 </style>
+
+@code{
+    private string _inputVal = "";
+}
