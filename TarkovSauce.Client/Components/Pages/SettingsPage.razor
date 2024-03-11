@@ -1,0 +1,11 @@
+﻿<h3>App Settings</h3>
+<br />
+@if (_appData is not null)
+{
+    <div>
+        <TSInput Placeholder="Tarkov Log Path" @bind-Value=_appData.Settings.TarkovPath />
+        <TSCheckbox Label="Test" @bind-IsOn=_appData.Settings.Test />
+    </div>
+    <br />
+    <TSButton Content="Save" OnClick="OnSaveEvent" IsPrimary=true />
+}
