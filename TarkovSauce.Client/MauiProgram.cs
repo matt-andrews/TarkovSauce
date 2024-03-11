@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using TarkovSauce.Client.Components;
 using TarkovSauce.Client.Data.MessageListeners;
 using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.HttpClients;
@@ -23,6 +24,7 @@ namespace TarkovSauce.Client
 
             builder.Configuration.AddJsonFile(AppDataManager.SettingsFile, true, true);
 
+            builder.Services.AddTSComponentServices();
             builder.Services.AddSingleton<StateContainer>();
             
             var appDataManager = new AppDataManager();

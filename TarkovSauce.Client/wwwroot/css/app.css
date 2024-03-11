@@ -19,6 +19,9 @@
     --border-90: #40404090;
     --border-40: #40404040;
     --border-radius-l1: 0.15rem;
+    --border-radius-l2: 0.3rem;
+    --toast-succ: #004515DD;
+    --toast-err: #45000cDD;
 }
 
 a{
