@@ -1,0 +1,59 @@
+﻿@inject ITSToastService ToastService
+@if (_isVisible)
+{
+    <div class="tstoast @_css">
+        @_message
+    </div>
+}
+<style>
+    div.tstoast {
+        position: fixed;
+        left: 30%;
+        width: 40%;
+        height: 5%;
+        bottom: 0;
+        padding: 0.2rem;
+        padding-left: 1rem;
+        padding-right: 1rem;
+        display: flex;
+        align-content: center;
+        justify-content: center;
+        font-weight: 500;
+        border-radius: var(--border-radius-l2);
+        border-bottom-right-radius: 0;
+        border-bottom-left-radius: 0;
+    }
+
+        div.tstoast.success {
+            background-color: var(--toast-succ);
+        }
+
+        div.tstoast.error {
+            background-color: var(--toast-err);
+        }
+</style>
+@code {
+    private string _css = "";
+    private bool _isVisible;
+    private string _message = "";
+    private Timer? _timer;
+    protected override void OnInitialized()
+    {
+        if (ToastService is TSToastService service)
+        {
+            service.OnEvent += (msg, type) =>
+            {
+                _message = msg;
+                _css = type.ToString().ToLower();
+                _timer = new Timer(OnTimerTrigger, null, 3000, 0);
+                _isVisible = true;
+                InvokeAsync(StateHasChanged);
+            };
+        }
+    }
+    private void OnTimerTrigger(object? state)
+    {
+        _isVisible = false;
+        InvokeAsync(StateHasChanged);
+    }
+}

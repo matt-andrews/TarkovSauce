@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.Logging;
+﻿using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.Logging;
+using TarkovSauce.Client.Components;
 using TarkovSauce.Client.Data.MessageListeners;
 using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.HttpClients;
@@ -20,7 +22,13 @@ namespace TarkovSauce.Client
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
+            builder.Configuration.AddJsonFile(AppDataManager.SettingsFile, true, true);
+
+            builder.Services.AddTSComponentServices();
             builder.Services.AddSingleton<StateContainer>();
+            
+            var appDataManager = new AppDataManager();
+            builder.Services.AddSingleton<IAppDataManager>(appDataManager);
 
             var tarkovDevHttpClient = new TarkovDevHttpClient(new HttpClient()
             {
@@ -34,7 +42,15 @@ namespace TarkovSauce.Client
             builder.Services
                 .AddWatcher(options =>
                 {
-                    options.LogPath = RegistryFinder.GetTarkovLogsLocation();
+                    string? path = builder.Configuration["Settings:TarkovPath"];
+                    if (string.IsNullOrWhiteSpace(path))
+                    {
+                        path = RegistryFinder.GetTarkovLogsLocation();
+                        var appdata = appDataManager.GetAppData();
+                        appdata.Settings.TarkovPath = path;
+                        appDataManager.WriteAppData(appdata);
+                    }
+                    options.LogPath = path;
                     options.AddFile(new WatcherFile("application", "application.log"));
                     options.AddFile(new WatcherFile("notifications", "notifications.log"));
                 });

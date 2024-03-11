@@ -11,6 +11,7 @@ namespace TarkovSauce.Client.Services
         Home,
         RawLogs,
         FleaSales,
-        ComponentTests
+        ComponentTests,
+        Settings
     }
 }

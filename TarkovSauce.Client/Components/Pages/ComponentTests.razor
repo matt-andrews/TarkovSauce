@@ -1,4 +1,6 @@
-﻿<h3>Component Tests</h3>
+﻿@using TarkovSauce.Client.Components.Modal
+@inject ITSToastService ToastService
+<h3>Component Tests</h3>
 
 @*
     <TarkovSauce.Client.Components.Misc.TSSPinner IsSpinning=true />
@@ -8,7 +10,7 @@
     <p>Buttons</p>
     <ul>
         <li>
-            <TSButton Content="Normal" IsPrimary=false />
+            <TSButton Content="Normal" IsPrimary=false OnClick='_ => ToastService.Toast("Test toast message", ToastType.Success)' />
         </li>
         <li>
             <TSButton Content="Primary" IsPrimary=true />
