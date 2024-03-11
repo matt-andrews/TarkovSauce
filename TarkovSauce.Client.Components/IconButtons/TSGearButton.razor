@@ -1,0 +1,20 @@
+﻿@using TarkovSauce.Client.Components.Buttons
+@inherits ButtonBase
+
+<div class="tsgearbutton icon-button">
+    <button class="@CssImpl" @onclick="async _ => await OnClick.InvokeAsync()" title="@Label">
+        <i class="bi-gear" />
+    </button>
+</div>
+
+<style>
+    .icon-button button i.bi-gear:before {
+        animation: rotatePopIn 2s forwards;
+    }
+
+    .icon-button button:hover i.bi-gear:before {
+        content: '\f3e2';
+        animation: rotatePopOut 2s forwards;
+    }
+
+</style>

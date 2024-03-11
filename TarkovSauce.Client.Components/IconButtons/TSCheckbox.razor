@@ -1,0 +1,42 @@
+﻿@using TarkovSauce.Client.Components.Buttons
+@inherits ToggleButtonBase
+
+<div class="tscheckbox icon-button">
+    <button class="@CssImpl" @onclick="OnToggleEvent" title="@Label" id="@_id">
+        @if (IsOn)
+        {
+            <i class="bi-check-square" />
+        }
+        else
+        {
+            <i class="bi-square" />
+        }
+    </button>
+    <label for="@_id" class="no-click">
+        @Label
+    </label>
+</div>
+
+<style>
+    .icon-button button i.bi-check-square:before {
+        animation: popIn 0.5s forwards;
+    }
+
+    .icon-button button:hover i.bi-check-square:before {
+        animation: popOut 0.5s forwards;
+        content: '\F26C';
+    }
+
+    .icon-button button i.bi-square:before {
+        animation: popIn 0.5s forwards;
+    }
+
+    .icon-button button:hover i.bi-square:before {
+        animation: popOut 0.5s forwards;
+        content: '\F582';
+    }
+</style>
+
+@code {
+    private readonly string _id = Guid.NewGuid().ToString();
+}
