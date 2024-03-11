@@ -12,5 +12,6 @@ namespace TarkovSauce.Client.Components.Inputs
         public string Value { get; set; } = "";
         [Parameter]
         public EventCallback<string> ValueChanged { get; set; }
+        protected override string CssImpl => $"tsinput {base.CssImpl}";
     }
 }

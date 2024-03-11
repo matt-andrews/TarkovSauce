@@ -1,0 +1,17 @@
+﻿@inherits StyleableComponentBase
+
+<div class="@CssImpl" style="@StyleImpl">
+    @if (HeaderContent is not null)
+    {
+        <div>
+            @HeaderContent
+            <hr />
+        </div>
+    }
+    else if (!string.IsNullOrWhiteSpace(Header))
+    {
+        <h4>@Header</h4>
+        <hr />
+    }
+    @ChildContent
+</div>

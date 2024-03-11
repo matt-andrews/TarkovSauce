@@ -71,6 +71,7 @@ html, body {
         .tsinput input:focus {
             border: 1px solid var(--primary-90);
         }
+
 .no-click {
     user-select: none;
 }
@@ -112,6 +113,20 @@ html, body {
         background-color: transparent;
         color: var(--primary-90);
     }
+
+hr {
+    color: var(--border-90);
+    width: 90%;
+    margin-left: 5%;
+}
+
+div.tscard {
+    border-top: solid 0.5px var(--border-90);
+    border-radius: var(--border-radius-l1);
+    box-shadow: var(--drop-shadow-heavy);
+    padding: 1.025rem;
+    margin-bottom: 0.925rem;
+}
 
 
 ::-webkit-input-placeholder {

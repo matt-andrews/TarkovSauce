@@ -12,12 +12,13 @@
     --warning-FF: #cf4419;
     --warning-90: #cf441990;
     --warning-40: #cf441940;
-    --drop-shadow: -0.3rem 0.3rem 0.5rem rgba(0,0,0,0.1), 0.3rem 0.3rem 0.5rem rgba(0,0,0,0.1);
-    --drop-shadow-medium: -0.13rem 0 0.5rem rgba(0,0,0,0.1),0.13rem 0 0.5rem rgba(0,0,0,0.1);
+    --drop-shadow: -0.3rem 0.3rem 0.5rem rgba(0,0,0,0.2), 0.3rem 0.3rem 0.5rem rgba(0,0,0,0.2);
+    --drop-shadow-medium: -0.13rem 0 0.5rem rgba(0,0,0,0.2),0.13rem 0 0.5rem rgba(0,0,0,0.2);
+    --drop-shadow-heavy: -0.35rem 0.35rem 0.55rem rgba(0,0,0,0.2), 0.35rem 0.35rem 0.55rem rgba(0,0,0,0.2);
     --border-FF: #404040;
     --border-90: #40404090;
     --border-40: #40404040;
-    --border-radius-l1: 0.13rem;
+    --border-radius-l1: 0.15rem;
 }
 
 a{

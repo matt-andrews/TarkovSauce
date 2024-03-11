@@ -1,8 +1,8 @@
 ﻿@using TarkovSauce.Client.Components.Buttons
 @inherits ToggleButtonBase
 
-<div class="tscheckbox icon-button">
-    <button class="@CssImpl" @onclick="OnToggleEvent" title="@Label" id="@_id">
+<div class="@CssImpl" style="@StyleImpl">
+    <button @onclick="OnToggleEvent" title="@Label" id="@_id">
         @if (IsOn)
         {
             <i class="bi-check-square" />
@@ -38,5 +38,6 @@
 </style>
 
 @code {
+    protected override string CssImpl => $"tscheckbox icon-button {base.CssImpl}";
     private readonly string _id = Guid.NewGuid().ToString();
 }
