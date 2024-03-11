@@ -127,7 +127,42 @@ div.tscard {
     padding: 1.025rem;
     margin-bottom: 0.925rem;
 }
+/*BEGIN TABLE*/
+div.tstable {
+    box-shadow: var(--drop-shadow);
+    width: 100%;
+    border: 1px solid var(--border-90);
+    padding: 4px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    background-color: var(--background-l2);
+    opacity: 0.9;
+}
 
+    div.tstable > table {
+        width: 100%;
+        border-top: 1px solid var(--border-90);
+        margin-top: 4px;
+        max-width: 100vw;
+    }
+
+        div.tstable > table tr th {
+            padding-top: 16px;
+        }
+
+    div.tstable td.style-row {
+        border: 1px solid var(--border-90);
+        border-top: none;
+    }
+
+    div.tstable > table tr td {
+        border: 1px solid var(--border-90);
+        border-bottom: none;
+        padding: 8px;
+        white-space: nowrap;
+    }
+
+/*END TABLE*/
 
 ::-webkit-input-placeholder {
     /* WebKit browsers */
