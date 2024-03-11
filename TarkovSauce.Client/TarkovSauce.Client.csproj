@@ -51,6 +51,7 @@
     </ItemGroup>
 
     <ItemGroup>
+      <ProjectReference Include="..\TarkovSauce.Client.Components\TarkovSauce.Client.Components.csproj" />
       <ProjectReference Include="..\TarkovSauce.Watcher\TarkovSauce.Watcher.csproj" />
     </ItemGroup>
 

@@ -1,0 +1,46 @@
+html, body {
+    background-color: var(--background-l1);
+    color: var(--font-l1);
+    font-size: 0.93rem;
+}
+
+
+button {
+    color: var(--font-l1);
+    background-color: var(--gray-90);
+    border: solid 1px var(--gray-FF);
+    border-radius: 0.13rem;
+    padding: 0.3rem;
+    padding-left: 0.625rem;
+    padding-right: 0.625rem;
+    margin-right: 0.5rem;
+    font-weight: 500;
+    transition-duration: 0.4s;
+    box-shadow: var(--drop-shadow);
+}
+
+    button:hover {
+        color: var(--font-l1);
+        background-color: var(--gray-40);
+        transition-duration: 0.4s;
+    }
+
+    button.primary {
+        background-color: var(--primary-90);
+        border: solid 1px var(--primary-FF);
+    }
+
+        button.primary:hover {
+            background-color: var(--primary-40);
+            color: var(--primary-FF);
+        }
+
+    button.warning {
+        background-color: var(--warning-90);
+        border: solid 1px var(--warning-FF);
+    }
+
+        button.warning:hover {
+            background-color: var(--warning-40);
+            color: var(--warning-FF);
+        }

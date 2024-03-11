@@ -1,20 +1,31 @@
-﻿html, body {
-    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+﻿:root {
+    --sidebar-bg: linear-gradient(180deg, #fa810090 0%, #fa810040 90%);
+    --background-l1: #202124;
+    --font-l1: #FFFFFFCC;
+    --black: #303030;
+    --gray-FF: #6a6a6a;
+    --gray-90: #6a6a6a90;
+    --gray-40: #6a6a6a40;
+    --primary-FF: #fa8100;
+    --primary-90: #fa810090;
+    --primary-40: #fa810040;
+    --warning-FF: #cf4419;
+    --warning-90: #cf441990;
+    --warning-40: #cf441940;
+    --drop-shadow: -0.3rem 0.3rem 0.5rem rgba(0,0,0,0.1), 0.3rem 0.3rem 0.5rem rgba(0,0,0,0.1);
+    --drop-shadow-medium: -0.13rem 0 0.5rem rgba(0,0,0,0.1),0.13rem 0 0.5rem rgba(0,0,0,0.1);
+    --border-FF: #404040;
+    --border-90: #40404090;
+    --border-40: #40404040;
 }
 
-a, .btn-link {
-    color: #006bb7;
+a{
+    color: var(--primary-90);
 }
 
-.btn-primary {
-    color: #fff;
-    background-color: #1b6ec2;
-    border-color: #1861ac;
-}
-
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-    box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
-}
+    a:hover{
+        color: var(--primary-40);
+    }
 
 .content {
     padding-top: 1.1rem;
