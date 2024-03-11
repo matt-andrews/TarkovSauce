@@ -1,0 +1,11 @@
+﻿@inherits StyleableComponentBase
+
+<div class="@CssImpl" style="@StyleImpl">
+    <label for="@_id" class="input-placeholder">
+        @if (!string.IsNullOrWhiteSpace(Placeholder))
+        {
+            @Placeholder
+        }
+    </label>
+    <input id="@_id" type="text" @bind-value:get=Value @bind-value:set="v => ValueChanged.InvokeAsync(v)" />
+</div>

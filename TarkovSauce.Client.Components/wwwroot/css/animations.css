@@ -1,0 +1,71 @@
+@keyframes swipeRight {
+    from {
+        transform: translateX(-15px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes swipeLeft {
+    from {
+        transform: translateX(15px);
+        opacity: 0;
+    }
+
+    to {
+        transform: translateX(0px);
+    }
+}
+
+@keyframes rotatePopIn {
+    from {
+        transform: rotate(0deg) scale(1);
+    }
+
+    to {
+        transform: rotate(360deg) scale(.8);
+    }
+}
+
+@keyframes rotatePopOut {
+    from {
+        transform: rotate(360deg) scale(.8);
+    }
+
+    to {
+        transform: rotate(0deg) scale(1);
+    }
+}
+
+@keyframes popIn {
+    from {
+        transform: scale(1);
+    }
+
+    to {
+        transform: scale(.8);
+    }
+}
+
+@keyframes popOut {
+    from {
+        transform: scale(.8);
+    }
+
+    to {
+        transform: scale(1);
+    }
+}
+
+@keyframes lds-dual-ring {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}

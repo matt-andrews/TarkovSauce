@@ -1,5 +1,6 @@
 ﻿@page "/"
 
+<PageTitle>Tarkov Sauce</PageTitle>
 @if(StateContainer.State.Value == Services.State.Home)
 {
     <Home />
@@ -11,4 +12,8 @@ else if(StateContainer.State.Value == Services.State.RawLogs)
 else if(StateContainer.State.Value == Services.State.FleaSales)
 {
     <FleaSales />
+}
+else if(StateContainer.State.Value == Services.State.ComponentTests)
+{
+    <ComponentTests />
 }
