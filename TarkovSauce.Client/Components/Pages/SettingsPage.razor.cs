@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Components;
+using TarkovSauce.Client.Components.Modal;
 using TarkovSauce.Client.Utils;
 
 namespace TarkovSauce.Client.Components.Pages
@@ -7,6 +8,8 @@ namespace TarkovSauce.Client.Components.Pages
     {
         [Inject]
         public IAppDataManager AppDataManager { get; set; } = default!;
+        [Inject]
+        public ITSToastService ToastService { get; set; } = default!;
         private AppDataJson? _appData;
         protected override void OnInitialized()
         {
@@ -20,6 +23,7 @@ namespace TarkovSauce.Client.Components.Pages
             }
 
             AppDataManager.WriteAppData(_appData);
+            ToastService.Toast("Your settings have been saved", ToastType.Success);
         }
     }
 }
