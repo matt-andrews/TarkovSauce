@@ -1,19 +1,50 @@
-﻿<h3>Quests</h3>
+﻿<h3>Tasks</h3>
 
 @if (_tasks is not null)
 {
-    foreach (var task in _tasks.OrderBy(task => task.Objectives.Any(objectives => objectives.Maps.Any())))
-    {
-        if (TestForMap(task))
+    <div class="tasks-container">
+        @foreach (var task in _tasks.OrderBy(task => task.Objectives.Any(objectives => objectives.Maps.Any())))
         {
-            <TSCard Header="@task.Name">
-                <ul>
-                    @foreach (var objective in task.Objectives)
-                    {
-                        <li>@objective.Description</li>
-                    }
-                </ul>
-            </TSCard>
+            if (TestForMap(task))
+            {
+                <TSCard>
+                    <HeaderContent>
+                        <div class="task-header">
+                            <div class="task-header-title">
+                                <h5>@task.Name</h5>
+                            </div>
+                            <div class="task-header-trader">
+                                <img src="@task.Trader.ImageLink" />
+                            </div>
+                        </div>
+                    </HeaderContent>
+                    <ChildContent>
+                        <ul>
+                            @foreach (var objective in task.Objectives)
+                            {
+                                <li>@objective.Description</li>
+                            }
+                        </ul>
+                    </ChildContent>
+                </TSCard>
+            }
         }
-    }
+    </div>
 }
+<style>
+    div.tasks-container {
+    }
+
+        div.tasks-container div.task-header {
+            width: 100%;
+            display: flex;
+            justify-items: end;
+        }
+
+            div.tasks-container div.task-header div.task-header-title {
+                width: 100%;
+            }
+
+            div.tasks-container div.task-header div.task-header-trader {
+            }
+</style>
