@@ -20,25 +20,33 @@ namespace TarkovSauce.Client.Components.Pages
         protected override async Task OnInitializedAsync()
         {
             StateContainer.IsLoading.Value = true;
-            var current = await TrackerHttpClient.GetProgress();
+            await BuildCurrentQuests();
+            StateContainer.IsLoading.Value = false;
+            SelectedMapProvider.OnStateChanged = () => InvokeAsync(StateHasChanged);
+            await base.OnInitializedAsync();
+        }
+
+        private async Task BuildCurrentQuests()
+        {
+            var progress = await TrackerHttpClient.GetProgress();
             if (StateContainer.TasksCache is null)
             {
                 StateContainer.TasksCache = await DevHttpClient.GetTasksBatch();
             }
 
             var tasks = StateContainer.TasksCache?.Data?.Tasks?
-                .Where(w => w.MinPlayerLevel <= current?.Data.PlayerLevel)
-                .Where(w => !current?.Data.TasksProgress.Any(a => a.Id == w.Id) ?? false)
-                .Where(w => !(w.Name.StartsWith("Compensation for") && w.MinPlayerLevel == 0))
+                .Where(task => task.MinPlayerLevel <= progress?.Data.PlayerLevel)
+                .Where(task => !progress?.Data.TasksProgress.Any(tp => tp.Id == task.Id) ?? false)
+                .Where(task => task.TraderRequirements.Length == 0)
                 ?? [];
-            //this can probably be linqified but I'm too tired to think about it lol
+
             List<TaskModel> results = [];
             foreach (var task in tasks)
             {
                 bool skip = false;
                 foreach (var req in task.TaskRequirements)
                 {
-                    if (!current?.Data.TasksProgress.Any(a => a.Id == req.Task.Id) ?? false)
+                    if (!progress?.Data.TasksProgress.Any(tp => tp.Id == req.Task.Id) ?? false)
                     {
                         skip = true;
                         break;
@@ -48,16 +56,12 @@ namespace TarkovSauce.Client.Components.Pages
                 results.Add(task);
             }
             _tasks = results;
-
-            StateContainer.IsLoading.Value = false;
-            SelectedMapProvider.OnStateChanged = () => InvokeAsync(StateHasChanged);
-            await base.OnInitializedAsync();
         }
 
         private bool TestForMap(TaskModel model)
         {
             if (string.IsNullOrWhiteSpace(SelectedMapProvider.Map)) return true;
-            if (model.Objectives.Any(a => a.Maps.Any(aa => aa.NormalizedName == SelectedMapProvider.Map) || a.Maps.Length == 0))
+            if (model.Objectives.Any(objective => objective.Maps.Any(map => map.NormalizedName == SelectedMapProvider.Map) || (objective.Maps.Length == 0 && objective.Type != "extract" && objective.Type != "giveQuestItem")))
                 return true;
             return false;
         }

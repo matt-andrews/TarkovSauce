@@ -2,16 +2,18 @@
 
 @if (_tasks is not null)
 {
-    foreach (var task in _tasks)
+    foreach (var task in _tasks.OrderBy(task => task.Objectives.Any(objectives => objectives.Maps.Any())))
     {
-        if (!TestForMap(task)) continue;
-        <TSCard Header="@task.Name">
-            <ul>
-                @foreach (var objective in task.Objectives)
-                {
-                    <li>@objective.Description</li>
-                }
-            </ul>
-        </TSCard>
+        if (TestForMap(task))
+        {
+            <TSCard Header="@task.Name">
+                <ul>
+                    @foreach (var objective in task.Objectives)
+                    {
+                        <li>@objective.Description</li>
+                    }
+                </ul>
+            </TSCard>
+        }
     }
 }
