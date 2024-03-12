@@ -35,7 +35,10 @@ namespace TarkovSauce.Client
                 BaseAddress = new Uri("https://api.tarkov.dev")
             });
             builder.Services.AddSingleton<ITarkovDevHttpClient>(provider => tarkovDevHttpClient);
-            builder.Services.AddSingleton<ITarkovTrackerHttpClient, TarkovTrackerHttpClient>();
+            builder.Services.AddSingleton<ITarkovTrackerHttpClient>(provider
+                => new TarkovTrackerHttpClient(new HttpClient(),
+                    provider.GetRequiredService<IConfiguration>(),
+                    provider.GetRequiredService<ILogger<TarkovTrackerHttpClient>>()));
 
 
             builder.Services.AddSingleton<IRawLogProvider, RawLogProvider>();

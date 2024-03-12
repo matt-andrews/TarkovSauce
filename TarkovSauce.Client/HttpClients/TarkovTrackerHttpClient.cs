@@ -25,7 +25,7 @@ namespace TarkovSauce.Client.HttpClients
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return JsonSerializer.Deserialize<TokenResponse>(resultString) ?? null;
+                return resultString.Deserialize<TokenResponse>() ?? null;
             }
             else
             {
@@ -42,7 +42,7 @@ namespace TarkovSauce.Client.HttpClients
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return JsonSerializer.Deserialize<ProgressResponse>(resultString) ?? null;
+                return resultString.Deserialize<ProgressResponse>() ?? null;
             }
             else
             {
