@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TarkovSauce.Client.Data.Models.Remote;
+using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.HttpClients;
 using TarkovSauce.Client.Services;
 
@@ -13,6 +14,8 @@ namespace TarkovSauce.Client.Components.Pages
         public ITarkovDevHttpClient DevHttpClient { get; set; } = default!;
         [Inject]
         public StateContainer StateContainer { get; set; } = default!;
+        [Inject]
+        public ISelectedMapProvider SelectedMapProvider { get; set; } = default!;
         private IEnumerable<TaskModel>? _tasks;
         protected override async Task OnInitializedAsync()
         {
@@ -47,7 +50,16 @@ namespace TarkovSauce.Client.Components.Pages
             _tasks = results;
 
             StateContainer.IsLoading.Value = false;
+            SelectedMapProvider.OnStateChanged = () => InvokeAsync(StateHasChanged);
             await base.OnInitializedAsync();
+        }
+
+        private bool TestForMap(TaskModel model)
+        {
+            if (string.IsNullOrWhiteSpace(SelectedMapProvider.Map)) return true;
+            if (model.Objectives.Any(a => a.Maps.Any(aa => aa.NormalizedName == SelectedMapProvider.Map) || a.Maps.Length == 0))
+                return true;
+            return false;
         }
     }
 }

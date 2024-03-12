@@ -4,6 +4,7 @@
 {
     foreach (var task in _tasks)
     {
+        if (!TestForMap(task)) continue;
         <TSCard Header="@task.Name">
             <ul>
                 @foreach (var objective in task.Objectives)
