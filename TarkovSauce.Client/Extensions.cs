@@ -12,5 +12,9 @@ namespace TarkovSauce.Client
         {
             return JsonSerializer.Deserialize<T>(json, _defaultOptions);
         }
+        public static string Serialize<T>(this T value)
+        {
+            return JsonSerializer.Serialize(value, _defaultOptions);
+        }
     }
 }

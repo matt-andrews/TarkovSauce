@@ -26,7 +26,7 @@ namespace TarkovSauce.Client
 
             builder.Services.AddTSComponentServices();
             builder.Services.AddSingleton<StateContainer>();
-            
+
             var appDataManager = new AppDataManager();
             builder.Services.AddSingleton<IAppDataManager>(appDataManager);
 
@@ -35,9 +35,16 @@ namespace TarkovSauce.Client
                 BaseAddress = new Uri("https://api.tarkov.dev")
             });
             builder.Services.AddSingleton<ITarkovDevHttpClient>(provider => tarkovDevHttpClient);
+            builder.Services.AddSingleton<ITarkovTrackerHttpClient>(provider
+                => new TarkovTrackerHttpClient(new HttpClient(),
+                    provider.GetRequiredService<IConfiguration>(),
+                    provider.GetRequiredService<ILogger<TarkovTrackerHttpClient>>()));
+
 
             builder.Services.AddSingleton<IRawLogProvider, RawLogProvider>();
             builder.Services.AddSingleton<IFleaSalesProvider, FleaSalesProvider>();
+            builder.Services.AddSingleton<ITarkovTrackerProvider, TarkovTrackerProvider>();
+            builder.Services.AddSingleton<ISelectedMapProvider, SelectedMapProvider>();
 
             builder.Services
                 .AddWatcher(options =>
