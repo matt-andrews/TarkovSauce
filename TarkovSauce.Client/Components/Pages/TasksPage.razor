@@ -1,0 +1,16 @@
+﻿<h3>Quests</h3>
+
+@if (_tasks is not null)
+{
+    foreach (var task in _tasks)
+    {
+        <TSCard Header="@task.Name">
+            <ul>
+                @foreach (var objective in task.Objectives)
+                {
+                    <li>@objective.Description</li>
+                }
+            </ul>
+        </TSCard>
+    }
+}

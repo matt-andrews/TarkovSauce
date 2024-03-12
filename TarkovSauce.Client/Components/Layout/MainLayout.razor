@@ -17,4 +17,12 @@
         </article>
     </main>
     <TarkovSauce.Client.Components.Modal.TSToast />
+    <TarkovSauce.Client.Components.Misc.TSSPinner @bind-IsSpinning=StateContainer.IsLoading.Value />
 </div>
+
+@code {
+    protected override void OnInitialized()
+    {
+        StateContainer.IsLoading.OnValueChanged += b => InvokeAsync(StateHasChanged);
+    }
+}
