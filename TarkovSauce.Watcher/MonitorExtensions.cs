@@ -9,12 +9,12 @@ namespace TarkovSauce.Watcher
         {
             MonitorOptions options = new();
             optionsBuilder(options);
-            services.AddSingleton(new Monitor(options).Start());
+            services.AddSingleton<IMonitor>(new Monitor(options).Start());
             return services;
         }
         public static void UseWatcher(this IServiceProvider services, Action<IServiceProvider, List<IMessageListener>> listenersBuilder)
         {
-            var monitor = services.GetRequiredService<Monitor>();
+            var monitor = services.GetRequiredService<IMonitor>() as Monitor ?? throw new Exception("Monitor is not the correct implementation");
             List<IMessageListener> listeners = [];
             listenersBuilder(services, listeners);
             monitor.RegisterListeners(listeners);

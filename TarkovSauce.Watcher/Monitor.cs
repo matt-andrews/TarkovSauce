@@ -4,14 +4,18 @@ using TarkovSauce.Watcher.Interfaces;
 
 namespace TarkovSauce.Watcher
 {
-    internal class Monitor : IWatcherEventListener
+    public interface IMonitor
+    {
+        void ChangePath(string path);
+    }
+    internal class Monitor : IWatcherEventListener, IMonitor
     {
         private Process? _process;
         private readonly Dictionary<string, Watcher> _watchers = [];
         private MessageFactory? _messageFactory;
         private readonly MonitorOptions _options;
-        private readonly FileSystemWatcher _logFileCreateWatcher;
         private readonly System.Timers.Timer _processTimer;
+        private FileSystemWatcher _logFileCreateWatcher;
 
         public Monitor(MonitorOptions options)
         {
@@ -43,6 +47,22 @@ namespace TarkovSauce.Watcher
             UpdateProcess();
             WatchFolders();
             return this;
+        }
+
+        public void ChangePath(string path)
+        {
+            foreach(var watcher in _watchers)
+            {
+                watcher.Value.Stop();
+            }
+            _watchers.Clear();
+            _options.LogPath = path;
+            _logFileCreateWatcher = new FileSystemWatcher
+            {
+                Filter = "*.log",
+                IncludeSubdirectories = true,
+            };
+            Start();
         }
 
         private void WatchFolders()
