@@ -1,5 +1,7 @@
-﻿using TarkovSauce.Client.Data.EventArgs;
+﻿using SQLite;
+using TarkovSauce.Client.Data.EventArgs;
 using TarkovSauce.Client.HttpClients;
+using TarkovSauce.Client.Services;
 
 namespace TarkovSauce.Client.Data.Providers
 {
@@ -9,21 +11,33 @@ namespace TarkovSauce.Client.Data.Providers
         Task AppendSale(FleaSoldMessageEventArgs? args);
         Task AppendExpiry(FleaExpiredeMessageEventArgs? args);
     }
-    public class FleaSalesProvider(ITarkovDevHttpClient _httpClient) : IFleaSalesProvider
+    public class FleaSalesProvider : IFleaSalesProvider
     {
+        private readonly ITarkovDevHttpClient _httpClient;
+        private readonly ISqlService _sqlService;
+
         public List<FleaEventModel> Events { get; } = [];
         public Action? OnStateChanged { get; set; }
+        
+        public FleaSalesProvider(ITarkovDevHttpClient httpClient, ISqlService sqlService)
+        {
+            _httpClient = httpClient;
+            _sqlService = sqlService;
+            Events.AddRange(sqlService.Get<FleaEventModel>());
+        }
 
         public async Task AppendExpiry(FleaExpiredeMessageEventArgs? args)
         {
             if (args is null) return;
             var item = (await _httpClient.GetItemNameBatch(args.ItemId))?.Data?.Items?.FirstOrDefault()?.Name ?? "Not Found";
-            Events.Add(new FleaEventModel()
+            var ev = new FleaEventModel()
             {
                 Type = FleaEventType.Expired,
                 ItemName = item,
                 Quantity = args.ItemCount
-            });
+            };
+            Events.Add(ev);
+            _sqlService.Insert(ev);
             OnStateChanged?.Invoke();
         }
 
@@ -32,7 +46,7 @@ namespace TarkovSauce.Client.Data.Providers
             if (args is null) return;
             var soldItem = (await _httpClient.GetItemNameBatch(args.SoldItemId))?.Data?.Items?.FirstOrDefault()?.Name ?? "Not Found";
             var currency = args.ReceivedItems.FirstOrDefault(f => !string.IsNullOrWhiteSpace(f.Key));
-            Events.Add(new FleaEventModel()
+            var ev = new FleaEventModel()
             {
                 Type = FleaEventType.Sale,
                 Buyer = args.Buyer,
@@ -40,12 +54,16 @@ namespace TarkovSauce.Client.Data.Providers
                 Currency = currency.Key,
                 Reward = currency.Value,
                 Quantity = args.SoldItemCount
-            });
+            };
+            Events.Add(ev);
+            _sqlService.Insert(ev);
             OnStateChanged?.Invoke();
         }
     }
     public class FleaEventModel
     {
+        [PrimaryKey, AutoIncrement]
+        public int Id { get; set; }
         public FleaEventType Type { get; set; }
         public string ItemName { get; set; } = "";
         public string Buyer { get; set; } = "";

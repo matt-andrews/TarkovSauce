@@ -10,7 +10,7 @@
             <th>Value</th>
         </tr>
 
-        @foreach (var item in FleaSalesProvider.Events)
+        @foreach (var item in FleaSalesProvider.Events.OrderByDescending(ev => ev.Id))
         {
             <tr>
                 <td>@item.Type</td>
