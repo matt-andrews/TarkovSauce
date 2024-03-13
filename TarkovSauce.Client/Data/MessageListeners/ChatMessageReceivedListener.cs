@@ -3,7 +3,10 @@ using TarkovSauce.Client.Data.Providers;
 
 namespace TarkovSauce.Client.Data.MessageListeners
 {
-    public class ChatMessageReceivedListener(IRawLogProvider _rawLogProvider, IFleaSalesProvider _fleaSalesProvider) : BaseMessageListener(_rawLogProvider)
+    public class ChatMessageReceivedListener(IRawLogProvider _rawLogProvider,
+        IFleaSalesProvider _fleaSalesProvider,
+        ITarkovTrackerProvider _tarkovTrackerProvider,
+        ITarkovTrackerLogsProvider _tarkovTrackerLogsProvider) : BaseMessageListener(_rawLogProvider)
     {
         public override string Match => "Got notification | ChatMessageReceived";
 
@@ -32,18 +35,18 @@ namespace TarkovSauce.Client.Data.MessageListeners
             if (args.Message.Type >= MessageType.TaskStarted && args.Message.Type <= MessageType.TaskFinished)
             {
                 var statusArgs = str.Deserialize<TaskStatusMessageEventArgs>();
-
+                _tarkovTrackerLogsProvider.Log(str);
                 if (args.Message.Type == MessageType.TaskStarted)
                 {
-
+                    _tarkovTrackerProvider.OnTaskStarted(statusArgs);
                 }
                 else if (args.Message.Type == MessageType.TaskFailed)
                 {
-
+                    _tarkovTrackerProvider.OnTaskFailed(statusArgs);
                 }
                 else if (args.Message.Type == MessageType.TaskFinished)
                 {
-
+                    _tarkovTrackerProvider.OnTaskComplete(statusArgs);
                 }
             }
         }
