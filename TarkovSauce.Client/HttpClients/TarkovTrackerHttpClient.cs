@@ -16,16 +16,21 @@ namespace TarkovSauce.Client.HttpClients
     {
         private readonly static string _baseUri = "https://tarkovtracker.io/api/v2";
         private string? AuthToken => _config["Settings:TarkovTrackerKey"];
+        private TokenResponse? _token;
         public async Task<TokenResponse?> TestToken()
         {
             if (string.IsNullOrWhiteSpace(AuthToken))
                 return null;
+            if (_token is not null && _token.Token == AuthToken)
+                return _token;
+
             HttpRequestMessage request = CreateRequest(HttpMethod.Get, _baseUri + "/token");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
             {
-                return resultString.Deserialize<TokenResponse>() ?? null;
+                _token = resultString.Deserialize<TokenResponse>() ?? null;
+                return _token;
             }
             else
             {
