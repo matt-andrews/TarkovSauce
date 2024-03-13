@@ -40,7 +40,7 @@ namespace TarkovSauce.Client.HttpClients
         }
         public async Task<ProgressResponse?> GetProgress()
         {
-            if (string.IsNullOrWhiteSpace(AuthToken))
+            if (_token is null && await TestToken() is null)
                 return null;
             HttpRequestMessage request = CreateRequest(HttpMethod.Get, _baseUri + "/progress");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
@@ -57,7 +57,7 @@ namespace TarkovSauce.Client.HttpClients
         }
         public async Task<string?> SetTaskStatusBatch(List<TaskStatusBody> body)
         {
-            if (string.IsNullOrWhiteSpace(AuthToken))
+            if (_token is null && await TestToken() is null)
                 return null;
             HttpRequestMessage request = CreateRequest(HttpMethod.Post, _baseUri + "/progress/tasks");
             request.Content = new StringContent(body.Serialize());
