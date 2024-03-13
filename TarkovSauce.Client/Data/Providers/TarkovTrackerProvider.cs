@@ -14,24 +14,25 @@ namespace TarkovSauce.Client.Data.Providers
     }
     public class TarkovTrackerProvider(ITarkovTrackerHttpClient _httpClient,
         ITSToastService _toastService,
-        ILogger<TarkovTrackerProvider> _logger)
+        ILogger<TarkovTrackerProvider> _logger,
+        ITarkovTrackerLogsProvider _tarkovTrackerLogs)
         : ITarkovTrackerProvider
     {
         public Action? OnStateChanged { get; set; }
         public async Task OnTaskComplete(TaskStatusMessageEventArgs? args)
         {
             await OnTaskChanged(args);
-            _toastService.Toast(args?.Message.Text ?? "N/A", ToastType.Success);
+            _toastService.Toast("Completed Task", ToastType.Success);
         }
         public async Task OnTaskFailed(TaskStatusMessageEventArgs? args)
         {
             await OnTaskChanged(args);
-            _toastService.Toast(args?.Message.Text ?? "N/A", ToastType.Success);
+            _toastService.Toast("Failed Task", ToastType.Success);
         }
         public async Task OnTaskStarted(TaskStatusMessageEventArgs? args)
         {
             await OnTaskChanged(args);
-            _toastService.Toast(args?.Message.Text ?? "N/A", ToastType.Success);
+            _toastService.Toast("Started Task", ToastType.Success);
         }
         private async Task OnTaskChanged(TaskStatusMessageEventArgs? args)
         {
@@ -41,6 +42,7 @@ namespace TarkovSauce.Client.Data.Providers
                 TaskStatusBody.From(args.TaskId, args.Status)
             ]) ?? string.Empty;
             _logger.LogInformation("Tarkov Tracker Set Result {result}", result);
+            _tarkovTrackerLogs.Log(result);
             OnStateChanged?.Invoke();
         }
     }

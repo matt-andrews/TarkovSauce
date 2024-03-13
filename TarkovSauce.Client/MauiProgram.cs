@@ -45,6 +45,7 @@ namespace TarkovSauce.Client
             builder.Services.AddSingleton<IFleaSalesProvider, FleaSalesProvider>();
             builder.Services.AddSingleton<ITarkovTrackerProvider, TarkovTrackerProvider>();
             builder.Services.AddSingleton<ISelectedMapProvider, SelectedMapProvider>();
+            builder.Services.AddSingleton<ITarkovTrackerLogsProvider, TarkovTrackerLogsProvider>();
 
             builder.Services
                 .AddWatcher(options =>
