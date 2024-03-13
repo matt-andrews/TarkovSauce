@@ -16,6 +16,8 @@ namespace TarkovSauce.Client.Components.Pages
         public StateContainer StateContainer { get; set; } = default!;
         [Inject]
         public ISelectedMapProvider SelectedMapProvider { get; set; } = default!;
+        [Inject]
+        public ITarkovTrackerProvider TarkovTrackerProvider { get; set; } = default!;
         private IEnumerable<TaskModel>? _tasks;
         protected override async Task OnInitializedAsync()
         {
@@ -23,6 +25,7 @@ namespace TarkovSauce.Client.Components.Pages
             await BuildCurrentQuests();
             StateContainer.IsLoading.Value = false;
             SelectedMapProvider.OnStateChanged = () => InvokeAsync(StateHasChanged);
+            TarkovTrackerProvider.OnStateChanged = () => InvokeAsync(StateHasChanged);
             await base.OnInitializedAsync();
         }
 
