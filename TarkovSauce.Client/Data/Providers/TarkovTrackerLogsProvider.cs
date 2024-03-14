@@ -11,7 +11,8 @@
         public List<string> Logs { get; } = [];
         public void Log(string message)
         {
-
+            Logs.Add(message);
+            OnStateChanged?.Invoke();
         }
     }
 }

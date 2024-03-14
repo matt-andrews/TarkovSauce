@@ -13,6 +13,7 @@ namespace TarkovSauce.Client.Utils
         public static string SettingsDirectory => FileSystem.Current.AppDataDirectory;
         public static string SettingsFile => Path.Combine(SettingsDirectory, "settings.json");
         public static string DatabaseFile => Path.Combine(SettingsDirectory, "data.db");
+        public static string CheckpointFile => Path.Combine(SettingsDirectory, "checkpoint");
         private readonly static JsonSerializerOptions _options = new() { WriteIndented = true };
         public AppDataJson GetAppData()
         {

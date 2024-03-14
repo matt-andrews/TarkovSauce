@@ -60,6 +60,7 @@ namespace TarkovSauce.Client
                         appDataManager.WriteAppData(appdata);
                     }
                     options.LogPath = path;
+                    options.CheckpointPath = AppDataManager.CheckpointFile;
                     options.AddFile(new WatcherFile("application", "application.log"));
                     options.AddFile(new WatcherFile("notifications", "notifications.log"));
                 });

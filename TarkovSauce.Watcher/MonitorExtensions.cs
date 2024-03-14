@@ -18,16 +18,22 @@ namespace TarkovSauce.Watcher
             List<IMessageListener> listeners = [];
             listenersBuilder(services, listeners);
             monitor.RegisterListeners(listeners);
+            Task.Run(() =>
+            {
+                monitor.GoToCheckpoint();
+            });
         }
     }
     public interface IMonitorOptions
     {
         string LogPath { get; set; }
+        string CheckpointPath { get; set; }
         void AddFile(WatcherFile file);
     }
     internal class MonitorOptions : IMonitorOptions
     {
         public string LogPath { get; set; } = "";//"C:\\Battlestate Games\\Escape from Tarkov\\Logs"
+        public string CheckpointPath { get; set; } = "";
         public List<WatcherFile> Files { get; set; } = [];
 
         public void AddFile(WatcherFile file)

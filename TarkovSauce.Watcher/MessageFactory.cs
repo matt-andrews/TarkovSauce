@@ -5,7 +5,7 @@ using TarkovSauce.Watcher.Interfaces;
 
 namespace TarkovSauce.Watcher
 {
-    internal partial class MessageFactory(List<IMessageListener> listeners) : IWatcherEventListener
+    internal partial class MessageFactory(List<IMessageListener> listeners, string checkpointPath) : IWatcherEventListener
     {
         public void OnMessage(string name, string message)
         {
@@ -27,6 +27,7 @@ namespace TarkovSauce.Watcher
                     listener.OnEvent(eventLine);
                 }
             }
+            File.WriteAllText(checkpointPath, DateTime.Now.ToString());
         }
         public void OnError(string name, string message, Exception ex)
         {
