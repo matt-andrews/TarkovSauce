@@ -1,6 +1,8 @@
-﻿@using TarkovSauce.Client.Services
+﻿@using Microsoft.Extensions.Configuration
+@using TarkovSauce.Client.Services
 @inherits LayoutComponentBase
 @inject StateContainer StateContainer
+@inject IConfiguration Config
 
 <div class="page">
     <div class="sidebar">
@@ -9,6 +11,7 @@
 
     <main>
         <div class="top-row px-4">
+            <TSButton OnClick="LaunchApp" Content="Launch BSG Launcher" IsPrimary="true" IsDisabled="@(string.IsNullOrEmpty(Config["Settings:TarkovExePath"]))"></TSButton>
             <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" />
         </div>
 
@@ -24,5 +27,14 @@
     protected override void OnInitialized()
     {
         StateContainer.IsLoading.OnValueChanged += b => InvokeAsync(StateHasChanged);
+        StateContainer.MainLayoutChangedEvent += () => InvokeAsync(StateHasChanged);
+    }
+    private void LaunchApp()
+    {
+        if (!string.IsNullOrEmpty(Config["Settings:TarkovExePath"]))
+        {
+            // Use Process.Start to launch the Tarkov application
+            System.Diagnostics.Process.Start(Config["Settings:TarkovExePath"]);
+        }
     }
 }

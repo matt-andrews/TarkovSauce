@@ -6,6 +6,7 @@
         <TSInput Placeholder="Tarkov Log Path" @bind-Value=_appData.Settings.TarkovPath />
         <TSInput Placeholder="Tarkov Tracker Key" @bind-Value=_appData.Settings.TarkovTrackerKey />
         <TSCheckbox Label="Test" @bind-IsOn=_appData.Settings.Test />
+        <TSInput Placeholder="BSG Launcher Exe Path" @bind-Value=_appData.Settings.TarkovExePath />
     </div>
     <br />
     <TSButton Content="Save" OnClick="OnSaveEvent" IsPrimary=true />
