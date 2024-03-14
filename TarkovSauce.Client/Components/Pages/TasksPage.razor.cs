@@ -37,28 +37,9 @@ namespace TarkovSauce.Client.Components.Pages
                 StateContainer.TasksCache = await DevHttpClient.GetTasksBatch();
             }
 
-            var tasks = StateContainer.TasksCache?.Data?.Tasks?
-                .Where(task => task.MinPlayerLevel <= progress?.Data.PlayerLevel)
-                .Where(task => !progress?.Data.TasksProgress.Any(tp => tp.Id == task.Id) ?? false)
-                .Where(task => task.TraderRequirements.Length == 0)
-                ?? [];
-
-            List<TaskModel> results = [];
-            foreach (var task in tasks)
-            {
-                bool skip = false;
-                foreach (var req in task.TaskRequirements)
-                {
-                    if (!progress?.Data.TasksProgress.Any(tp => tp.Id == req.Task.Id) ?? false)
-                    {
-                        skip = true;
-                        break;
-                    }
-                }
-                if (skip) continue;
-                results.Add(task);
-            }
-            _tasks = results;
+            _tasks = StateContainer.TasksCache?.Data?.Tasks?
+                .Where(task => progress?.Data.TasksProgress
+                    .Any(tp => tp.Id == task.Id && !tp.Complete && !tp.Failed && !tp.Invalid) ?? false);
         }
 
         private bool TestForMap(TaskModel model)
