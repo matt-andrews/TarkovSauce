@@ -16,24 +16,25 @@ namespace TarkovSauce.Client.Components.Pages
         public IMonitor Monitor { get; set; } = default!;
         [Inject]
         public StateContainer StateContainer { get; set; } = default!;
-        private AppDataJson? _appData;
+        [Inject]
+        public AppDataJson AppDataJson { get; set; } = default!;
         private string _previousLogPath = "";
         protected override void OnInitialized()
         {
-            _appData = AppDataManager.GetAppData();
-            _previousLogPath = _appData.Settings.TarkovPath;
+         
+            _previousLogPath = AppDataJson.Settings.TarkovPath;
         }
         private void OnSaveEvent()
         {
-            if (_appData is null)
+            if (AppDataJson is null)
             {
                 return;
             }
 
-            AppDataManager.WriteAppData(_appData);
-            if (_appData.Settings.TarkovPath != _previousLogPath)
+            AppDataManager.WriteAppData(AppDataJson);
+            if (AppDataJson.Settings.TarkovPath != _previousLogPath)
             {
-                Monitor.ChangePath(_appData.Settings.TarkovPath);
+                Monitor.ChangePath(AppDataJson.Settings.TarkovPath);
             }
             ToastService.Toast("Your settings have been saved", ToastType.Success);
         }

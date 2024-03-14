@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using Microsoft.Extensions.Primitives;
 using TarkovSauce.Client.Components;
 using TarkovSauce.Client.Data.MessageListeners;
 using TarkovSauce.Client.Data.Providers;
@@ -22,10 +23,23 @@ namespace TarkovSauce.Client
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
-            builder.Configuration.AddJsonFile(AppDataManager.SettingsFile, true, true);
+            // Make statecontainer a thing
+            var stateContainer = new StateContainer();
+            var appData = new AppDataJson();
+            var configuration = new ConfigurationBuilder()
+                .AddJsonFile(AppDataManager.SettingsFile, true, true)
+                .Build();
+            configuration.Bind(appData);
+            builder.Configuration.AddConfiguration(configuration);
 
+            ChangeToken.OnChange(() => configuration.GetReloadToken(), () => {
+                configuration.Bind(appData);
+                stateContainer.MainLayoutHasChanged();
+            });
+
+            builder.Services.AddSingleton(appData);
             builder.Services.AddTSComponentServices();
-            builder.Services.AddSingleton<StateContainer>();
+            builder.Services.AddSingleton(stateContainer);
 
             var appDataManager = new AppDataManager();
             builder.Services.AddSingleton<IAppDataManager>(appDataManager);

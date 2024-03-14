@@ -1,12 +1,12 @@
 ﻿<h3>App Settings</h3>
 <br />
-@if (_appData is not null)
+@if (AppDataJson is not null)
 {
     <div>
-        <TSInput Placeholder="Tarkov Log Path" @bind-Value=_appData.Settings.TarkovPath />
-        <TSInput Placeholder="Tarkov Tracker Key" @bind-Value=_appData.Settings.TarkovTrackerKey />
-        <TSCheckbox Label="Test" @bind-IsOn=_appData.Settings.Test />
-        <TSInput Placeholder="BSG Launcher Exe Path" @bind-Value=_appData.Settings.TarkovExePath />
+        <TSInput Placeholder="Tarkov Log Path" @bind-Value=AppDataJson.Settings.TarkovPath />
+        <TSInput Placeholder="Tarkov Tracker Key" @bind-Value=AppDataJson.Settings.TarkovTrackerKey />
+        <TSCheckbox Label="Test" @bind-IsOn=AppDataJson.Settings.Test />
+        <TSInput Placeholder="BSG Launcher Exe Path" @bind-Value=AppDataJson.Settings.TarkovExePath />
     </div>
     <br />
     <TSButton Content="Save" OnClick="OnSaveEvent" IsPrimary=true />
