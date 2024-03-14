@@ -26,7 +26,7 @@ namespace TarkovSauce.Client.Services
 
             _connection.CreateTable<FleaEventModel>();
             _connection.CreateTable<ItemModel>();
-            _connection.CreateTable<TaskModel>();
+            _connection.CreateTable<TaskModelFlat>();
         }
         public void Insert<T>(T? entity)
             where T : class

@@ -2,7 +2,7 @@
 {
     public class TaskStatusBody
     {
-        public string? Id { get; private set; }
+        public string Id { get; private set; }
         public string State { get; private set; }
         private TaskStatusBody(string id, string newState)
         {
