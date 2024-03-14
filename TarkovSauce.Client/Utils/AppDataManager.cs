@@ -50,5 +50,6 @@ namespace TarkovSauce.Client.Utils
         public string TarkovPath { get; set; } = "";
         public string TarkovTrackerKey { get; set; } = "";
         public bool Test { get; set; }
+        public string TarkovExePath { get; set; } = "";
     }
 }

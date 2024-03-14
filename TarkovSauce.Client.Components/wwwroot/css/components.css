@@ -18,6 +18,8 @@ html, body {
     box-shadow: var(--drop-shadow);
 }
 
+
+
     .tsbutton button:hover {
         color: var(--font-l1);
         background-color: var(--gray-40);
@@ -41,6 +43,19 @@ html, body {
     .tsbutton.warning button:hover {
         background-color: var(--warning-40);
         color: var(--warning-FF);
+    }
+
+.tsbutton.disabled button {
+    background-color: var(--gray-40);
+    border-color: var(--gray-90);
+    cursor: not-allowed;
+}
+
+    .tsbutton.disabled button:hover {
+        background-color: var(--gray-40);
+        border-color: var(--gray-90);
+        color: var(--font-l1);
+        pointer-events: none;
     }
 
 
