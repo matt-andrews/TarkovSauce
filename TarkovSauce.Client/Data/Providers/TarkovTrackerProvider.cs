@@ -8,42 +8,85 @@ namespace TarkovSauce.Client.Data.Providers
 {
     public interface ITarkovTrackerProvider : IProvider
     {
-        Task OnTaskComplete(TaskStatusMessageEventArgs? args);
-        Task OnTaskFailed(TaskStatusMessageEventArgs? args);
-        Task OnTaskStarted(TaskStatusMessageEventArgs? args);
+        void OnTaskComplete(TaskStatusMessageEventArgs? args);
+        void OnTaskFailed(TaskStatusMessageEventArgs? args);
+        void OnTaskStarted(TaskStatusMessageEventArgs? args);
     }
-    public class TarkovTrackerProvider(ITarkovTrackerHttpClient _httpClient,
-        ITSToastService _toastService,
-        ILogger<TarkovTrackerProvider> _logger,
-        ITarkovTrackerLogsProvider _tarkovTrackerLogs)
-        : ITarkovTrackerProvider
+    public class TarkovTrackerProvider : ITarkovTrackerProvider, IDisposable
     {
         public Action? OnStateChanged { get; set; }
-        public async Task OnTaskComplete(TaskStatusMessageEventArgs? args)
+        private readonly Queue<TaskStatusBody> _taskQueue = [];
+        private readonly ITarkovTrackerHttpClient _httpClient;
+        private readonly ITSToastService _toastService;
+        private readonly ILogger<TarkovTrackerProvider> _logger;
+        private readonly ITarkovTrackerLogsProvider _tarkovTrackerLogs;
+        private readonly Timer _timer;
+        private bool _disposedValue;
+
+        public TarkovTrackerProvider(ITarkovTrackerHttpClient httpClient,
+            ITSToastService toastService,
+            ILogger<TarkovTrackerProvider> logger,
+            ITarkovTrackerLogsProvider tarkovTrackerLogs)
         {
-            await OnTaskChanged(args);
+            _httpClient = httpClient;
+            _toastService = toastService;
+            _logger = logger;
+            _tarkovTrackerLogs = tarkovTrackerLogs;
+            _timer = new Timer(async (state) => await TaskDispatch(state), null, 30_000, 30_000);
+        }
+
+        public void OnTaskComplete(TaskStatusMessageEventArgs? args)
+        {
+            OnTaskChanged(args);
             _toastService.Toast("Completed Task", ToastType.Success);
         }
-        public async Task OnTaskFailed(TaskStatusMessageEventArgs? args)
+        public void OnTaskFailed(TaskStatusMessageEventArgs? args)
         {
-            await OnTaskChanged(args);
-            _toastService.Toast("Failed Task", ToastType.Success);
+            OnTaskChanged(args);
+            _toastService.Toast("Failed Task", ToastType.Warning);
         }
-        public async Task OnTaskStarted(TaskStatusMessageEventArgs? args)
+        public void OnTaskStarted(TaskStatusMessageEventArgs? args)
         {
-            await OnTaskChanged(args);
+            OnTaskChanged(args);
             _toastService.Toast("Started Task", ToastType.Success);
         }
-        private async Task OnTaskChanged(TaskStatusMessageEventArgs? args)
+        private void OnTaskChanged(TaskStatusMessageEventArgs? args)
         {
             if (args is null) return;
-            string? result = await _httpClient.SetTaskStatusBatch(
-            [
-                TaskStatusBody.From(args.TaskId, args.Status)
-            ]) ?? string.Empty;
+            _taskQueue.Enqueue(TaskStatusBody.From(args.TaskId, args.Status));
+        }
+        private async Task TaskDispatch(object? _)
+        {
+            var tasks = _taskQueue.ToList();
+            _taskQueue.Clear();
+            if (tasks.Count == 0) return;
+            string? result = await _httpClient.SetTaskStatusBatch(tasks);
             _logger.LogInformation("Tarkov Tracker Set Result {result}", result);
-            _tarkovTrackerLogs.Log(result);
+            _tarkovTrackerLogs.Log(result ?? "");
             OnStateChanged?.Invoke();
+        }
+
+        protected virtual void Dispose(bool disposing)
+        {
+            if (!_disposedValue)
+            {
+                if (disposing)
+                {
+                    try
+                    {
+                        _timer.Dispose();
+                    }
+                    catch { }
+                }
+
+                _disposedValue = true;
+            }
+        }
+
+        public void Dispose()
+        {
+            Dispose(disposing: true);
+            GC.SuppressFinalize(this);
         }
     }
 }

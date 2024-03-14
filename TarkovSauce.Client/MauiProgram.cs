@@ -23,6 +23,10 @@ namespace TarkovSauce.Client
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
+            using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+                .SetMinimumLevel(LogLevel.Trace)
+                .AddDebug());
+
             // Make statecontainer a thing
             var stateContainer = new StateContainer();
             var appData = new AppDataJson();
@@ -41,19 +45,20 @@ namespace TarkovSauce.Client
             builder.Services.AddTSComponentServices();
             builder.Services.AddSingleton(stateContainer);
 
+            var sqlService = new SqlService(AppDataManager.DatabaseFile, loggerFactory.CreateLogger<SqlService>());
             var appDataManager = new AppDataManager();
-            builder.Services.AddSingleton<IAppDataManager>(appDataManager);
-
             var tarkovDevHttpClient = new TarkovDevHttpClient(new HttpClient()
             {
                 BaseAddress = new Uri("https://api.tarkov.dev")
-            });
+            }, sqlService);
+
+            builder.Services.AddSingleton<IAppDataManager>(appDataManager);
             builder.Services.AddSingleton<ITarkovDevHttpClient>(provider => tarkovDevHttpClient);
             builder.Services.AddSingleton<ITarkovTrackerHttpClient>(provider
                 => new TarkovTrackerHttpClient(new HttpClient(),
                     provider.GetRequiredService<IConfiguration>(),
                     provider.GetRequiredService<ILogger<TarkovTrackerHttpClient>>()));
-
+            builder.Services.AddSingleton<ISqlService>(sqlService);
 
             builder.Services.AddSingleton<IRawLogProvider, RawLogProvider>();
             builder.Services.AddSingleton<IFleaSalesProvider, FleaSalesProvider>();
@@ -73,6 +78,7 @@ namespace TarkovSauce.Client
                         appDataManager.WriteAppData(appdata);
                     }
                     options.LogPath = path;
+                    options.CheckpointPath = AppDataManager.CheckpointFile;
                     options.AddFile(new WatcherFile("application", "application.log"));
                     options.AddFile(new WatcherFile("notifications", "notifications.log"));
                 });

@@ -2,6 +2,7 @@
 using TarkovSauce.Client.Data.EventArgs;
 using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.HttpClients;
+using TarkovSauce.Client.Services;
 
 namespace TarkovSauce.Tests.Client
 {
@@ -27,8 +28,9 @@ namespace TarkovSauce.Tests.Client
         public async Task TestFleaSalesProvider_SoldEventTrigger()
         {
             var httpClient = Substitute.For<ITarkovDevHttpClient>();
+            var sqlService = Substitute.For<ISqlService>();
             bool isHit = false;
-            var provider = new FleaSalesProvider(httpClient);
+            var provider = new FleaSalesProvider(httpClient, sqlService);
             provider.OnStateChanged += () =>
             {
                 isHit = true;
@@ -44,8 +46,9 @@ namespace TarkovSauce.Tests.Client
         public async Task TestFleaSalesProvider_ExpiryEventTrigger()
         {
             var httpClient = Substitute.For<ITarkovDevHttpClient>();
+            var sqlService = Substitute.For<ISqlService>();
             bool isHit = false;
-            var provider = new FleaSalesProvider(httpClient);
+            var provider = new FleaSalesProvider(httpClient, sqlService);
             provider.OnStateChanged += () =>
             {
                 isHit = true;

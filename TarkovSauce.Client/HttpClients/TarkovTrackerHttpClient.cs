@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
+using System.Text;
 using System.Text.Json;
 using TarkovSauce.Client.Data.Models.Remote;
 
@@ -60,7 +61,7 @@ namespace TarkovSauce.Client.HttpClients
             if (_token is null && await TestToken() is null)
                 return null;
             HttpRequestMessage request = CreateRequest(HttpMethod.Post, _baseUri + "/progress/tasks");
-            request.Content = new StringContent(body.Serialize());
+            request.Content = new StringContent(body.Serialize(), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)

@@ -2,16 +2,18 @@
 {
     public interface IRawLogProvider : IProvider
     {
-        List<string> RawLogs { get; }
+        Queue<string> RawLogs { get; }
         void AppendLog(string message);
     }
     public class RawLogProvider : IRawLogProvider
     {
         public Action? OnStateChanged { get; set; }
-        public List<string> RawLogs { get; } = [];
+        public Queue<string> RawLogs { get; } = [];
         public void AppendLog(string message)
         {
-            RawLogs.Add(message);
+            if (RawLogs.Count > 1000)
+                RawLogs.Dequeue();
+            RawLogs.Enqueue(message);
             OnStateChanged?.Invoke();
         }
     }

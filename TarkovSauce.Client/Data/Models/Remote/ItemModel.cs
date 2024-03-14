@@ -1,7 +1,10 @@
-﻿namespace TarkovSauce.Client.Data.Models.Remote
+﻿using SQLite;
+
+namespace TarkovSauce.Client.Data.Models.Remote
 {
     public class ItemModel
     {
+        [PrimaryKey]
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
     }

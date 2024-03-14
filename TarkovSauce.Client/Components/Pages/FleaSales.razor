@@ -4,15 +4,17 @@
 <div class="tstable">
     <table class="flea-sales-table">
         <tr>
+            <th>Timestamp</th>
             <th>Type</th>
             <th>Item</th>
             <th>Quantity</th>
             <th>Value</th>
         </tr>
 
-        @foreach (var item in FleaSalesProvider.Events)
+        @foreach (var item in FleaSalesProvider.Events.OrderByDescending(ev => ev.Timestamp))
         {
             <tr>
+                <td>@item.Timestamp.ToString("G")</td>
                 <td>@item.Type</td>
                 <td>@item.ItemName</td>
                 <td>@item.Quantity</td>

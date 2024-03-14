@@ -1,9 +1,8 @@
 ﻿@using Microsoft.Extensions.Configuration
 @using TarkovSauce.Client.Services
 @using TarkovSauce.Client.Utils
+@using TarkovSauce.Watcher
 @inherits LayoutComponentBase
-@inject StateContainer StateContainer
-@inject AppDataJson AppDataJson
 
 <div class="page">
     <div class="sidebar">
@@ -20,22 +19,9 @@
             @Body
         </article>
     </main>
-    <TarkovSauce.Client.Components.Modal.TSToast />
+    @if (!Monitor.IsLoading)
+    {
+        <TarkovSauce.Client.Components.Modal.TSToast />
+    }
     <TarkovSauce.Client.Components.Misc.TSSPinner @bind-IsSpinning=StateContainer.IsLoading.Value />
 </div>
-
-@code {
-    protected override void OnInitialized()
-    {
-        StateContainer.IsLoading.OnValueChanged += b => InvokeAsync(StateHasChanged);
-        StateContainer.MainLayoutChangedEvent += () => InvokeAsync(StateHasChanged);
-    }
-    private void LaunchApp()
-    {
-        if (!string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))
-        {
-            // Use Process.Start to launch the Tarkov application
-            System.Diagnostics.Process.Start(AppDataJson.Settings.TarkovExePath);
-        }
-    }
-}

@@ -6,10 +6,15 @@ namespace TarkovSauce.Watcher
 {
     public interface IMonitor
     {
+        bool IsLoading { get; }
+        event Action<bool>? IsLoadingChanged;
         void ChangePath(string path);
+        void GoToCheckpoint();
     }
     internal class Monitor : IWatcherEventListener, IMonitor
     {
+        public bool IsLoading { get; private set; }
+        public event Action<bool>? IsLoadingChanged;
         private Process? _process;
         private readonly Dictionary<string, Watcher> _watchers = [];
         private MessageFactory? _messageFactory;
@@ -34,7 +39,7 @@ namespace TarkovSauce.Watcher
 
         public void RegisterListeners(List<IMessageListener> listeners)
         {
-            _messageFactory = new(listeners);
+            _messageFactory = new(listeners, _options.CheckpointPath);
         }
 
         public Monitor Start()
@@ -51,7 +56,7 @@ namespace TarkovSauce.Watcher
 
         public void ChangePath(string path)
         {
-            foreach(var watcher in _watchers)
+            foreach (var watcher in _watchers)
             {
                 watcher.Value.Stop();
             }
@@ -63,6 +68,45 @@ namespace TarkovSauce.Watcher
                 IncludeSubdirectories = true,
             };
             Start();
+        }
+
+        public void GoToCheckpoint()
+        {
+            if (_messageFactory is null)
+                throw new Exception("Cannot go to checkpoint before listeners have been assigned");
+            IsLoading = true;
+            IsLoadingChanged?.Invoke(IsLoading);
+            DateTime checkpoint = DateTime.MinValue;
+            if (File.Exists(_options.CheckpointPath))
+            {
+                string txt = File.ReadAllText(_options.CheckpointPath);
+                _ = DateTime.TryParse(txt, out checkpoint);
+            }
+            var folders = new FolderFinder(_options.LogPath).GetLogFoldersNewerThan(checkpoint);
+            foreach (var folder in folders)
+            {
+                var files = Directory.GetFiles(folder);
+                foreach (var file in files)
+                {
+                    string? name = _options.Files.FirstOrDefault(f => file.Contains(f.File))?.Name;
+                    if (string.IsNullOrWhiteSpace(name))
+                        continue;
+                    string[] contents = File.ReadAllLines(file);
+                    int index = 0;
+                    foreach (var line in contents)
+                    {
+                        string left = line.Split('|')[0];
+                        if (DateTime.TryParse(left, out DateTime linedt) && linedt >= checkpoint)
+                        {
+                            break;
+                        }
+                        index++;
+                    }
+                    _messageFactory?.OnMessage(name, string.Join(Environment.NewLine, contents.Skip(index)));
+                }
+            }
+            IsLoading = false;
+            IsLoadingChanged?.Invoke(IsLoading);
         }
 
         private void WatchFolders()
