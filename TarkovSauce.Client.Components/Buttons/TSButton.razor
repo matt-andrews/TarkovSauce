@@ -1,7 +1,7 @@
 ﻿@inherits StyleableComponentBase
 
 <div class="@CssImpl" style="@StyleImpl">
-    <button @onclick="@OnClick">
+    <button @onclick="()=>OnClickEvent()">
         @Content
     </button>
 </div>

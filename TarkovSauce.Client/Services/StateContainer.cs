@@ -7,7 +7,14 @@ namespace TarkovSauce.Client.Services
     {
         public ObservableValue<State> State { get; set; } = new(Services.State.ComponentTests);
         public ObservableValue<bool> IsLoading { get; set; } = new(false);
+        public event Action? MainLayoutChangedEvent;
         public TasksGraphQLWrapper? TasksCache { get; set; }
+
+        public void MainLayoutHasChanged()
+        {
+            MainLayoutChangedEvent?.Invoke();
+        }
+
     }
     public enum State
     {
@@ -19,4 +26,5 @@ namespace TarkovSauce.Client.Services
         Tasks,
         TarkovTrackerLogs
     }
+
 }
