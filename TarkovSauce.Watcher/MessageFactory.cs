@@ -9,7 +9,6 @@ namespace TarkovSauce.Watcher
     {
         public void OnMessage(string name, string message)
         {
-            Debug.WriteLine(message);
             MatchCollection logMessages = LogPatternRegex().Matches(message);
             foreach (Match match in logMessages.Cast<Match>())
             {
@@ -31,7 +30,6 @@ namespace TarkovSauce.Watcher
         }
         public void OnError(string name, string message, Exception ex)
         {
-            Debug.WriteLine(ex);
             throw ex;
         }
 

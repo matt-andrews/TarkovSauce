@@ -1,4 +1,5 @@
 ﻿
+using Microsoft.Extensions.Logging;
 using SQLite;
 using TarkovSauce.Client.Data.Models.Remote;
 using TarkovSauce.Client.Data.Providers;
@@ -19,7 +20,9 @@ namespace TarkovSauce.Client.Services
     internal class SqlService : ISqlService
     {
         private readonly SQLiteConnection _connection;
-        public SqlService(string connectionString)
+        private readonly ILogger<SqlService> _logger;
+
+        public SqlService(string connectionString, ILogger<SqlService> logger)
         {
             _connection = new SQLiteConnection(connectionString,
                 SQLiteOpenFlags.SharedCache | SQLiteOpenFlags.Create | SQLiteOpenFlags.ReadWrite);
@@ -27,6 +30,7 @@ namespace TarkovSauce.Client.Services
             _connection.CreateTable<FleaEventModel>();
             _connection.CreateTable<ItemModel>();
             _connection.CreateTable<TaskModelFlat>();
+            _logger = logger;
         }
         public void Insert<T>(T? entity)
             where T : class
@@ -36,7 +40,10 @@ namespace TarkovSauce.Client.Services
             {
                 _connection.Insert(entity);
             }
-            catch { }//TODO log me
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
         }
         public void InsertAll<T>(IEnumerable<T>? entities)
             where T : class
@@ -44,9 +51,15 @@ namespace TarkovSauce.Client.Services
             if (entities is null) return;
             try
             {
-                _connection.InsertAll(entities);
+                foreach (var entity in entities)
+                {
+                    _connection.InsertOrReplace(entity);
+                }
             }
-            catch { }//TODO log me
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
         }
         public IEnumerable<T> Get<T>()
             where T : new()
@@ -55,7 +68,10 @@ namespace TarkovSauce.Client.Services
             {
                 return _connection.Table<T>();
             }
-            catch { }//TODO log me
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
             return [];
         }
         public IEnumerable<T> GetWhere<T>(Func<T, bool> predicate)
@@ -65,7 +81,10 @@ namespace TarkovSauce.Client.Services
             {
                 return _connection.Table<T>().Where(predicate);
             }
-            catch { }//TODO log me
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, ex.Message);
+            }
             return [];
         }
     }

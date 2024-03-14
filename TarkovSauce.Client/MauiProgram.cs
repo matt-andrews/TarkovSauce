@@ -23,6 +23,10 @@ namespace TarkovSauce.Client
                     fonts.AddFont("OpenSans-Regular.ttf", "OpenSansRegular");
                 });
 
+            using var loggerFactory = LoggerFactory.Create(loggingBuilder => loggingBuilder
+                .SetMinimumLevel(LogLevel.Trace)
+                .AddDebug());
+
             // Make statecontainer a thing
             var stateContainer = new StateContainer();
             var appData = new AppDataJson();
@@ -41,7 +45,7 @@ namespace TarkovSauce.Client
             builder.Services.AddTSComponentServices();
             builder.Services.AddSingleton(stateContainer);
 
-            var sqlService = new SqlService(AppDataManager.DatabaseFile);
+            var sqlService = new SqlService(AppDataManager.DatabaseFile, loggerFactory.CreateLogger<SqlService>());
             var appDataManager = new AppDataManager();
             var tarkovDevHttpClient = new TarkovDevHttpClient(new HttpClient()
             {

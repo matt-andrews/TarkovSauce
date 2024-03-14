@@ -18,10 +18,6 @@ namespace TarkovSauce.Watcher
             List<IMessageListener> listeners = [];
             listenersBuilder(services, listeners);
             monitor.RegisterListeners(listeners);
-            Task.Run(() =>
-            {
-                monitor.GoToCheckpoint();
-            });
         }
     }
     public interface IMonitorOptions

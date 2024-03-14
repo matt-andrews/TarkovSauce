@@ -58,6 +58,7 @@ namespace TarkovSauce.Client.HttpClients
         }
         public async Task<string?> SetTaskStatusBatch(List<TaskStatusBody> body)
         {
+            return "";
             if (_token is null && await TestToken() is null)
                 return null;
             HttpRequestMessage request = CreateRequest(HttpMethod.Post, _baseUri + "/progress/tasks");

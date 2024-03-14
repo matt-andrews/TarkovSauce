@@ -23,7 +23,7 @@ namespace TarkovSauce.Client.Data.Providers
         {
             _httpClient = httpClient;
             _sqlService = sqlService;
-            Events.AddRange(sqlService.Get<FleaEventModel>());
+            //Events.AddRange(sqlService.Get<FleaEventModel>());
         }
 
         public async Task AppendExpiry(FleaExpiredeMessageEventArgs? args)
