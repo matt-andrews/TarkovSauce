@@ -34,7 +34,8 @@ namespace TarkovSauce.Client.Data.Providers
             {
                 Type = FleaEventType.Expired,
                 ItemName = item,
-                Quantity = args.ItemCount
+                Quantity = args.ItemCount,
+                Timestamp = DateTime.UnixEpoch.AddSeconds(args.Message.Timestamp).ToLocalTime()
             };
             Events.Add(ev);
             _sqlService.Insert(ev);
@@ -53,7 +54,8 @@ namespace TarkovSauce.Client.Data.Providers
                 ItemName = soldItem,
                 Currency = currency.Key,
                 Reward = currency.Value,
-                Quantity = args.SoldItemCount
+                Quantity = args.SoldItemCount,
+                Timestamp = DateTime.UnixEpoch.AddSeconds(args.Message.Timestamp).ToLocalTime()
             };
             Events.Add(ev);
             _sqlService.Insert(ev);
@@ -70,6 +72,7 @@ namespace TarkovSauce.Client.Data.Providers
         public int Quantity { get; set; }
         public string Currency { get; set; } = "";
         public int Reward { get; set; }
+        public DateTime Timestamp { get; set; }
     }
     public enum FleaEventType
     {
