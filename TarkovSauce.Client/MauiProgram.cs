@@ -27,20 +27,20 @@ namespace TarkovSauce.Client
             builder.Services.AddTSComponentServices();
             builder.Services.AddSingleton<StateContainer>();
 
+            var sqlService = new SqlService(AppDataManager.DatabaseFile);
             var appDataManager = new AppDataManager();
-            builder.Services.AddSingleton<IAppDataManager>(appDataManager);
-
             var tarkovDevHttpClient = new TarkovDevHttpClient(new HttpClient()
             {
                 BaseAddress = new Uri("https://api.tarkov.dev")
-            });
+            }, sqlService);
+
+            builder.Services.AddSingleton<IAppDataManager>(appDataManager);
             builder.Services.AddSingleton<ITarkovDevHttpClient>(provider => tarkovDevHttpClient);
             builder.Services.AddSingleton<ITarkovTrackerHttpClient>(provider
                 => new TarkovTrackerHttpClient(new HttpClient(),
                     provider.GetRequiredService<IConfiguration>(),
                     provider.GetRequiredService<ILogger<TarkovTrackerHttpClient>>()));
-            builder.Services.AddSingleton<ISqlService>(provider 
-                => new SqlService(AppDataManager.DatabaseFile));
+            builder.Services.AddSingleton<ISqlService>(sqlService);
 
             builder.Services.AddSingleton<IRawLogProvider, RawLogProvider>();
             builder.Services.AddSingleton<IFleaSalesProvider, FleaSalesProvider>();
