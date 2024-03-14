@@ -1,8 +1,12 @@
-﻿namespace TarkovSauce.Client.Data.Models.Remote
+﻿using System.Text.Json.Serialization;
+
+namespace TarkovSauce.Client.Data.Models.Remote
 {
     public class TaskStatusBody
     {
+        [JsonPropertyName("id")]
         public string Id { get; private set; }
+        [JsonPropertyName("state")]
         public string State { get; private set; }
         private TaskStatusBody(string id, string newState)
         {
