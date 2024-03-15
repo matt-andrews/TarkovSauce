@@ -94,11 +94,11 @@ h1:focus {
 
 .top-row-buttons {
     display: flex;
-    margin-right: 2rem;
+    margin-right: 1rem;
     margin-bottom: 0.925rem;
 }
 .bsg-launcher {
-    margin-right: 2rem;
+    margin-right: 0.75rem;
 }
 
 @supports (-webkit-touch-callout: none) {

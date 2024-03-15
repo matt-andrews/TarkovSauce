@@ -1,14 +1,23 @@
-﻿<h3>FleaSales</h3>
-@if (_runningTotal > 0)
+﻿@if (_runningTotal > 0)
 {
     <div style="width:100%;display:flex;justify-content:end">
-        <div>
-            <b>Total Sales: ₽@(_runningTotal.ToString("###,###,###"))</b>
-            <br />
-            <b>Flea Rep: @CalculateRep()</b>
-            <br />
-            <b>Next Rep Milestone in: ₽@(CalcNextRepMilestone().ToString("###,###,###"))</b>
-        </div>
+        <table class="running-total">
+            <tr>
+                <th>Total Sales:</th>
+                <td>&nbsp;</td>
+                <td>₽@(_runningTotal.ToString("###,###,###"))</td>
+            </tr>
+            <tr>
+                <th>Flea Rep:</th>
+                <td>&nbsp;</td>
+                <td>@CalculateRep()</td>
+            </tr>
+            <tr>
+                <th>Next Rep Level:</th>
+                <td>&nbsp;</td>
+                <td>₽@(CalcNextRepMilestone().ToString("###,###,###"))</td>
+            </tr>
+        </table>
     </div>
 }
 <br />
@@ -35,3 +44,8 @@
         }
     </table>
 </div>
+<style>
+    table.running-total th {
+        text-align: right;
+    }
+</style>

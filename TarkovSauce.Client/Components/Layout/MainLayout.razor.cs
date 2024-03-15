@@ -53,6 +53,14 @@ namespace TarkovSauce.Client.Components.Layout
                     break;
             }
         }
+        private string GetPageTitle()
+        {
+            if (StateContainer.State.Value == State.ComponentTests)
+                return "Component Tests";
+            else if (StateContainer.State.Value == State.FleaSales)
+                return "Flea Sales";
+            return StateContainer.State.Value.ToString();
+        }
         private async Task LaunchApp()
         {
             if (!string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))

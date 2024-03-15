@@ -7,6 +7,9 @@
 <div class="page">
     <main>
         <div class="top-row px-4">
+            <div class="top-bar-title">
+                <h3>@GetPageTitle()</h3>
+            </div>
             <div class="top-row-buttons">
                 <TSTabButton DataSource="_tabButtons" Selection="@_tabSelection" OnSelection="OnTabSelection" />
             </div>
@@ -30,3 +33,10 @@
     }
     <TarkovSauce.Client.Components.Misc.TSSPinner @bind-IsSpinning=StateContainer.IsLoading.Value />
 </div>
+<style>
+    .top-bar-title {
+        position: absolute;
+        left: 1.25rem;
+        top: 0.75rem;
+    }
+</style>
