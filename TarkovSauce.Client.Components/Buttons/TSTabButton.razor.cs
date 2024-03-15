@@ -20,6 +20,7 @@ namespace TarkovSauce.Client.Components.Buttons
 
         private async Task OnClick(string val)
         {
+            if (val == Selection) return;
             StateHasChanged();
             await OnSelection.InvokeAsync(val);
         }

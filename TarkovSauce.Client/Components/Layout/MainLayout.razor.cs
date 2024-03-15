@@ -14,6 +14,8 @@ namespace TarkovSauce.Client.Components.Layout
         public AppDataJson AppDataJson { get; set; } = default!;
         [Inject]
         public IMonitor Monitor { get; set; } = default!;
+        private readonly string[] _tabButtons = ["Component Tests", "Logs", "Tasks", "Flea Sales"];
+        private string _tabSelection = "Component Tests";
         private bool _launchAppIsLoading;
         protected override void OnInitialized()
         {
@@ -31,6 +33,25 @@ namespace TarkovSauce.Client.Components.Layout
         protected override async Task OnInitializedAsync()
         {
             await base.OnInitializedAsync();
+        }
+        private void OnTabSelection(string selection)
+        {
+            _tabSelection = selection;
+            switch(selection)
+            {
+                case "Component Tests":
+                    StateContainer.State.Value = State.ComponentTests;
+                    break;
+                case "Logs":
+                    StateContainer.State.Value = State.Logs;
+                    break;
+                case "Tasks":
+                    StateContainer.State.Value = State.Tasks;
+                    break;
+                case "Flea Sales":
+                    StateContainer.State.Value = State.FleaSales;
+                    break;
+            }
         }
         private async Task LaunchApp()
         {
