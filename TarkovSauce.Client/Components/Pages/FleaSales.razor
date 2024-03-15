@@ -11,14 +11,14 @@
             <th>Value</th>
         </tr>
 
-        @foreach (var item in FleaSalesProvider.Events.OrderByDescending(ev => ev.Timestamp))
+        @foreach (var item in FleaSalesProvider.CachedEvents.Concat(FleaSalesProvider.Events).OrderByDescending(ev => ev.Timestamp))
         {
             <tr>
                 <td>@item.Timestamp.ToString("G")</td>
                 <td>@item.Type</td>
                 <td>@item.ItemName</td>
                 <td>@item.Quantity</td>
-                <td>@(item.Currency)@(item.Reward)</td>
+                <td>@(item.Currency)@(item.Reward.ToString("###,###,###"))</td>
             </tr>
         }
     </table>

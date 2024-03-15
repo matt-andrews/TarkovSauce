@@ -9,6 +9,7 @@ namespace TarkovSauce.Client.Components.Pages
         public IFleaSalesProvider FleaSalesProvider { get; set; } = default!;
         protected override void OnInitialized()
         {
+            FleaSalesProvider.InitCache();
             FleaSalesProvider.OnStateChanged = () =>
             {
                 InvokeAsync(StateHasChanged);
