@@ -12,10 +12,10 @@
             <TSButton Content="Normal" IsPrimary=false OnClick='_ => ToastService.Toast("Test toast message", ToastType.Success)' />
         </li>
         <li>
-            <TSButton Content="Primary" IsPrimary=true />
+            <TSButton Content="Primary" IsPrimary=true OnClick="_ => _loadingButton = !_loadingButton" />
         </li>
         <li>
-            <TSButton Content="Warning" IsPrimary=false Css="warning" OnClick="_ => _loadingButton = !_loadingButton" />
+            <TSButton Content="Warning" IsPrimary=false Css="warning" OnClick="_ => TestExceptionToast()" />
         </li>
         <li>
             <TSButton Content="Button Is Loading" IsPrimary=true @bind-IsLoading=_loadingButton />
@@ -63,4 +63,15 @@
     private string _inputVal = "";
     private string _tabSelection = "hello";
     private bool _loadingButton = true;
+    private void TestExceptionToast()
+    {
+        try
+        {
+            throw new Exception("This is a test exception");
+        }
+        catch (Exception ex)
+        {
+            ToastService.Toast(ex.ToString(), ToastType.Error);
+        }
+    }
 }
