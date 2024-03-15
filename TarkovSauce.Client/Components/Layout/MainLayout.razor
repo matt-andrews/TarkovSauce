@@ -14,7 +14,11 @@
                 <TSBookButton OnClick="_ => StateContainer.State.Value = State.FleaSales" Label="Flea Sales" />
                 <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" Label="Settings" />
             </div>
-            <TSButton OnClick="LaunchApp" Content="Launch BSG Launcher" IsPrimary="true" IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"></TSButton>
+            <TSButton OnClick="LaunchApp"
+                      Content="Launch BSG Launcher"
+                      IsPrimary="true"
+                      IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"
+                      @bind-IsLoading=_launchAppIsLoading />
         </div>
 
         <article class="content px-4">
