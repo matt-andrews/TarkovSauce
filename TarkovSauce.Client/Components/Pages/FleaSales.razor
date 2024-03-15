@@ -1,4 +1,16 @@
 ﻿<h3>FleaSales</h3>
+@if (_runningTotal > 0)
+{
+    <div style="width:100%;display:flex;justify-content:end">
+        <div>
+            <b>Total Sales: ₽@(_runningTotal.ToString("###,###,###"))</b>
+            <br />
+            <b>Flea Rep: @CalculateRep()</b>
+            <br />
+            <b>Next Rep Milestone in: ₽@(CalcNextRepMilestone().ToString("###,###,###"))</b>
+        </div>
+    </div>
+}
 <br />
 
 <div class="tstable">
