@@ -54,7 +54,7 @@
             {
                 _message = msg;
                 _css = type.ToString().ToLower();
-                _timer = new Timer(OnTimerTrigger, null, 3000, 0);
+                _timer = new Timer(OnTimerTrigger, null, 5000, 0);
                 _isVisible = true;
                 InvokeAsync(StateHasChanged);
             };
