@@ -1,4 +1,6 @@
-﻿<h3>FleaSales</h3>
+﻿@using TarkovSauce.Client.Components.MiscComponents
+
+<h3>FleaSales</h3>
 <br />
 
 <div class="tstable">
@@ -16,7 +18,7 @@
             <tr>
                 <td>@item.Timestamp.ToString("G")</td>
                 <td>@item.Type</td>
-                <td>@item.ItemName</td>
+                <td> <ItemComponent Item="@item"/></td>
                 <td>@item.Quantity</td>
                 <td>@(item.Currency)@(item.Reward)</td>
             </tr>
