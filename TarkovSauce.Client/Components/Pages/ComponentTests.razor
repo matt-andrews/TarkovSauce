@@ -16,7 +16,10 @@
             <TSButton Content="Primary" IsPrimary=true />
         </li>
         <li>
-            <TSButton Content="Warning" IsPrimary=false Css="warning" />
+            <TSButton Content="Warning" IsPrimary=false Css="warning" OnClick="_ => _loadingButton = !_loadingButton" />
+        </li>
+        <li>
+            <TSButton Content="Button Is Loading" IsPrimary=true @bind-IsLoading=_loadingButton />
         </li>
         <li>
             <TSCheckbox Label="Test Checkbox" />
@@ -60,4 +63,5 @@
 @code {
     private string _inputVal = "";
     private string _tabSelection = "hello";
+    private bool _loadingButton = true;
 }
