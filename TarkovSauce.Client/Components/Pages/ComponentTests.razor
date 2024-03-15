@@ -24,6 +24,9 @@
         <li>
             <TSGearButton />
         </li>
+        <li>
+            <TSTabButton DataSource="@(new List<string>{ "hello", "world" })" Selection="@_tabSelection" OnSelection="v => _tabSelection = v" />
+        </li>
     </ul>
     <p>Inputs</p>
     <ul>
@@ -56,4 +59,5 @@
 
 @code {
     private string _inputVal = "";
+    private string _tabSelection = "hello";
 }

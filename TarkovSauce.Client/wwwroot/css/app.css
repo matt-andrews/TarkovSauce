@@ -15,6 +15,7 @@
     --drop-shadow: -0.3rem 0.3rem 0.5rem rgba(0,0,0,0.2), 0.3rem 0.3rem 0.5rem rgba(0,0,0,0.2);
     --drop-shadow-medium: -0.13rem 0 0.5rem rgba(0,0,0,0.2),0.13rem 0 0.5rem rgba(0,0,0,0.2);
     --drop-shadow-heavy: -0.35rem 0.35rem 0.55rem rgba(0,0,0,0.2), 0.35rem 0.35rem 0.55rem rgba(0,0,0,0.2);
+    --drop-shadow-bottom-only: 0 0.5rem 0.925rem rgba(0,0,0,0.2);
     --border-FF: #404040;
     --border-90: #40404090;
     --border-40: #40404040;

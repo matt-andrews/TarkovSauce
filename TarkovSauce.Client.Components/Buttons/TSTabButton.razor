@@ -1,0 +1,60 @@
+﻿<div class="ts-tab-button">
+    <label for="@_id" class="input-placeholder">
+        @if (!string.IsNullOrWhiteSpace(Placeholder))
+        {
+            @Placeholder
+        }
+    </label>
+    <div class="ts-tab-button collection-content" id="@_id">
+        @if (DataSource is not null)
+        {
+            @foreach (var item in DataSource)
+            {
+                <TSButton Content="@item" IsPrimary=true OnClick="_ => OnClick(item)" Css="@(item == Selection ? "selection" : "not-selection")" />
+            }
+        }
+    </div>
+</div>
+
+<style>
+    .ts-tab-button.collection-content {
+        display: flex;
+        width: 100%;
+        padding-bottom: 4px;
+    }
+
+    .ts-tab-button .tsbutton button {
+        background-color: transparent;
+        border: none;
+        padding-left: 1.625rem;
+        padding-right: 1.625rem;
+        box-shadow: var(--drop-shadow-bottom-only);
+    }
+
+        .ts-tab-button .tsbutton button:hover {
+            background-color: transparent;
+            border: none;
+        }
+
+    .ts-tab-button .selection > button {
+        font-weight: bolder;
+        color: var(--primary-90);
+        border-bottom: 3px solid var(--primary-90);
+    }
+
+        .ts-tab-button .selection > button:hover {
+            border-bottom: 3px solid var(--primary-90);
+            color: var(--font-l1);
+        }
+
+    .ts-tab-button .not-selection > button {
+        font-weight: bolder;
+        color: var(--font-l1);
+        border-bottom: 3px solid var(--font-l1);
+    }
+
+        .ts-tab-button .not-selection > button:hover {
+            border-bottom: 3px solid var(--font-l1);
+            color: var(--primary-90);
+        }
+</style>
