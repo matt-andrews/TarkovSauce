@@ -10,11 +10,13 @@
             <div class="top-row-buttons">
                 <TSTabButton DataSource="_tabButtons" Selection="@_tabSelection" OnSelection="OnTabSelection" />
             </div>
-            <TSButton OnClick="LaunchApp"
-                      Content="Launch BSG Launcher"
-                      IsPrimary="true"
-                      IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"
-                      @bind-IsLoading=_launchAppIsLoading />
+            <div class="bsg-launcher">
+                <TSButton OnClick="LaunchApp"
+                          Content="Launch BSG Launcher"
+                          IsPrimary="true"
+                          IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"
+                          @bind-IsLoading=_launchAppIsLoading />
+            </div>
             <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" Label="Settings" />
         </div>
 

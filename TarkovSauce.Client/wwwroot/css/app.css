@@ -97,6 +97,9 @@ h1:focus {
     margin-right: 2rem;
     margin-bottom: 0.925rem;
 }
+.bsg-launcher {
+    margin-right: 2rem;
+}
 
 @supports (-webkit-touch-callout: none) {
     .status-bar-safe-area {
