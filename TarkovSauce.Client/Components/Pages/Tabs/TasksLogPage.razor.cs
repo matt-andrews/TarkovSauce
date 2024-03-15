@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TarkovSauce.Client.Data.Providers;
 
-namespace TarkovSauce.Client.Components.Pages
+namespace TarkovSauce.Client.Components.Pages.Tabs
 {
     public partial class TasksLogPage
     {

@@ -2,6 +2,7 @@
     --sidebar-bg: linear-gradient(180deg, #fa810090 0%, #fa810040 90%);
     --background-l1: #202124;
     --font-l1: #d9d9d9CC;
+    --hint: slategray;
     --black: #303030;
     --gray-FF: #6a6a6a;
     --gray-90: #6a6a6a90;
@@ -15,6 +16,7 @@
     --drop-shadow: -0.3rem 0.3rem 0.5rem rgba(0,0,0,0.2), 0.3rem 0.3rem 0.5rem rgba(0,0,0,0.2);
     --drop-shadow-medium: -0.13rem 0 0.5rem rgba(0,0,0,0.2),0.13rem 0 0.5rem rgba(0,0,0,0.2);
     --drop-shadow-heavy: -0.35rem 0.35rem 0.55rem rgba(0,0,0,0.2), 0.35rem 0.35rem 0.55rem rgba(0,0,0,0.2);
+    --drop-shadow-bottom-only: 0 0.5rem 0.925rem rgba(0,0,0,0.2);
     --border-FF: #404040;
     --border-90: #40404090;
     --border-40: #40404040;
@@ -24,11 +26,16 @@
     --toast-err: #45000cDD;
 }
 
-a{
+html {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+a {
     color: var(--primary-90);
 }
 
-    a:hover{
+    a:hover {
         color: var(--primary-40);
     }
 
@@ -85,6 +92,15 @@ h1:focus {
     display: none;
 }
 
+.top-row-buttons {
+    display: flex;
+    margin-right: 1rem;
+    margin-bottom: 0.925rem;
+}
+.bsg-launcher {
+    margin-right: 0.75rem;
+}
+
 @supports (-webkit-touch-callout: none) {
     .status-bar-safe-area {
         display: flex;
@@ -99,4 +115,16 @@ h1:focus {
     .flex-column, .navbar-brand {
         padding-left: env(safe-area-inset-left);
     }
+}
+
+::-webkit-scrollbar {
+    width: 2px;
+}
+
+::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0,0,0,0.3);
+}
+
+::-webkit-scrollbar-thumb {
+    background-color: var(--primary-90);
 }

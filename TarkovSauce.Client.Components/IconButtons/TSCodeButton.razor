@@ -1,0 +1,24 @@
+﻿@using TarkovSauce.Client.Components.Buttons
+@inherits ButtonBase
+
+<div class="@CssImpl" style="@StyleImpl">
+    <button @onclick="async _ => await OnClick.InvokeAsync()" title="@Label">
+        <i class="bi-code-slash" />
+    </button>
+</div>
+
+<style>
+    .icon-button button i.bi-code-slash:before {
+        animation: popIn 0.5s forwards;
+    }
+
+    .icon-button button:hover i.bi-code-slash:before {
+        content: '\F2C8';
+        animation: popOut 0.5s forwards;
+    }
+
+</style>
+
+@code {
+    protected override string CssImpl => $"tsbookbutton icon-button {base.CssImpl}";
+}

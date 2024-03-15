@@ -1,4 +1,25 @@
-﻿<h3>FleaSales</h3>
+﻿@if (_runningTotal > 0)
+{
+    <div style="width:100%;display:flex;justify-content:end">
+        <table class="running-total">
+            <tr>
+                <th>Total Sales:</th>
+                <td>&nbsp;</td>
+                <td>₽@(_runningTotal.ToString("###,###,###"))</td>
+            </tr>
+            <tr>
+                <th>Flea Rep:</th>
+                <td>&nbsp;</td>
+                <td>@CalculateRep()</td>
+            </tr>
+            <tr>
+                <th>Next Rep Level:</th>
+                <td>&nbsp;</td>
+                <td>₽@(CalcNextRepMilestone().ToString("###,###,###"))</td>
+            </tr>
+        </table>
+    </div>
+}
 <br />
 
 <div class="tstable">
@@ -11,15 +32,20 @@
             <th>Value</th>
         </tr>
 
-        @foreach (var item in FleaSalesProvider.Events.OrderByDescending(ev => ev.Timestamp))
+        @foreach (var item in FleaSalesProvider.CachedEvents.Concat(FleaSalesProvider.Events).OrderByDescending(ev => ev.Timestamp))
         {
             <tr>
                 <td>@item.Timestamp.ToString("G")</td>
                 <td>@item.Type</td>
                 <td>@item.ItemName</td>
                 <td>@item.Quantity</td>
-                <td>@(item.Currency)@(item.Reward)</td>
+                <td>@(item.Currency)@(item.Reward.ToString("###,###,###"))</td>
             </tr>
         }
     </table>
 </div>
+<style>
+    table.running-total th {
+        text-align: right;
+    }
+</style>

@@ -19,12 +19,11 @@ namespace TarkovSauce.Client.Services
     public enum State
     {
         Home,
-        RawLogs,
+        Logs,
         FleaSales,
         ComponentTests,
         Settings,
         Tasks,
-        TarkovTrackerLogs
     }
 
 }

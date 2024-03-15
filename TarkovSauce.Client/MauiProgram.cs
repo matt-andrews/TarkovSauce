@@ -77,6 +77,14 @@ namespace TarkovSauce.Client
                         appdata.Settings.TarkovPath = path;
                         appDataManager.WriteAppData(appdata);
                     }
+                    string? launcher = builder.Configuration["Settings:TarkovExePath"];
+                    if (string.IsNullOrWhiteSpace(launcher))
+                    {
+                        launcher = RegistryFinder.GetBsgLauncherLocation();
+                        var appdata = appDataManager.GetAppData();
+                        appdata.Settings.TarkovExePath = launcher;
+                        appDataManager.WriteAppData(appdata);
+                    }
                     options.LogPath = path;
                     options.CheckpointPath = AppDataManager.CheckpointFile;
                     options.AddFile(new WatcherFile("application", "application.log"));

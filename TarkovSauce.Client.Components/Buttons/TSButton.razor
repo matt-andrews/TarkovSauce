@@ -1,7 +1,30 @@
-﻿@inherits StyleableComponentBase
+﻿@inherits ButtonBase
 
 <div class="@CssImpl" style="@StyleImpl">
     <button @onclick="()=>OnClickEvent()">
-        @Content
+        <div style="display:flex">
+            @Content
+            @if (IsLoading)
+            {
+                <div class="tsbutton-lds-dual-ring"></div>
+            }
+        </div>
     </button>
 </div>
+<style>
+    .tsbutton-lds-dual-ring{
+        align-self: center;
+    }
+    .tsbutton-lds-dual-ring:after {
+        content: " ";
+        display: block;
+        width: 16px;
+        height: 16px;
+        margin: 0;
+        margin-left: 0.525rem;
+        border-radius: 50%;
+        border: 2px solid var(--primary-90);
+        border-color: var(--primary-90) transparent var(--primary-90) transparent;
+        animation: lds-dual-ring 1.2s linear infinite;
+    }
+</style>

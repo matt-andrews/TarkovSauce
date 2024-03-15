@@ -1,36 +1,45 @@
 ﻿@inject ITSToastService ToastService
 @if (_isVisible)
 {
-    <div class="tstoast @_css">
-        @_message
+    <div class="toast-wrapper">
+        <div class="tstoast @_css">
+            @_message
+        </div>
     </div>
+
 }
 <style>
-    div.tstoast {
+    div.toast-wrapper {
         position: fixed;
-        left: 30%;
-        width: 40%;
-        height: 5%;
         bottom: 0;
-        padding: 0.2rem;
-        padding-left: 1rem;
-        padding-right: 1rem;
+        left: 0;
+        right: 0;
         display: flex;
-        align-content: center;
         justify-content: center;
-        font-weight: 500;
-        border-radius: var(--border-radius-l2);
-        border-bottom-right-radius: 0;
-        border-bottom-left-radius: 0;
     }
 
-        div.tstoast.success {
-            background-color: var(--toast-succ);
+        div.toast-wrapper div.tstoast {
+            padding: 0.2rem;
+            padding-left: 1rem;
+            padding-right: 1rem;
+            min-width: 40%;
+            min-height: 5%;
+            display: flex;
+            align-content: center;
+            justify-content: center;
+            font-weight: 500;
+            border-radius: var(--border-radius-l2);
+            border-bottom-right-radius: 0;
+            border-bottom-left-radius: 0;
         }
 
-        div.tstoast.error {
-            background-color: var(--toast-err);
-        }
+    div.tstoast.success {
+        background-color: var(--toast-succ);
+    }
+
+    div.tstoast.error {
+        background-color: var(--toast-err);
+    }
 </style>
 @code {
     private string _css = "";
@@ -45,7 +54,7 @@
             {
                 _message = msg;
                 _css = type.ToString().ToLower();
-                _timer = new Timer(OnTimerTrigger, null, 3000, 0);
+                _timer = new Timer(OnTimerTrigger, null, 5000, 0);
                 _isVisible = true;
                 InvokeAsync(StateHasChanged);
             };

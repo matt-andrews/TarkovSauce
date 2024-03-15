@@ -1,0 +1,24 @@
+﻿@using TarkovSauce.Client.Components.Buttons
+@inherits ButtonBase
+
+<div class="@CssImpl" style="@StyleImpl">
+    <button @onclick="async _ => await OnClick.InvokeAsync()" title="@Label">
+        <i class="bi-basket" />
+    </button>
+</div>
+
+<style>
+    .icon-button button i.bi-basket:before {
+        animation: popIn 0.5s forwards;
+    }
+
+    .icon-button button:hover i.bi-basket:before {
+        content: '\F17F';
+        animation: popOut 0.5s forwards;
+    }
+
+</style>
+
+@code {
+    protected override string CssImpl => $"tsbasketbutton icon-button {base.CssImpl}";
+}

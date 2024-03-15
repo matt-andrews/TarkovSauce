@@ -1,6 +1,4 @@
-﻿<h3>App Settings</h3>
-<br />
-@if (AppDataJson is not null)
+﻿@if (AppDataJson is not null)
 {
     <div>
         <TSInput Placeholder="Tarkov Log Path" @bind-Value=AppDataJson.Settings.TarkovPath />

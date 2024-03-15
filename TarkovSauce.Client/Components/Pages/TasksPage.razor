@@ -1,6 +1,4 @@
-﻿<h3>Tasks</h3>
-
-@if (_tasks is not null)
+﻿@if (_tasks is not null)
 {
     <div class="tasks-container">
         @foreach (var task in _tasks.OrderBy(task => task.Objectives.Any(objectives => objectives.Maps.Any())))
