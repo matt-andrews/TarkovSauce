@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.Extensions.Logging;
 using System.Diagnostics;
+using TarkovSauce.Client.Components.Modal;
 using TarkovSauce.Client.Services;
 using TarkovSauce.Client.Utils;
 using TarkovSauce.Watcher;
@@ -14,6 +16,10 @@ namespace TarkovSauce.Client.Components.Layout
         public AppDataJson AppDataJson { get; set; } = default!;
         [Inject]
         public IMonitor Monitor { get; set; } = default!;
+        [Inject]
+        public ITSToastService ToastService { get; set; } = default!;
+        [Inject]
+        public ILogger<MainLayout> Logger { get; set; } = default!;
         private readonly string[] _tabButtons = ["Component Tests", "Logs", "Tasks", "Flea Sales"];
         private string _tabSelection = "Component Tests";
         private bool _launchAppIsLoading;
@@ -37,7 +43,7 @@ namespace TarkovSauce.Client.Components.Layout
         private void OnTabSelection(string selection)
         {
             _tabSelection = selection;
-            switch(selection)
+            switch (selection)
             {
                 case "Component Tests":
                     StateContainer.State.Value = State.ComponentTests;
@@ -65,26 +71,34 @@ namespace TarkovSauce.Client.Components.Layout
         {
             if (!string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))
             {
-                // Check for launcher already started so we can skip the loading button
-                Process[] processes = Process.GetProcessesByName("BsgLauncher");
-                _launchAppIsLoading = true;
-                // Use Process.Start to launch the Tarkov application
-                Process process = new()
+                try
                 {
-                    StartInfo = new ProcessStartInfo()
+                    // Check for launcher already started so we can skip the loading button
+                    Process[] processes = Process.GetProcessesByName("BsgLauncher");
+                    _launchAppIsLoading = true;
+                    // Use Process.Start to launch the Tarkov application
+                    Process process = new()
                     {
-                        FileName = AppDataJson.Settings.TarkovExePath
+                        StartInfo = new ProcessStartInfo()
+                        {
+                            FileName = AppDataJson.Settings.TarkovExePath
+                        }
+                    };
+                    process.Start();
+                    if (processes.Length <= 0)
+                    {
+                        // Wait for the bsg launcher to open so we can turn off the loading spinner
+                        while (process.MainWindowTitle != "BsgLauncher")
+                        {
+                            process.Refresh();
+                            await Task.Delay(150);
+                        }
                     }
-                };
-                process.Start();
-                if (processes.Length <= 0)
+                }
+                catch (Exception ex)
                 {
-                    // Wait for the bsg launcher to open so we can turn off the loading spinner
-                    while (process.MainWindowTitle != "BsgLauncher")
-                    {
-                        process.Refresh();
-                        await Task.Delay(150);
-                    }
+                    ToastService.Toast(ex.Message, ToastType.Error);
+                    Logger.LogError(ex, ex.Message);
                 }
                 _launchAppIsLoading = false;
             }

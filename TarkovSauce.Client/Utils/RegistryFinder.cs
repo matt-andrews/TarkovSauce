@@ -18,5 +18,19 @@ namespace TarkovSauce.Client.Utils
             return "";
 #endif
         }
+        public static string GetBsgLauncherLocation()
+        {
+#if WINDOWS
+            string keyPath = "SOFTWARE\\WOW6432Node\\Microsoft\\Windows\\CurrentVersion\\Uninstall\\EscapeFromTarkov";
+
+            using RegistryKey key = Registry.LocalMachine.OpenSubKey(keyPath)
+                ?? throw new Exception("EFT install registry entry not found");
+
+            return Path.GetFullPath(Path.Combine(key.GetValue("InstallLocation")?.ToString()
+                ?? throw new Exception("InstallLocation registry value not found"), "..", "BsgLauncher", "BsgLauncher.exe"));
+#else
+            return "";
+#endif
+        }
     }
 }
