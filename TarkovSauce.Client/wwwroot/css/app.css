@@ -1,7 +1,8 @@
-:root {
+﻿:root {
     --sidebar-bg: linear-gradient(180deg, #fa810090 0%, #fa810040 90%);
     --background-l1: #202124;
     --font-l1: #d9d9d9CC;
+    --hint: slategray;
     --black: #303030;
     --gray-FF: #6a6a6a;
     --gray-90: #6a6a6a90;
@@ -27,13 +28,14 @@
 
 html {
     overflow-y: scroll;
+    overflow-x: hidden;
 }
 
-a{
+a {
     color: var(--primary-90);
 }
 
-    a:hover{
+    a:hover {
         color: var(--primary-40);
     }
 
@@ -89,6 +91,20 @@ h1:focus {
 .status-bar-safe-area {
     display: none;
 }
+
+.top-row-buttons {
+    display: flex;
+    margin-right: 1rem;
+}
+
+    .top-row-buttons .icon-button {
+        margin-right: 2rem;
+    }
+
+        .top-row-buttons .icon-button button i {
+            font-size: 2.5rem;
+        }
+
 
 @supports (-webkit-touch-callout: none) {
     .status-bar-safe-area {

@@ -5,14 +5,16 @@
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
         <div class="top-row px-4">
+            <div class="top-row-buttons">
+                <TSBasketButton OnClick="_ => StateContainer.State.Value = State.ComponentTests" Label="Component Tests" />
+                <TSCodeButton OnClick="_ => StateContainer.State.Value = State.Logs" Label="Logs" />
+                <TSClipboardButton OnClick="_ => StateContainer.State.Value = State.Tasks" Label="Tasks" />
+                <TSBookButton OnClick="_ => StateContainer.State.Value = State.FleaSales" Label="Flea Sales" />
+                <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" Label="Settings" />
+            </div>
             <TSButton OnClick="LaunchApp" Content="Launch BSG Launcher" IsPrimary="true" IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"></TSButton>
-            <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" />
         </div>
 
         <article class="content px-4">

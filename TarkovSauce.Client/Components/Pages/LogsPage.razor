@@ -1,0 +1,13 @@
+﻿@using TarkovSauce.Client.Components.Pages.Tabs
+<h3>Logs</h3>
+<TSTabButton DataSource="_tabs" Selection="@_tabSelection" OnSelection="v => _tabSelection = v" />
+<br />
+<h5>@_tabSelection</h5>
+@if(_tabSelection == "Task Logs")
+{
+    <TasksLogPage />
+}
+else if(_tabSelection == "Raw Logs")
+{
+    <RawLog />
+}
