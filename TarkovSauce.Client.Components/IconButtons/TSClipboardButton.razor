@@ -1,0 +1,24 @@
+﻿@using TarkovSauce.Client.Components.Buttons
+@inherits ButtonBase
+
+<div class="@CssImpl" style="@StyleImpl">
+    <button @onclick="async _ => await OnClick.InvokeAsync()" title="@Label">
+        <i class="bi-clipboard-check" />
+    </button>
+</div>
+
+<style>
+    .icon-button button i.bi-clipboard-check:before {
+        animation: popIn 0.5s forwards;
+    }
+
+    .icon-button button:hover i.bi-clipboard-check:before {
+        content: '\F71B';
+        animation: popOut 0.5s forwards;
+    }
+
+</style>
+
+@code {
+    protected override string CssImpl => $"tsclipboardbutton icon-button {base.CssImpl}";
+}
