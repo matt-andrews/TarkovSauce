@@ -7,6 +7,10 @@ namespace TarkovSauce.Client.Data.Models.Remote
         [PrimaryKey]
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
+        public string ShortName { get; set; } = "";
+        public string Description { get; set; } = "No description";
+        public int Avg24hPrice { get; set; }
+        public string GridImageLink { get; set; } = "";
     }
     public class ItemsWrapper
     {
