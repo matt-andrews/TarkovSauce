@@ -5,14 +5,22 @@
 @inherits LayoutComponentBase
 
 <div class="page">
-    <div class="sidebar">
-        <NavMenu />
-    </div>
-
     <main>
         <div class="top-row px-4">
-            <TSButton OnClick="LaunchApp" Content="Launch BSG Launcher" IsPrimary="true" IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"></TSButton>
-            <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" />
+            <div class="top-bar-title">
+                <h3>@GetPageTitle()</h3>
+            </div>
+            <div class="top-row-buttons">
+                <TSTabButton DataSource="_tabButtons" Selection="@_tabSelection" OnSelection="OnTabSelection" />
+            </div>
+            <div class="bsg-launcher">
+                <TSButton OnClick="LaunchApp"
+                          Content="Launch BSG Launcher"
+                          IsPrimary="true"
+                          IsDisabled="@(string.IsNullOrEmpty(AppDataJson.Settings.TarkovExePath))"
+                          @bind-IsLoading=_launchAppIsLoading />
+            </div>
+            <TSGearButton OnClick="_ => StateContainer.State.Value = State.Settings" Label="Settings" />
         </div>
 
         <article class="content px-4">
@@ -25,3 +33,10 @@
     }
     <TarkovSauce.Client.Components.Misc.TSSPinner @bind-IsSpinning=StateContainer.IsLoading.Value />
 </div>
+<style>
+    .top-bar-title {
+        position: absolute;
+        left: 1.25rem;
+        top: 0.75rem;
+    }
+</style>

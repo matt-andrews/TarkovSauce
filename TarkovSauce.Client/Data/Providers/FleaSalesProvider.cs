@@ -7,7 +7,9 @@ namespace TarkovSauce.Client.Data.Providers
 {
     public interface IFleaSalesProvider : IProvider
     {
-        public List<FleaEventModel> Events { get; }
+        List<FleaEventModel> Events { get; }
+        List<FleaEventModel> CachedEvents { get; }
+        void InitCache();
         Task AppendSale(FleaSoldMessageEventArgs? args);
         Task AppendExpiry(FleaExpiredeMessageEventArgs? args);
     }
@@ -17,15 +19,18 @@ namespace TarkovSauce.Client.Data.Providers
         private readonly ISqlService _sqlService;
 
         public List<FleaEventModel> Events { get; } = [];
+        public List<FleaEventModel> CachedEvents { get; private set; } = [];
         public Action? OnStateChanged { get; set; }
-        
+
         public FleaSalesProvider(ITarkovDevHttpClient httpClient, ISqlService sqlService)
         {
             _httpClient = httpClient;
             _sqlService = sqlService;
-            //Events.AddRange(sqlService.Get<FleaEventModel>());
         }
-
+        public void InitCache()
+        {
+            CachedEvents = _sqlService.Get<FleaEventModel>().ToList();
+        }
         public async Task AppendExpiry(FleaExpiredeMessageEventArgs? args)
         {
             if (args is null) return;
