@@ -1,0 +1,25 @@
+﻿@if (_map is not null)
+{
+    <div class="raid-map-toolbar">
+        <TSCheckbox Label="PMC Extracts" IsOn=_mapShowPmcExtract IsOnChanged="v => OnMapShowPmcExtract(v)" />
+        <TSCheckbox Label="Scav Extracts" IsOn=_mapShowScavExtract IsOnChanged="v => OnMapShowScavExtract(v)" />
+        <TSCheckbox Label="Show Current Position" IsOn=_showCurrentPos IsOnChanged="v => OnMapCurrentPos(v)" />
+    </div>
+    <div class="raid-page">
+        <img src="@ImgSrc" />
+    </div>
+}
+<style>
+    .raid-map-toolbar {
+        width: 100%;
+        display: flex;
+    }
+
+    .raid-page {
+        width: calc(100vw-3.5rem);
+    }
+
+        .raid-page img {
+            width: 100%;
+        }
+</style>

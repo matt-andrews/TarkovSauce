@@ -1,0 +1,72 @@
+{
+  "Name": "Customs",
+  "Map": "maps/customs.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ 675.8, 8.1, 126 ],
+      "MapCoord": [ 48, 912, 0 ]
+    },
+    {
+      "GameCoord": [ -328.8, 3.0, -236.0 ],
+      "MapCoord": [ 2239, 139, 0 ]
+    }
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ -300, 0, -210 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Trailer Park",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -315, 0, -75 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Crossroads",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 180, 0, 235 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Dorms V-Ex",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -25, 0, 145 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Smugglers Boat",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 650, 0, -125 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "ZB-1011",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 485, 0, -100 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "ZB-1012",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 325, 0, -175 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Old Gas",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 210, 0, -140 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "ZB-1013",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -5, 0, -115 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "RUAF",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ]
+  }
+}

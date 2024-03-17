@@ -1,43 +1,45 @@
 ﻿using Microsoft.Extensions.DependencyInjection;
+using System.Drawing;
+using System.Text.Json;
 
 namespace TarkovSauce.MapTools
 {
     public static class MapExtensions
     {
-        public static IMapTools AddMapTools(this IServiceCollection services)
+        public static IMapTools AddMapTools(this IServiceCollection services, string baseUri)
         {
+            services.AddSingleton(new MapToolsHttpClient(new HttpClient() { BaseAddress = new Uri(baseUri) }));
             MapTools tools = new();
-            services.AddSingleton<IMapTools>(tools);
+            services.AddSingleton<IMapTools>(provider => tools.AddHttpClient(provider.GetRequiredService<MapToolsHttpClient>()));
             return tools;
         }
-        public static IMapTools AddMap(this IMapTools mapTools, Action<IMapOptions> optionsBuilder)
+
+        public static IMapTools AddMap(this IMapTools mapTools, string configPath)
         {
             if (mapTools is not MapTools tools)
             {
                 throw new Exception("Wrong implementation of IMapTools");
             }
 
-            MapOptions options = new();
-            optionsBuilder(options);
-            tools.Maps.Add(new Map(options.Name, options.BaseImage, [.. options.Anchors]));
+            using var fs = new FileStream(configPath, FileMode.Open, FileAccess.Read);
+            MapConfig config = JsonSerializer.Deserialize<MapConfig>(fs) ?? throw new Exception("Config linked is not a map config");
+
+            var map = new Map(config.Name, config.Map, config.Anchors.Select(s => new Anchor()
+            {
+                Game = new GameCoord(s.GameCoord[0], s.GameCoord[1], s.GameCoord[2]),
+                Map = new MapCoord(s.MapCoord[0], s.MapCoord[1], s.MapCoord[2])
+            }).ToArray());
+
+            map.AddDefaultPos(config.Extracts.Pmc, FilterType.PmcExtract);
+
+            tools.Maps.Add(map);
+
             return tools;
         }
-    }
-    public interface IMapOptions
-    {
-        string Name { get; set; }
-        string BaseImage { get; set; }
-        void AddAnchor(GameCoord gameCoord, MapCoord mapCoord);
-    }
-    internal class MapOptions : IMapOptions
-    {
-        public string Name { get; set; } = "";
-        public string BaseImage { get; set; } = "";
-        public List<Anchor> Anchors { get; set; } = [];
 
-        public void AddAnchor(GameCoord gameCoord, MapCoord mapCoord)
+        internal static string ToHex(this Color color)
         {
-            Anchors.Add(new Anchor() { Game = gameCoord, Map = mapCoord });
+            return $"#{color.R:X2}{color.G:X2}{color.B:X2}";
         }
     }
 }

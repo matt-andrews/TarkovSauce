@@ -44,6 +44,10 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Remove="resources\raw\customs.json" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
@@ -53,7 +57,14 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TarkovSauce.Client.Components\TarkovSauce.Client.Components.csproj" />
+      <ProjectReference Include="..\TarkovSauce.MapTools\TarkovSauce.MapTools.csproj" />
       <ProjectReference Include="..\TarkovSauce.Watcher\TarkovSauce.Watcher.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiAsset Update="Resources\Raw\customs.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
     </ItemGroup>
 
 </Project>

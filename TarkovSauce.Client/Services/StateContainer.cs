@@ -24,6 +24,7 @@ namespace TarkovSauce.Client.Services
         ComponentTests,
         Settings,
         Tasks,
+        Raid
     }
 
 }
