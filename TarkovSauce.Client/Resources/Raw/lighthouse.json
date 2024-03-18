@@ -1,0 +1,14 @@
+{
+  "Name": "lighthouse",
+  "Map": "maps/lighthouse.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ -201.2, 6.1, -702.4 ],
+      "MapCoord": [ 546, 250, 0 ]
+    },
+    {
+      "GameCoord": [ 111.3, 1.8, 551.5 ],
+      "MapCoord": [ 314, 1168, 0 ]
+    }
+  ]
+}

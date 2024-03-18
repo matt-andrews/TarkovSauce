@@ -1,4 +1,5 @@
 ﻿using System.Diagnostics;
+using System.Text.RegularExpressions;
 using System.Timers;
 using TarkovSauce.Watcher.Interfaces;
 
@@ -21,6 +22,8 @@ namespace TarkovSauce.Watcher
         private readonly MonitorOptions _options;
         private readonly System.Timers.Timer _processTimer;
         private FileSystemWatcher _logFileCreateWatcher;
+        private readonly FileSystemWatcher _screenshotWatcher;
+        private readonly string _screenshotPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Escape From Tarkov", "Screenshots");
 
         public Monitor(MonitorOptions options)
         {
@@ -35,6 +38,7 @@ namespace TarkovSauce.Watcher
                 AutoReset = true,
                 Enabled = false
             };
+            _screenshotWatcher = new FileSystemWatcher();
         }
 
         public void RegisterListeners(List<IMessageListener> listeners)
@@ -51,6 +55,7 @@ namespace TarkovSauce.Watcher
             _processTimer.Start();
             UpdateProcess();
             WatchFolders();
+            SetupScreenshotWatcher();
             return this;
         }
 
@@ -185,6 +190,45 @@ namespace TarkovSauce.Watcher
         public void OnError(string name, string message, Exception ex)
         {
             _messageFactory?.OnError(name, message, ex);
+        }
+
+        private void SetupScreenshotWatcher()
+        {
+            try
+            {
+                bool screenshotPathExists = Directory.Exists(_screenshotPath);
+                string watchPath = screenshotPathExists ? _screenshotPath : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                _screenshotWatcher.Path = watchPath;
+                _screenshotWatcher.IncludeSubdirectories = !screenshotPathExists;
+                _screenshotWatcher.Created -= ScreenshotWatcher_Created;
+                _screenshotWatcher.Created -= ScreenshotWatcher_FolderCreated;
+                if (screenshotPathExists)
+                {
+                    _screenshotWatcher.Filter = "*.png";
+                    _screenshotWatcher.Created += ScreenshotWatcher_Created;
+                }
+                else
+                {
+                    _screenshotWatcher.Created += ScreenshotWatcher_FolderCreated;
+                }
+                _screenshotWatcher.EnableRaisingEvents = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private void ScreenshotWatcher_FolderCreated(object sender, FileSystemEventArgs e)
+        {
+            if (e.FullPath == _screenshotPath)
+            {
+                SetupScreenshotWatcher();
+            }
+        }
+        private void ScreenshotWatcher_Created(object sender, FileSystemEventArgs e)
+        {
+            string filename = e.Name ?? "";
+            _messageFactory?.OnScreenshot(filename);
         }
     }
 }

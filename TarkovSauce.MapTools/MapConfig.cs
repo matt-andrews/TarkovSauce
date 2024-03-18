@@ -6,22 +6,27 @@
         public string Map { get; set; } = "";
         public AnchorConfig[] Anchors { get; set; } = [];
         public ExtractsConfig Extracts { get; set; } = new();
+        public SpawnsConfig Spawns { get; set; } = new();
     }
     internal class ExtractsConfig
     {
-        public PmcConfig[] Pmc { get; set; } = [];
-        internal class PmcConfig : IPos
-        {
-            public float[] XYZ { get; set; } = [];
-            public string Sprite { get; set; } = "";
-            public string Title { get; set; } = "";
-            public int[] TitleColor { get; set; } = [];
-        }
+        public PosConfig[] Pmc { get; set; } = [];
+        public PosConfig[] Scav { get; set; } = [];
+    }
+    internal class SpawnsConfig
+    {
+        public PosConfig[] Pmc { get; set; } = [];
+        public PosConfig[] Scav { get; set; } = [];
     }
     internal class AnchorConfig
     {
         public float[] GameCoord { get; set; } = [];
         public int[] MapCoord { get; set; } = [];
+    }
+    internal class BossConfig
+    {
+        public PosConfig[] Bosses { get; set; } = [];
+        public PosConfig[] Goons { get; set; } = [];
     }
     internal interface IPos
     {
@@ -29,5 +34,12 @@
         string Sprite { get; set; }
         string Title { get; set; }
         int[] TitleColor { get; set; }
+    }
+    internal class PosConfig : IPos
+    {
+        public float[] XYZ { get; set; } = [];
+        public string Sprite { get; set; } = "";
+        public string Title { get; set; } = "";
+        public int[] TitleColor { get; set; } = [];
     }
 }

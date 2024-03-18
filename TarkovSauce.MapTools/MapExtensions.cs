@@ -31,6 +31,9 @@ namespace TarkovSauce.MapTools
             }).ToArray());
 
             map.AddDefaultPos(config.Extracts.Pmc, FilterType.PmcExtract);
+            map.AddDefaultPos(config.Extracts.Scav, FilterType.ScavExtract);
+            map.AddDefaultPos(config.Spawns.Pmc, FilterType.PmcSpawns);
+            map.AddDefaultPos(config.Spawns.Scav, FilterType.ScavSpawns);
 
             tools.Maps.Add(map);
 

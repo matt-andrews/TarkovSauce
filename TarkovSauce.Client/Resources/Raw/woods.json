@@ -1,0 +1,14 @@
+{
+  "Name": "woods",
+  "Map": "maps/woods.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ 206.2, 14.5, -813.3 ],
+      "MapCoord": [ 312, 119, 0 ]
+    },
+    {
+      "GameCoord": [ -537.1, 0.0, 292.6 ],
+      "MapCoord": [ 1160, 1352, 0 ]
+    }
+  ]
+}

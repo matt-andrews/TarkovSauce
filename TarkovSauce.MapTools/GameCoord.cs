@@ -36,5 +36,9 @@ namespace TarkovSauce.MapTools
         {
             return new MapCoord((int)Math.Round(point.X), (int)Math.Round(point.Y), 0);
         }
+        public static GameCoord ToGameCoord(this PointF point)
+        {
+            return new GameCoord(point.X, 0, point.Y);
+        }
     }
 }

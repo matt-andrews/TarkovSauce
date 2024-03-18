@@ -10,6 +10,7 @@ namespace TarkovSauce.MapTools
         byte[] Image { get; }
         string Name { get; }
         MapCoord GetPos(GameCoord gameCoord);
+        GameCoord GetPos(MapCoord mapCoord);
         IMapBuilder GetBuilder();
 
         public interface IMapBuilder
@@ -112,21 +113,46 @@ namespace TarkovSauce.MapTools
 
         internal void AddDefaultPos(IPos obj, FilterType filterType)
         {
-            _defaultPositions.Add(
-                new PosObj(
-                    new GameCoord(obj.XYZ[0], obj.XYZ[1], obj.XYZ[2]),
-                    obj.Sprite,
-                    new SpriteText(obj.Title, Color.FromArgb(obj.TitleColor[0], obj.TitleColor[1], obj.TitleColor[2])),
-                    filterType
-                    )
-                );
+            if (!string.IsNullOrWhiteSpace(obj.Title))
+            {
+                _defaultPositions.Add(
+                    new PosObj(
+                        new GameCoord(obj.XYZ[0], obj.XYZ[1], obj.XYZ[2]),
+                        obj.Sprite,
+                        new SpriteText(obj.Title, Color.FromArgb(obj.TitleColor[0], obj.TitleColor[1], obj.TitleColor[2])),
+                        filterType
+                        )
+                    );
+            }
+            else
+            {
+                _defaultPositions.Add(
+                    new PosObj(
+                        new GameCoord(obj.XYZ[0], obj.XYZ[1], obj.XYZ[2]),
+                        obj.Sprite,
+                        null,
+                        filterType
+                        )
+                    );
+            }
         }
         internal void AddDefaultPos(IEnumerable<IPos> objs, FilterType filterType)
         {
             foreach (var obj in objs)
                 AddDefaultPos(obj, filterType);
         }
+        public GameCoord GetPos(MapCoord mapCoord)
+        {
+            PointF[] realWorldPoints = Anchors.Select(s => s.Game.ToPointF()).ToArray();
+            PointF[] imagePoints = Anchors.Select(s => s.Map.ToPointF()).ToArray();
 
+            Matrix transformationMatrix = CalculateTransformationMatrix(imagePoints, realWorldPoints);
+
+            PointF realCoordinate = mapCoord.ToPointF();
+            PointF mappedPixelCoordinate = MapCoordinate(realCoordinate, transformationMatrix);
+
+            return mappedPixelCoordinate.ToGameCoord();
+        }
         /// <summary>
         /// Get the map coordinates from the game coordinates
         /// </summary>

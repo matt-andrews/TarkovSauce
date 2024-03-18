@@ -1,0 +1,14 @@
+{
+  "Name": "streets",
+  "Map": "maps/streets.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ -69.8, 4.4, -142.3 ],
+      "MapCoord": [ 714, 95, 0 ]
+    },
+    {
+      "GameCoord": [ 290.6, 4.9, 494.7 ],
+      "MapCoord": [ 48, 1269, 0 ]
+    }
+  ]
+}

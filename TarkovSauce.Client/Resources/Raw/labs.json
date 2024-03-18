@@ -1,0 +1,16 @@
+{
+  "Name": "labs",
+  "Map": "maps/labs_main.JPG",
+  "MapL2": "maps/reserve_bunker.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ -117.2, 1.5, -416.4 ],
+      "MapCoord": [ 440, 1347, 0 ]
+    },
+    {
+      "GameCoord": [ -257.6, 1.6, -288.8 ],
+      "MapCoord": [ 1421, 263, 0 ]
+    }
+
+  ]
+}

@@ -45,6 +45,12 @@
 
     <ItemGroup>
       <Content Remove="resources\raw\customs.json" />
+      <Content Remove="resources\raw\labs.json" />
+      <Content Remove="resources\raw\lighthouse.json" />
+      <Content Remove="resources\raw\reserve.json" />
+      <Content Remove="resources\raw\shoreline.json" />
+      <Content Remove="resources\raw\streets.json" />
+      <Content Remove="resources\raw\woods.json" />
     </ItemGroup>
 
     <ItemGroup>
@@ -63,6 +69,12 @@
 
     <ItemGroup>
       <MauiAsset Update="Resources\Raw\customs.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
+      <MauiAsset Update="Resources\Raw\shoreline.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
+      <MauiAsset Update="Resources\Raw\woods.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </MauiAsset>
     </ItemGroup>

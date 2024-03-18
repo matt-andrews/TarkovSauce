@@ -67,6 +67,7 @@ namespace TarkovSauce.Client
             builder.Services.AddSingleton<ITarkovTrackerProvider, TarkovTrackerProvider>();
             builder.Services.AddSingleton<ISelectedMapProvider, SelectedMapProvider>();
             builder.Services.AddSingleton<ITarkovTrackerLogsProvider, TarkovTrackerLogsProvider>();
+            builder.Services.AddSingleton<IScreenshotWatcherProvider, ScreenshotWatcherProvider>();
 
             builder.Services
                 .AddWatcher(options =>
@@ -95,7 +96,12 @@ namespace TarkovSauce.Client
 
             builder.Services
                 .AddMapTools("https://tarkovsauce.blob.core.windows.net/static/")
-                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customs.json"));
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customs.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "woods.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shoreline.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "streets.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lighthouse.json"))
+                ;
 
             builder.Services.AddMauiBlazorWebView();
 

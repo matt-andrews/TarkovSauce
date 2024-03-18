@@ -7,35 +7,7 @@ namespace TarkovSauce.Client.Data.EventArgs
         {
             get
             {
-                switch (RaidSettings.Location)
-                {
-                    case "bigmap":
-                        return "customs";
-                    case "Shoreline":
-                        return "shoreline";
-                    case "Woods":
-                        return "woods";
-                    case "Interchange":
-                        return "interchange";
-                    case "TarkovStreets":
-                        return "streets-of-tarkov";
-                    case "Sandbox":
-                        return "ground-zero";
-                    case "Lighthouse":
-                        return "lighthouse";
-                    case "RezervBase":
-                        return "reserve";
-                    case "laboratory":
-                        return "the-lab";
-                    case "factory4_day":
-                        return "factory";
-                    case "factory..night?"://TODO
-                        return "night-factory";
-                    default:
-                        if (RaidSettings.Location.StartsWith("factory"))
-                            return "factory";
-                        return "";
-                }
+                return RaidSettings.Location.NormalizeMap();
             }
         }
         public string RaidMode => RaidSettings.RaidMode;

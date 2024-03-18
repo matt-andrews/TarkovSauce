@@ -1,33 +1,68 @@
 ﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components.Web;
+using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.MapTools;
 
 namespace TarkovSauce.Client.Components.Pages
 {
     public partial class RaidPage
     {
+        private readonly bool _isDebug = false;
         [Inject]
         public IMapTools MapTools { get; set; } = default!;
+        [Inject]
+        public ISelectedMapProvider SelectedMapProvider { get; set; } = default!;
+        [Inject]
+        public IScreenshotWatcherProvider ScreenshotWatcherProvider { get; set; } = default!;
         private MapTools.IMap? _map;
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
 
+        private readonly List<PosObj> _currentPositions = [];
         private bool _mapShowPmcExtract = true;
         private bool _mapShowScavExtract;
         private bool _showCurrentPos = true;
-        protected override async Task OnInitializedAsync()
+        private bool _showPmcSpawns;
+        private bool _showScavSpawns;
+        protected override void OnInitialized()
         {
-            await BuildMap();
+            SelectedMapProvider.OnStateChanged = async () =>
+            {
+                await BuildMap(SelectedMapProvider.Map);
+                await InvokeAsync(StateHasChanged);
+            };
+            ScreenshotWatcherProvider.OnStateChanged = async () =>
+            {
+                if (ScreenshotWatcherProvider.Position is null) return;
+                _currentPositions.Clear();
+                _currentPositions.Add(new PosObj()
+                {
+                    Coord = ScreenshotWatcherProvider.Position.Value,
+                    Sprite = "sprites/red-yourehere.png",
+                    FilterType = FilterType.CurrentPos
+                });
+                await RebuildMap();
+            };
         }
-        private async Task BuildMap()
+        private async Task BuildMap(string mapName)
         {
             var builder = MapTools
-                .GetMap("Customs")
+                .GetMap(mapName)
                 .GetBuilder();
 
             FilterType filter = GetFilterType();
-
-            _map = await builder
-                    .WithPos(new GameCoord(-125.4f, 0.8f, -2.4f), "sprites/red-yourehere.png", FilterType.CurrentPos)
-                    .Build(filter);
+            _map = await builder.Build(filter);
+        }
+        private async Task RebuildMap()
+        {
+            if (_map is null) return;
+            FilterType filter = GetFilterType();
+            var builder = _map.GetBuilder();
+            foreach (var pos in _currentPositions)
+            {
+                builder.WithPos(pos.Coord, pos.Sprite, pos.FilterType);
+            }
+            _map = await builder.Build(filter);
+            await InvokeAsync(StateHasChanged);
         }
         private FilterType GetFilterType()
         {
@@ -38,25 +73,55 @@ namespace TarkovSauce.Client.Components.Pages
                 filter |= FilterType.ScavExtract;
             if (!_showCurrentPos)
                 filter |= FilterType.CurrentPos;
+            if (!_showPmcSpawns)
+                filter |= FilterType.PmcSpawns;
+            if (!_showScavSpawns)
+                filter |= FilterType.ScavSpawns;
             return filter;
         }
         private async Task OnMapShowPmcExtract(bool val)
         {
             _mapShowPmcExtract = val;
-            await BuildMap();
+            await RebuildMap();
             StateHasChanged();
         }
         private async Task OnMapShowScavExtract(bool val)
         {
             _mapShowScavExtract = val;
-            await BuildMap();
+            await RebuildMap();
             StateHasChanged();
         }
         private async Task OnMapCurrentPos(bool val)
         {
             _showCurrentPos = val;
-            await BuildMap();
+            await RebuildMap();
             StateHasChanged();
+        }
+        private async Task OnShowPmcSpawns(bool val)
+        {
+            _showPmcSpawns = val;
+            await RebuildMap();
+            StateHasChanged();
+        }
+        private async Task OnShowScavSpawns(bool val)
+        {
+            _showScavSpawns = val;
+            await RebuildMap();
+            StateHasChanged();
+        }
+        private void OnMapClick(MouseEventArgs args)
+        {
+            if (_map is null) return;
+            System.Diagnostics.Debug.WriteLine($"Map: ({args.OffsetX}, {args.OffsetY})");
+            var gamecoord = _map.GetPos(new MapCoord((int)args.OffsetX, (int)args.OffsetY, 0));
+            System.Diagnostics.Debug.WriteLine($"Game: {gamecoord}");
+            System.Diagnostics.Debug.WriteLine("{\"XYZ\":[" + $"{gamecoord.X},{gamecoord.Y},{gamecoord.Z}" + "],\"Sprite\":\"\"}");
+        }
+        private class PosObj
+        {
+            public required GameCoord Coord { get; set; }
+            public required string Sprite { get; set; }
+            public required FilterType FilterType { get; set; }
         }
     }
 }

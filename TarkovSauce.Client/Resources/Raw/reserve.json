@@ -1,0 +1,16 @@
+{
+  "Name": "reserve",
+  "Map": "maps/reserve.JPG",
+  "MapL2": "maps/reserve_bunker.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ 280.9, -5.5, 27.3 ],
+      "MapCoord": [ 74, 1066, 0 ]
+    },
+    {
+      "GameCoord": [ -300.3, -4.6, -91.8 ],
+      "MapCoord": [ 1667, 268, 0 ]
+    }
+
+  ]
+}

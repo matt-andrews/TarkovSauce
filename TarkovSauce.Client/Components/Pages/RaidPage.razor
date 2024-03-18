@@ -1,13 +1,22 @@
 ﻿@if (_map is not null)
 {
-    <div class="raid-map-toolbar">
-        <TSCheckbox Label="PMC Extracts" IsOn=_mapShowPmcExtract IsOnChanged="v => OnMapShowPmcExtract(v)" />
-        <TSCheckbox Label="Scav Extracts" IsOn=_mapShowScavExtract IsOnChanged="v => OnMapShowScavExtract(v)" />
-        <TSCheckbox Label="Show Current Position" IsOn=_showCurrentPos IsOnChanged="v => OnMapCurrentPos(v)" />
-    </div>
-    <div class="raid-page">
-        <img src="@ImgSrc" />
-    </div>
+    if (_isDebug)
+    {
+        <img src="@ImgSrc" @onclick=OnMapClick />
+    }
+    else
+    {
+        <div class="raid-map-toolbar">
+            <TSCheckbox Label="PMC Extracts" IsOn=_mapShowPmcExtract IsOnChanged="v => OnMapShowPmcExtract(v)" />
+            <TSCheckbox Label="Scav Extracts" IsOn=_mapShowScavExtract IsOnChanged="v => OnMapShowScavExtract(v)" />
+            <TSCheckbox Label="Current Position" IsOn=_showCurrentPos IsOnChanged="v => OnMapCurrentPos(v)" />
+            <TSCheckbox Label="PMC Spawns" IsOn=_showPmcSpawns IsOnChanged="v => OnShowPmcSpawns(v)" />
+            <TSCheckbox Label="Scav Spawns" IsOn=_showScavSpawns IsOnChanged="v => OnShowScavSpawns(v)" />
+        </div>
+        <div class="raid-page">
+            <img src="@ImgSrc" />
+        </div>
+    }
 }
 <style>
     .raid-map-toolbar {

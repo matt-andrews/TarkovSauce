@@ -1,0 +1,14 @@
+{
+  "Name": "shoreline",
+  "Map": "maps/shoreline.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ 361.5, -41.4, -264.9 ],
+      "MapCoord": [ 218, 188, 0 ]
+    },
+    {
+      "GameCoord": [ -938.8, -56.4, 307.6 ],
+      "MapCoord": [ 1686, 850, 0 ]
+    }
+  ]
+}
