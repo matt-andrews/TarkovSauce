@@ -1,4 +1,6 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using System.IO.Pipes;
 using System.Text.RegularExpressions;
 using System.Timers;
 using TarkovSauce.Watcher.Interfaces;
@@ -80,35 +82,52 @@ namespace TarkovSauce.Watcher
             if (_messageFactory is null)
                 throw new Exception("Cannot go to checkpoint before listeners have been assigned");
             IsLoading = true;
-            IsLoadingChanged?.Invoke(IsLoading);
-            DateTime checkpoint = DateTime.MinValue;
-            if (File.Exists(_options.CheckpointPath))
+            try
             {
-                string txt = File.ReadAllText(_options.CheckpointPath);
-                _ = DateTime.TryParse(txt, out checkpoint);
-            }
-            var folders = new FolderFinder(_options.LogPath).GetLogFoldersNewerThan(checkpoint);
-            foreach (var folder in folders)
-            {
-                var files = Directory.GetFiles(folder);
-                foreach (var file in files)
+                IsLoadingChanged?.Invoke(IsLoading);
+                DateTime checkpoint = DateTime.MinValue;
+                if (File.Exists(_options.CheckpointPath))
                 {
-                    string? name = _options.Files.FirstOrDefault(f => file.Contains(f.File))?.Name;
-                    if (string.IsNullOrWhiteSpace(name))
-                        continue;
-                    string[] contents = File.ReadAllLines(file);
-                    int index = 0;
-                    foreach (var line in contents)
-                    {
-                        string left = line.Split('|')[0];
-                        if (DateTime.TryParse(left, out DateTime linedt) && linedt >= checkpoint)
-                        {
-                            break;
-                        }
-                        index++;
-                    }
-                    _messageFactory?.OnMessage(name, string.Join(Environment.NewLine, contents.Skip(index)));
+                    string txt = File.ReadAllText(_options.CheckpointPath);
+                    _ = DateTime.TryParse(txt, out checkpoint);
                 }
+                var folders = new FolderFinder(_options.LogPath).GetLogFoldersNewerThan(checkpoint);
+                foreach (var folder in folders)
+                {
+                    var files = Directory.GetFiles(folder);
+                    foreach (var file in files)
+                    {
+                        string? name = _options.Files.FirstOrDefault(f => file.Contains(f.File))?.Name;
+                        if (string.IsNullOrWhiteSpace(name))
+                            continue;
+
+                        string[] contents;
+                        using (FileStream stream = new(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        {
+                            using StreamReader reader = new(stream);
+                            string str = reader.ReadToEnd();
+                            contents = str.Split(Environment.NewLine);
+                        }
+
+                        int index = 0;
+                        foreach (var line in contents)
+                        {
+                            string left = line.Split('|')[0];
+                            if (DateTime.TryParse(left, out DateTime linedt) && linedt >= checkpoint)
+                            {
+                                break;
+                            }
+                            index++;
+                        }
+                        _messageFactory?.OnMessage(name, string.Join(Environment.NewLine, contents.Skip(index)));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: log
+                Debug.WriteLine(ex);
+                throw new Exception("Failed to go to checkpoint");
             }
             IsLoading = false;
             IsLoadingChanged?.Invoke(IsLoading);
