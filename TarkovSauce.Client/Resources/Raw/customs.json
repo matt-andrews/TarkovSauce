@@ -1,5 +1,6 @@
 {
-  "Name": "customs",
+  "Name": "Customs",
+  "NormalizedName": "customs",
   "Map": "maps/customs.JPG",
   "Anchors": [
     {

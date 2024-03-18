@@ -1,5 +1,6 @@
 {
-  "Name": "streets",
+  "Name": "Streets",
+  "NormalizedName": "streets",
   "Map": "maps/streets.JPG",
   "Anchors": [
     {

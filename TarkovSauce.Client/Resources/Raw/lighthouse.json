@@ -1,5 +1,6 @@
 {
-  "Name": "lighthouse",
+  "Name": "Lighthouse",
+  "NormalizedName": "lighthouse",
   "Map": "maps/lighthouse.JPG",
   "Anchors": [
     {

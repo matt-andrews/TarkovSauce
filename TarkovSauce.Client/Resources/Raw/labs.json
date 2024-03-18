@@ -1,5 +1,6 @@
 {
-  "Name": "labs",
+  "Name": "The Lab",
+  "NormalizedName": "labs",
   "Map": "maps/labs_main.JPG",
   "MapL2": "maps/reserve_bunker.JPG",
   "Anchors": [

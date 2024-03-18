@@ -1,5 +1,6 @@
 {
-  "Name": "reserve",
+  "Name": "Reserve",
+  "NormalizedName": "reserve",
   "Map": "maps/reserve.JPG",
   "MapL2": "maps/reserve_bunker.JPG",
   "Anchors": [

@@ -43,8 +43,18 @@ namespace TarkovSauce.Client.Components.Pages
                 await RebuildMap();
             };
         }
+        private async Task SelectMap(string mapName)
+        {
+            var normal = MapTools.Maps.FirstOrDefault(f => f.Name == mapName)?.NormalizedName;
+            if (!string.IsNullOrWhiteSpace(normal))
+                await BuildMap(normal);
+        }
         private async Task BuildMap(string mapName)
         {
+            if (MapTools.Maps.FirstOrDefault(f => f.NormalizedName == mapName) == null)
+            {
+                return;
+            }
             var builder = MapTools
                 .GetMap(mapName)
                 .GetBuilder();

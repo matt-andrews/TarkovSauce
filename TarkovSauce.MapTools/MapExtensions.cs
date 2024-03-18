@@ -24,7 +24,7 @@ namespace TarkovSauce.MapTools
             using var fs = new FileStream(configPath, FileMode.Open, FileAccess.Read);
             MapConfig config = JsonSerializer.Deserialize<MapConfig>(fs) ?? throw new Exception("Config linked is not a map config");
 
-            var map = new Map(config.Name, config.Map, config.Anchors.Select(s => new Anchor()
+            var map = new Map(config.Name, config.NormalizedName, config.Map, config.Anchors.Select(s => new Anchor()
             {
                 Game = new GameCoord(s.GameCoord[0], s.GameCoord[1], s.GameCoord[2]),
                 Map = new MapCoord(s.MapCoord[0], s.MapCoord[1], s.MapCoord[2])

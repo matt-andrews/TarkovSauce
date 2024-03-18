@@ -1,4 +1,7 @@
-﻿@if (_map is not null)
+﻿<div>
+    <TSTabButton DataSource="MapTools.Maps.Select(s=>s.Name)" Selection="@_map?.Name" OnSelection="v => SelectMap(v)" />
+</div>
+@if (_map is not null)
 {
     if (_isDebug)
     {

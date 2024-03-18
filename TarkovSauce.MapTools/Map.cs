@@ -9,6 +9,7 @@ namespace TarkovSauce.MapTools
     {
         byte[] Image { get; }
         string Name { get; }
+        string NormalizedName { get; }
         MapCoord GetPos(GameCoord gameCoord);
         GameCoord GetPos(MapCoord mapCoord);
         IMapBuilder GetBuilder();
@@ -24,16 +25,21 @@ namespace TarkovSauce.MapTools
     {
         public byte[] Image { get; private set; } = [];
         public string Name { get; }
+        public string NormalizedName { get; }
         public Anchor[] Anchors { get; }
         private readonly List<PosObj> _defaultPositions = [];
         private readonly string _baseImage;
         private MapToolsHttpClient? _httpClient;
 
-        public Map(string name, string baseImage, Anchor[] anchors)
+        public Map(string name, string normalizedName, string baseImage, Anchor[] anchors)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
                 throw new ArgumentNullException(nameof(name));
+            }
+            if (string.IsNullOrWhiteSpace(normalizedName))
+            {
+                throw new ArgumentNullException(nameof(normalizedName));
             }
             if (string.IsNullOrWhiteSpace(baseImage))
             {
@@ -47,6 +53,7 @@ namespace TarkovSauce.MapTools
             Name = name;
             _baseImage = baseImage;
             Anchors = anchors;
+            NormalizedName = normalizedName;
         }
 
         public IMap.IMapBuilder GetBuilder()

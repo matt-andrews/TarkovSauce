@@ -71,6 +71,9 @@
       <MauiAsset Update="Resources\Raw\customs.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </MauiAsset>
+      <MauiAsset Update="Resources\Raw\labs.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
       <MauiAsset Update="Resources\Raw\shoreline.json">
         <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
       </MauiAsset>
