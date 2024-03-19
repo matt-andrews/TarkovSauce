@@ -8,6 +8,7 @@
         public AnchorConfig[] Anchors { get; set; } = [];
         public ExtractsConfig Extracts { get; set; } = new();
         public SpawnsConfig Spawns { get; set; } = new();
+        public LayerObj[] Layers { get; set; } = [];
     }
     internal class ExtractsConfig
     {
@@ -29,12 +30,19 @@
         public PosConfig[] Bosses { get; set; } = [];
         public PosConfig[] Goons { get; set; } = [];
     }
+    public class LayerObj
+    {
+        public string Name { get; set; } = "";
+        public string Map { get; set; } = "";
+        public int Layer { get; set; } = 0;
+    }
     internal interface IPos
     {
         float[] XYZ { get; set; }
         string Sprite { get; set; }
         string Title { get; set; }
         int[] TitleColor { get; set; }
+        int Layer { get; set; }
     }
     internal class PosConfig : IPos
     {
@@ -42,5 +50,6 @@
         public string Sprite { get; set; } = "";
         public string Title { get; set; } = "";
         public int[] TitleColor { get; set; } = [];
+        public int Layer { get; set; } = -1;
     }
 }

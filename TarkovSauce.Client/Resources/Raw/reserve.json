@@ -2,7 +2,13 @@
   "Name": "Reserve",
   "NormalizedName": "reserve",
   "Map": "maps/reserve.JPG",
-  "MapL2": "maps/reserve_bunker.JPG",
+  "Layers": [
+    {
+      "Name": "Bunker",
+      "Map": "maps/reserve_bunker.JPG",
+      "Layer": 1
+    }
+  ],
   "Anchors": [
     {
       "GameCoord": [ -136.8, 9.1, 166.9 ],

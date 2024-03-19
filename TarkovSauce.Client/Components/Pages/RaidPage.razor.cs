@@ -18,6 +18,7 @@ namespace TarkovSauce.Client.Components.Pages
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
 
         private readonly List<PosObj> _currentPositions = [];
+        private string _selectedLayer = "Main";
         private bool _mapShowPmcExtract = true;
         private bool _mapShowScavExtract;
         private bool _showCurrentPos = true;
@@ -43,6 +44,13 @@ namespace TarkovSauce.Client.Components.Pages
                 await RebuildMap();
             };
         }
+        private async Task SelectLayer(string layerName)
+        {
+            var layer = _map?.Layers.FirstOrDefault(f=>f.Name == layerName);
+            if (layer is null) return;
+            _selectedLayer = layer.Name;
+            await RebuildMap(layer.Layer);
+        }
         private async Task SelectMap(string mapName)
         {
             var normal = MapTools.Maps.FirstOrDefault(f => f.Name == mapName)?.NormalizedName;
@@ -67,11 +75,11 @@ namespace TarkovSauce.Client.Components.Pages
             FilterType filter = GetFilterType();
             _map = await builder.Build(filter);
         }
-        private async Task RebuildMap()
+        private async Task RebuildMap(int layer = 0)
         {
             if (_map is null) return;
             FilterType filter = GetFilterType();
-            var builder = _map.GetBuilder();
+            var builder = _map.GetBuilder(layer);
             foreach (var pos in _currentPositions)
             {
                 builder.WithPos(pos.Coord, pos.Sprite, pos.FilterType);

@@ -10,14 +10,15 @@ namespace TarkovSauce.MapTools
         byte[] Image { get; }
         string Name { get; }
         string NormalizedName { get; }
+        LayerObj[] Layers { get; }
         MapCoord GetPos(GameCoord gameCoord);
         GameCoord GetPos(MapCoord mapCoord);
-        IMapBuilder GetBuilder();
+        IMapBuilder GetBuilder(int layer = 0);
 
         public interface IMapBuilder
         {
-            IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType);
-            IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType, SpriteText title);
+            IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType, int layer = -1);
+            IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType, SpriteText title, int layer = -1);
             Task<IMap> Build(FilterType filterType);
         }
     }
@@ -30,8 +31,9 @@ namespace TarkovSauce.MapTools
         private readonly List<PosObj> _defaultPositions = [];
         private readonly string _baseImage;
         private MapToolsHttpClient? _httpClient;
+        public LayerObj[] Layers { get; }
 
-        public Map(string name, string normalizedName, string baseImage, Anchor[] anchors)
+        public Map(string name, string normalizedName, string baseImage, Anchor[] anchors, LayerObj[] layers)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -54,11 +56,16 @@ namespace TarkovSauce.MapTools
             _baseImage = baseImage;
             Anchors = anchors;
             NormalizedName = normalizedName;
+            Layers = layers;
+            if (Layers.Length != 0)
+            {
+                Layers = [new LayerObj() { Name = "Main", Map = _baseImage }, .. layers];
+            }
         }
 
-        public IMap.IMapBuilder GetBuilder()
+        public IMap.IMapBuilder GetBuilder(int layer = 0)
         {
-            return new MapBuilder(this);
+            return new MapBuilder(this, layer);
         }
 
         internal Map AddHttpClient(MapToolsHttpClient httpClient)
@@ -67,18 +74,29 @@ namespace TarkovSauce.MapTools
             return this;
         }
 
-        internal async Task<IMap> Build(List<PosObj> positions, FilterType filterType)
+        internal async Task<IMap> Build(List<PosObj> positions, FilterType filterType, int layer)
         {
             if (_httpClient is null)
                 throw new Exception("Http Client is missing!");
 
-            var bitmap = SKBitmap.Decode(await _httpClient.GetImage(_baseImage));
+            SKBitmap bitmap;
+            if (Layers.Length > 0)
+            {
+                bitmap = SKBitmap.Decode(await _httpClient.GetImage(Layers.FirstOrDefault(f => f.Layer == layer)?.Map ?? Layers.First().Map));
+            }
+            else
+            {
+                bitmap = SKBitmap.Decode(await _httpClient.GetImage(_baseImage));
+            }
+
             var newBitmap = new SKBitmap(bitmap.Width, bitmap.Height);
             using var canvas = new SKCanvas(newBitmap);
             canvas.DrawBitmap(bitmap, new SKPoint(0, 0));
             foreach (var pos in _defaultPositions.Concat(positions))
             {
                 if (filterType != FilterType.None && filterType.HasFlag(pos.FilterType))
+                    continue;
+                if (pos.Layer != -1 && pos.Layer != layer)
                     continue;
                 var mapPos = GetPos(pos.Coord);
                 var sprite = SKBitmap.Decode(await _httpClient.GetImage(pos.Sprite));
@@ -127,7 +145,8 @@ namespace TarkovSauce.MapTools
                         new GameCoord(obj.XYZ[0], obj.XYZ[1], obj.XYZ[2]),
                         obj.Sprite,
                         new SpriteText(obj.Title, Color.FromArgb(obj.TitleColor[0], obj.TitleColor[1], obj.TitleColor[2])),
-                        filterType
+                        filterType,
+                        obj.Layer
                         )
                     );
             }
@@ -138,7 +157,8 @@ namespace TarkovSauce.MapTools
                         new GameCoord(obj.XYZ[0], obj.XYZ[1], obj.XYZ[2]),
                         obj.Sprite,
                         null,
-                        filterType
+                        filterType,
+                        obj.Layer
                         )
                     );
             }
@@ -199,31 +219,32 @@ namespace TarkovSauce.MapTools
         }
 #pragma warning restore CA1416 // Validate platform compatibility
 
-        internal class MapBuilder(Map _map) : IMapBuilder
+        internal class MapBuilder(Map _map, int _layer) : IMapBuilder
         {
             private readonly List<PosObj> _list = [];
             public async Task<IMap> Build(FilterType filterType)
             {
-                return await _map.Build(_list, filterType);
+                return await _map.Build(_list, filterType, _layer);
             }
 
-            public IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType)
+            public IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType, int layer = -1)
             {
-                _list.Add(new PosObj(pos, sprite, null, filterType));
+                _list.Add(new PosObj(pos, sprite, null, filterType, layer));
                 return this;
             }
-            public IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType, SpriteText title)
+            public IMapBuilder WithPos(GameCoord pos, string sprite, FilterType filterType, SpriteText title, int layer = -1)
             {
-                _list.Add(new PosObj(pos, sprite, title, filterType));
+                _list.Add(new PosObj(pos, sprite, title, filterType, layer));
                 return this;
             }
         }
-        internal class PosObj(GameCoord coord, string sprite, SpriteText? title, FilterType filterType)
+        internal class PosObj(GameCoord coord, string sprite, SpriteText? title, FilterType filterType, int layer)
         {
             public GameCoord Coord { get; } = coord;
             public string Sprite { get; } = sprite;
             public SpriteText? Title { get; } = title;
             public FilterType FilterType { get; } = filterType;
+            public int Layer { get; } = layer;
         }
     }
     public class SpriteText(string text, Color color)
