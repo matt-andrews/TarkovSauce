@@ -1,5 +1,6 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace TarkovSauce.Client.Utils
 {
@@ -46,12 +47,13 @@ namespace TarkovSauce.Client.Utils
     public class AppDataJson
     {
         public Settings Settings { get; set; } = new();
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingDefault)]
+        public bool Debug { get; set; }
     }
     public class Settings
     {
         public string TarkovPath { get; set; } = "";
         public string TarkovTrackerKey { get; set; } = "";
-        public bool Test { get; set; }
         public string TarkovExePath { get; set; } = "";
     }
 }

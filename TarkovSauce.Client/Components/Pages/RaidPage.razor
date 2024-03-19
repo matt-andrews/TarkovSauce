@@ -3,16 +3,16 @@
 </div>
 @if (_map is not null)
 {
-    if (_isDebug)
+    if (_map.Layers.Length > 0)
+    {
+        <TSTabButton DataSource="_map.Layers.Select(s=>s.Name)" Selection="@_selectedLayer" OnSelection="v => SelectLayer(v)" />
+    }
+    if (AppData.Debug)
     {
         <img src="@ImgSrc" @onclick=OnMapClick />
     }
     else
     {
-        if(_map.Layers.Length > 0)
-        {
-            <TSTabButton DataSource="_map.Layers.Select(s=>s.Name)" Selection="@_selectedLayer" OnSelection="v => SelectLayer(v)" />
-        }
         <div class="raid-map-toolbar">
             <TSCheckbox Label="PMC Extracts" IsOn=_mapShowPmcExtract IsOnChanged="v => OnMapShowPmcExtract(v)" />
             <TSCheckbox Label="Scav Extracts" IsOn=_mapShowScavExtract IsOnChanged="v => OnMapShowScavExtract(v)" />

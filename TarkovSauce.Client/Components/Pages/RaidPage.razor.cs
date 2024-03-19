@@ -1,13 +1,15 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using TarkovSauce.Client.Data.Providers;
+using TarkovSauce.Client.Utils;
 using TarkovSauce.MapTools;
 
 namespace TarkovSauce.Client.Components.Pages
 {
     public partial class RaidPage
     {
-        private readonly bool _isDebug = false;
+        [Inject]
+        public AppDataJson AppData { get; set; } = default!;
         [Inject]
         public IMapTools MapTools { get; set; } = default!;
         [Inject]

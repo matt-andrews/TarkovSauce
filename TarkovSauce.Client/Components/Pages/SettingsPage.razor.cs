@@ -21,7 +21,6 @@ namespace TarkovSauce.Client.Components.Pages
         private string _previousLogPath = "";
         protected override void OnInitialized()
         {
-         
             _previousLogPath = AppDataJson.Settings.TarkovPath;
         }
         private void OnSaveEvent()
