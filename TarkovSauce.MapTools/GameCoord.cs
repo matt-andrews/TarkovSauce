@@ -15,6 +15,10 @@ namespace TarkovSauce.MapTools
         {
             return $"({X}, {Y}, {Z})";
         }
+        public GameCoord Invert()
+        {
+            return new(Z, Y, X);
+        }
     }
     public readonly struct MapCoord(int x, int y, int z)
     {

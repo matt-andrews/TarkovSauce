@@ -30,10 +30,11 @@ namespace TarkovSauce.MapTools
         public Anchor[] Anchors { get; }
         private readonly List<PosObj> _defaultPositions = [];
         private readonly string _baseImage;
+        private readonly bool _invertedXZ;
         private MapToolsHttpClient? _httpClient;
         public LayerObj[] Layers { get; }
 
-        public Map(string name, string normalizedName, string baseImage, Anchor[] anchors, LayerObj[] layers)
+        public Map(string name, string normalizedName, string baseImage, Anchor[] anchors, LayerObj[] layers, bool invertedXZ)
         {
             if (string.IsNullOrWhiteSpace(name))
             {
@@ -55,8 +56,16 @@ namespace TarkovSauce.MapTools
             Name = name;
             _baseImage = baseImage;
             Anchors = anchors;
+            if (invertedXZ)
+            {
+                foreach(var anchor in Anchors)
+                {
+                    anchor.Game = anchor.Game.Invert();
+                }
+            }
             NormalizedName = normalizedName;
             Layers = layers;
+            _invertedXZ = invertedXZ;
             if (Layers.Length != 0)
             {
                 Layers = [new LayerObj() { Name = "Main", Map = _baseImage }, .. layers];
@@ -98,6 +107,8 @@ namespace TarkovSauce.MapTools
                     continue;
                 if (pos.Layer != -1 && pos.Layer != layer)
                     continue;
+                if (_invertedXZ)
+                    pos.Coord = pos.Coord.Invert();
                 var mapPos = GetPos(pos.Coord);
                 var sprite = SKBitmap.Decode(await _httpClient.GetImage(pos.Sprite));
                 canvas.DrawBitmap(sprite, new SKPoint(mapPos.X, mapPos.Y - sprite.Height));
@@ -240,7 +251,7 @@ namespace TarkovSauce.MapTools
         }
         internal class PosObj(GameCoord coord, string sprite, SpriteText? title, FilterType filterType, int layer)
         {
-            public GameCoord Coord { get; } = coord;
+            public GameCoord Coord { get; internal set; } = coord;
             public string Sprite { get; } = sprite;
             public SpriteText? Title { get; } = title;
             public FilterType FilterType { get; } = filterType;

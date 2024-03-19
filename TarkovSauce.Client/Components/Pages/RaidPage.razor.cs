@@ -19,7 +19,15 @@ namespace TarkovSauce.Client.Components.Pages
         private MapTools.IMap? _map;
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
 
-        private readonly List<PosObj> _currentPositions = [];
+        private readonly List<PosObj> _currentPositions = [
+            /*
+            new PosObj() { Coord = new GameCoord(-192.0f, 2.9f, -258.8f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
+            new PosObj() { Coord = new GameCoord(-151.7f, 2.9f, -258.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
+            new PosObj() { Coord = new GameCoord(-131.1f, 2.2f, -263.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
+            new PosObj() { Coord = new GameCoord(-117.4f, 1.5f, -253.1f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
+            new PosObj() { Coord = new GameCoord(-232.4f, 6.3f, -343.1f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" }
+            */
+            ];
         private string _selectedLayer = "Main";
         private bool _mapShowPmcExtract = true;
         private bool _mapShowScavExtract;
@@ -48,7 +56,7 @@ namespace TarkovSauce.Client.Components.Pages
         }
         private async Task SelectLayer(string layerName)
         {
-            var layer = _map?.Layers.FirstOrDefault(f=>f.Name == layerName);
+            var layer = _map?.Layers.FirstOrDefault(f => f.Name == layerName);
             if (layer is null) return;
             _selectedLayer = layer.Name;
             await RebuildMap(layer.Layer);

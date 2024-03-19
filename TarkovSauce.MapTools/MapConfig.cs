@@ -5,6 +5,7 @@
         public string Name { get; set; } = "";
         public string NormalizedName { get; set; } = "";
         public string Map { get; set; } = "";
+        public bool InvertedXZ { get; set; }
         public AnchorConfig[] Anchors { get; set; } = [];
         public ExtractsConfig Extracts { get; set; } = new();
         public SpawnsConfig Spawns { get; set; } = new();

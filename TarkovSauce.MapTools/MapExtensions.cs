@@ -28,7 +28,7 @@ namespace TarkovSauce.MapTools
             {
                 Game = new GameCoord(s.GameCoord[0], s.GameCoord[1], s.GameCoord[2]),
                 Map = new MapCoord(s.MapCoord[0], s.MapCoord[1], s.MapCoord[2])
-            }).ToArray(), config.Layers);
+            }).ToArray(), config.Layers, config.InvertedXZ);
 
             map.AddDefaultPos(config.Extracts.Pmc, FilterType.PmcExtract);
             map.AddDefaultPos(config.Extracts.Scav, FilterType.ScavExtract);
