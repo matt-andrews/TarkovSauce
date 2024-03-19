@@ -49,6 +49,11 @@ namespace TarkovSauce.Client.Components.Pages
             if (!string.IsNullOrWhiteSpace(normal))
                 await BuildMap(normal);
         }
+        private string GetImgCss()
+        {
+            if (_map is null) return "";
+            return _map.NormalizedName;
+        }
         private async Task BuildMap(string mapName)
         {
             if (MapTools.Maps.FirstOrDefault(f => f.NormalizedName == mapName) == null)

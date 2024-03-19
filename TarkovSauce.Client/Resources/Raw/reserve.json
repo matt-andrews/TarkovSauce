@@ -5,13 +5,12 @@
   "MapL2": "maps/reserve_bunker.JPG",
   "Anchors": [
     {
-      "GameCoord": [ 280.9, -5.5, 27.3 ],
-      "MapCoord": [ 74, 1066, 0 ]
+      "GameCoord": [ -136.8, 9.1, 166.9 ],
+      "MapCoord": [ 1344, 1370, 0 ]
     },
     {
-      "GameCoord": [ -300.3, -4.6, -91.8 ],
-      "MapCoord": [ 1667, 268, 0 ]
+      "GameCoord": [ 197.3, -5.6, -264.6 ],
+      "MapCoord": [ 344, 88, 0 ]
     }
-
   ]
 }

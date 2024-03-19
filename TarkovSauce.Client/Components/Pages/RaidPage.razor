@@ -17,11 +17,16 @@
             <TSCheckbox Label="Scav Spawns" IsOn=_showScavSpawns IsOnChanged="v => OnShowScavSpawns(v)" />
         </div>
         <div class="raid-page">
-            <img src="@ImgSrc" />
+            <img src="@ImgSrc" class="@GetImgCss()" />
         </div>
     }
 }
 <style>
+    img.reserve {
+        margin-top: -100px;
+        transform: rotate(-14.7deg);
+    }
+
     .raid-map-toolbar {
         width: 100%;
         display: flex;
