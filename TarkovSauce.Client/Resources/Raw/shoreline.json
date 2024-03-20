@@ -11,5 +11,295 @@
       "GameCoord": [ -938.8, -56.4, 307.6 ],
       "MapCoord": [ 1686, 850, 0 ]
     }
-  ]
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ 465.13425, 0, -181.01407 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Path to Lighthouse",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -178.81549, 0, -339.27313 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Climber's Trail",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -523.3773, 0, -350.5156 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Road to North V-Ex",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -835.1659, 0, 17.02594 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Road to Customs",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -1014.9757, 0, 333.54407 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Railway",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -326.7379, 0, 565.3114 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Pier Boat",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 396.93048, 0, 306.73517 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Tunnel",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ -371.9118, 0, -334.08432 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Old Bunker",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -495.9187, 0, -375.59488 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "North Fence Passage",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -840.48047, 0, 22.214783 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Road to Customs",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -442.77283, 0, 563.5818 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Lighthouse",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 372.12912, 0, 339.59766 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Ruined Road",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 461.5912, 0, 125.1264 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Svetliy Dead End",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 463.3627, 0, -51.29355 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Ruined House Fence",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -240.81891, 0, -141.23312 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Admin Basement",
+        "TitleColor": [ 255, 127, 39 ]
+      }
+    ]
+  },
+  "Spawns": {
+    "Pmc": [
+      {
+        "XYZ": [ 336.6986, 0, -244.14473 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 316.32605, 0, -125.66666 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 439.4471, 0, -62.53598 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 438.56134, 0, 76.69739 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 409.33118, 0, 97.4527 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 447.41898, 0, 111.28955 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 454.50507, 0, 150.20569 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 406.6739, 0, 158.8537 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 462.47696, 0, 190.85144 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 406.6739, 0, 274.73743 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 356.1854, 0, 330.94965 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 346.442, 0, 121.667175 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 285.32434, 0, 178.7442 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 242.80774, 0, 134.63922 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -492.3756, 0, -360.0284 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -536.6637, 0, -120.47781 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -676.61426, 0, -15.836578 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -779.3628, 0, 27.403595 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -879.454, 0, 26.538788 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -665.9851, 0, 138.96326 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -558.80786, 0, 188.25702 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -646.4984, 0, 328.35522 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -672.18555, 0, 490.0735 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -806.8214, 0, 456.3462 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -855.53845, 0, 366.40662 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -820.99365, 0, 281.65582 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -906.9127, 0, 252.2525 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -945.0005, 0, 193.44586 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ -143.38495, 0, -266.62964 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 16.938171, 0, -186.2029 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 182.57584, 0, -246.73915 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -78.72424, 0, -3.7293396 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -159.32867, 0, -72.913635 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -243.4762, 0, -102.316956 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -328.5094, 0, -73.77844 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 155.11719, 0, 121.667175 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 421.73184, 0, 122.53198 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 314.55453, 0, 311.05914 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 231.29282, 0, 427.80768 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -197.4165, 0, 390.6211 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -327.62366, 0, 509.964 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -131.87006, 0, 182.20343 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -233.73279, 0, 171.8258 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -456.94507, 0, 265.22455 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -642.0696, 0, 462.39978 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -847.5665, 0, 61.13092 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -924.6279, 0, 304.14075 ],
+        "Sprite": "sprites/scav-spawn.png"
+      }
+    ]
+  }
 }

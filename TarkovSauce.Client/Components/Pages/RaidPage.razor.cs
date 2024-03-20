@@ -17,6 +17,7 @@ namespace TarkovSauce.Client.Components.Pages
         [Inject]
         public IScreenshotWatcherProvider ScreenshotWatcherProvider { get; set; } = default!;
         private MapTools.IMap? _map;
+        private List<string> _debugObjs = [];
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
 
         private readonly List<PosObj> _currentPositions = [
@@ -148,7 +149,17 @@ namespace TarkovSauce.Client.Components.Pages
             System.Diagnostics.Debug.WriteLine($"Map: ({args.OffsetX}, {args.OffsetY})");
             var gamecoord = _map.GetPos(new MapCoord((int)args.OffsetX, (int)args.OffsetY, 0));
             System.Diagnostics.Debug.WriteLine($"Game: {gamecoord}");
-            System.Diagnostics.Debug.WriteLine("{\"XYZ\":[" + $"{gamecoord.X},{gamecoord.Y},{gamecoord.Z}" + "],\"Sprite\":\"\"}");
+            var json = "{\"XYZ\":[" + $"{gamecoord.X},{gamecoord.Y},{gamecoord.Z}" + "],\"Sprite\":\"\"}";
+            System.Diagnostics.Debug.WriteLine(json);
+            _debugObjs.Add(json);
+        }
+
+        private void OnDebugDump()
+        {
+            var path = Path.Combine(FileSystem.Current.AppDataDirectory, DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-ff") + ".json");
+            File.WriteAllText(path, string.Join($",{Environment.NewLine}", _debugObjs));
+            _debugObjs.Clear();
+            System.Diagnostics.Debug.WriteLine("Saved debug data");
         }
         private class PosObj
         {

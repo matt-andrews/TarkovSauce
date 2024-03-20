@@ -11,5 +11,59 @@
       "GameCoord": [ 171.3, 24.1, -86.5 ],
       "MapCoord": [ 339, 172, 0 ]
     }
-  ]
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ 151.87553, 0, -92.90411 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Emercom",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 215.09326, 0, 27.70668 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Mira Ave",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -16.234161, 0, 112.0275 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Police Cordon V-Ex",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -24.003937, 0, 335.1041 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Nakatani Basement",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 25.793243, 0, -77.24962 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Scav Co-Op",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 151.87553, 0, -92.90411 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Emercom",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -24.003937, 0, 335.1041 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Nakatani Basement",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 25.793243, 0, -77.24962 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Scav Co-Op",
+        "TitleColor": [ 255, 127, 39 ]
+      }
+    ]
+  }
 }

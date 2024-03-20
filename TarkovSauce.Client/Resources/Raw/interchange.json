@@ -23,5 +23,186 @@
       "GameCoord": [ -361.1, 23.1, 263.2 ],
       "MapCoord": [ 1599, 1311, 0 ]
     }
-  ]
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ 495.90723, 0, -419.49207 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Railway",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -235.0039, 0, -355.87003 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Power Station V-Ex",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -207.1065, 0, -20.056366 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Hole in the fence",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -31.353088, 0, 52.41739 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Emercom",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -298.60986, 0, 270.392 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Saferoom",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 290.02463, 0, -20.609589 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Scav Co-Op",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 290.02463, 0, -20.609589 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Scav Co-Op",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -31.353088, 0, 52.41739 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Emercom",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 495.90723, 0, -419.49207 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Railway",
+        "TitleColor": [ 255, 127, 39 ]
+      }
+    ],
+    "Spawns": {
+      "Pmc": [
+        {
+          "XYZ": [ 299.50974, 0, -403.44824 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 176.20337, 0, -406.21442 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 421.14227, 0, -334.8471 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 341.3558, 0, -160.02484 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 206.33252, 0, -342.03915 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 179.55106, 0, -406.21442 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 111.481476, 0, -365.82828 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -11.266968, 0, -368.0412 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -154.1015, 0, -364.7218 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -192.59985, 0, -93.083405 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -195.94757, 0, 14.797455 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -231.65619, 0, 70.674164 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -307.53705, 0, 162.5112 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -342.12976, 0, 270.392 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -193.71576, 0, 267.0726 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ -57.018677, 0, 283.11642 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 67.403625, 0, 257.1144 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 158.90698, 0, 351.16434 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        },
+        {
+          "XYZ": [ 287.2349, 0, 362.78226 ],
+          "Sprite": "sprites/pmc-spawn.png"
+        }
+      ],
+      "Scav": [
+        {
+          "XYZ": [ -232.7721, 0, -363.61533 ],
+          "Sprite": "sprites/scav-spawn.png"
+        },
+        {
+          "XYZ": [ -198.17938, 0, -345.9118 ],
+          "Sprite": "sprites/scav-spawn.png"
+        },
+        {
+          "XYZ": [ 94.18509, 0, -167.77011 ],
+          "Sprite": "sprites/scav-spawn.png"
+        },
+        {
+          "XYZ": [ 274.4021, 0, 7.0521545 ],
+          "Sprite": "sprites/scav-spawn.png"
+        },
+        {
+          "XYZ": [ -11.824951, 0, 86.71799 ],
+          "Sprite": "sprites/scav-spawn.png"
+        },
+        {
+          "XYZ": [ -165.81842, 0, 166.93704 ],
+          "Sprite": "sprites/scav-spawn.png"
+        },
+        {
+          "XYZ": [ 77.446686, 0, -25.588715 ],
+          "Sprite": "sprites/scav-spawn.png",
+          "Layer": 2
+        },
+        {
+          "XYZ": [ 19.978088, 0, -66.52811 ],
+          "Sprite": "sprites/scav-spawn.png",
+          "Layer": 2
+        },
+        {
+          "XYZ": [ 77.446686, 0, -77.592804 ],
+          "Sprite": "sprites/scav-spawn.png",
+          "Layer": 2
+        }
+      ]
+    }
+  }
 }

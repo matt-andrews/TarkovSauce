@@ -24,5 +24,119 @@
       "GameCoord": [ 72.7, 1.6, -64.0 ],
       "MapCoord": [ 1497, 126, 0 ]
     }
-  ]
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ -28.006958, 0, 72.89074 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Gate 3",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 65.937775, 0, 57.058445 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Cellars",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -56.266754, 0, -18.192657 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Med Tent",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 59.63661, 0, -64.64042 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Gate 0",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 65.65136, 0, 57.249195 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Gate 3",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 43.597263, 0, 14.80719 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Office Window",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 41.019512, 0, -15.426773 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Camera Bunker Door",
+        "TitleColor": [ 255, 127, 39 ]
+      }
+    ]
+  },
+  "Spawns": {
+    "Pmc": [
+      {
+        "XYZ": [ -13.113281, 0, 66.882095 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -60.56302, 0, 68.50348 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -34.976433, 0, 43.3244 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -28.293373, 0, -3.6002426 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -15.500084, 0, -8.845879 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -0.4154663, 0, 19.289825 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 21.543163, 0, 28.064358 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 9.609123, 0, -31.068321 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 40.06479, 0, -17.906532 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 66.41514, 0, -20.290916 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 57.345272, 0, -52.527763 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      }
+    ],
+    "Spawn": [
+      {
+        "XYZ": [ 0.15737152, 0, 43.229027 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -16.454811, 0, 8.13092 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 10.754791, 0, 3.3621597 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 52.28524, 0, -21.340042 ],
+        "Sprite": "sprites/scav-spawn.png"
+      }
+    ]
+  }
 }
