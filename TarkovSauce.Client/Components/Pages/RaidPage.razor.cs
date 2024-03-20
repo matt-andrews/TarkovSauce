@@ -22,7 +22,7 @@ namespace TarkovSauce.Client.Components.Pages
 
         private readonly List<PosObj> _currentPositions = [
             
-            //new PosObj() { Coord = new GameCoord(0,0,0), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
+            new PosObj() { Coord = new GameCoord(0,0,0), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             /*new PosObj() { Coord = new GameCoord(-151.7f, 2.9f, -258.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             new PosObj() { Coord = new GameCoord(-131.1f, 2.2f, -263.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             new PosObj() { Coord = new GameCoord(-117.4f, 1.5f, -253.1f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
