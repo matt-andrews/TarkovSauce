@@ -115,12 +115,12 @@ namespace TarkovSauce.MapTools
                 canvas.DrawBitmap(sprite, new SKPoint(mapPos.X, mapPos.Y - sprite.Height));
                 if (pos.Title is not null)
                 {
-                    var textCoord = new SKPoint(mapPos.X, mapPos.Y + 32);
+                    var textCoord = new SKPoint(mapPos.X, mapPos.Y + 24);
                     // Draw stroke
                     var strokePaint = new SKPaint()
                     {
                         Color = SKColor.Parse("#000"),
-                        TextSize = 32,
+                        TextSize = 24,
                         Style = SKPaintStyle.Stroke,
                         IsAntialias = true,
                         StrokeWidth = 6,
@@ -131,7 +131,7 @@ namespace TarkovSauce.MapTools
                     var textPaint = new SKPaint()
                     {
                         Color = SKColor.Parse(pos.Title.Color.ToHex()),
-                        TextSize = 32,
+                        TextSize = 24,
                         FakeBoldText = true,
                         Style = SKPaintStyle.Fill,
                         IsAntialias = true,

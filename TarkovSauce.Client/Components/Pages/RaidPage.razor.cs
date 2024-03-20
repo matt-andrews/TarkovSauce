@@ -17,12 +17,12 @@ namespace TarkovSauce.Client.Components.Pages
         [Inject]
         public IScreenshotWatcherProvider ScreenshotWatcherProvider { get; set; } = default!;
         private MapTools.IMap? _map;
-        private List<string> _debugObjs = [];
+        private readonly List<string> _debugObjs = [];
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
 
         private readonly List<PosObj> _currentPositions = [
             
-            new PosObj() { Coord = new GameCoord(0,0,0), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
+            //new PosObj() { Coord = new GameCoord(0,0,0), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             /*new PosObj() { Coord = new GameCoord(-151.7f, 2.9f, -258.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             new PosObj() { Coord = new GameCoord(-131.1f, 2.2f, -263.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             new PosObj() { Coord = new GameCoord(-117.4f, 1.5f, -253.1f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },

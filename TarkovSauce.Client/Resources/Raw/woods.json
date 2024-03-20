@@ -115,13 +115,13 @@
       {
         "XYZ": [ 414.81482, 0, 255.82635 ],
         "Sprite": "sprites/scav-extract.png",
-        "Title": "Outskirts",
+        "Title": "Scav House",
         "TitleColor": [ 255, 127, 39 ]
       },
       {
         "XYZ": [ 351.70444, 0, 362.55963 ],
         "Sprite": "sprites/scav-extract.png",
-        "Title": "Scav House",
+        "Title": "Outskirts",
         "TitleColor": [ 255, 127, 39 ]
       }
     ]
