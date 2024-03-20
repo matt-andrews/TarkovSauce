@@ -1,4 +1,4 @@
-﻿using Microsoft.AspNetCore.Components;
+using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.Utils;
@@ -74,7 +74,7 @@ namespace TarkovSauce.Client.Components.Pages
         }
         private async Task BuildMap(string mapName)
         {
-            if (MapTools.Maps.FirstOrDefault(f => f.NormalizedName == mapName) == null)
+            if (MapTools.Maps.FirstOrDefault(f => f.NormalizedName.Contains(mapName)) == null)
             {
                 return;
             }

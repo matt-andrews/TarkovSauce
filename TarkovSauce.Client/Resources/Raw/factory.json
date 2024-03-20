@@ -1,0 +1,28 @@
+{
+  "Name": "Factory",
+  "NormalizedName": "factory",
+  "Map": "maps/factory_1.JPG",
+  "InvertedXZ": true,
+  "Layers": [
+    {
+      "Name": "Level 2",
+      "Map": "maps/factory_2.JPG",
+      "Layer": 1
+    },
+    {
+      "Name": "Level 3",
+      "Map": "maps/factory_3.JPG",
+      "Layer": 2
+    }
+  ],
+  "Anchors": [
+    {
+      "GameCoord": [ -53.1, 2.7, 58.3 ],
+      "MapCoord": [ 216, 1445, 0 ]
+    },
+    {
+      "GameCoord": [ 72.7, 1.6, -64.0 ],
+      "MapCoord": [ 1497, 126, 0 ]
+    }
+  ]
+}

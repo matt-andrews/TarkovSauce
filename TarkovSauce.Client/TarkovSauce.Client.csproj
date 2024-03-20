@@ -45,6 +45,9 @@
 
     <ItemGroup>
       <Content Remove="resources\raw\customs.json" />
+      <Content Remove="resources\raw\factory.json" />
+      <Content Remove="resources\raw\ground-zero.json" />
+      <Content Remove="resources\raw\interchange.json" />
       <Content Remove="resources\raw\labs.json" />
       <Content Remove="resources\raw\lighthouse.json" />
       <Content Remove="resources\raw\reserve.json" />

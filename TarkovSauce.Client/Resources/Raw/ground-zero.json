@@ -1,0 +1,15 @@
+{
+  "Name": "Ground Zero",
+  "NormalizedName": "ground-zero",
+  "Map": "maps/ground_zero.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ -18.0, 24.2, 328.7 ],
+      "MapCoord": [ 875, 1339, 0 ]
+    },
+    {
+      "GameCoord": [ 171.3, 24.1, -86.5 ],
+      "MapCoord": [ 339, 172, 0 ]
+    }
+  ]
+}

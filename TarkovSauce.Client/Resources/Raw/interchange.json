@@ -1,0 +1,27 @@
+{
+  "Name": "Interchange",
+  "NormalizedName": "interchange",
+  "Map": "maps/interchange_1.JPG",
+  "Layers": [
+    {
+      "Name": "Level 2",
+      "Map": "maps/interchange_2.JPG",
+      "Layer": 1
+    },
+    {
+      "Name": "Level 3",
+      "Map": "maps/interchange_3.JPG",
+      "Layer": 2
+    }
+  ],
+  "Anchors": [
+    {
+      "GameCoord": [ 530.5, 19.9, -412.3 ],
+      "MapCoord": [ 1, 90, 0 ]
+    },
+    {
+      "GameCoord": [ -361.1, 23.1, 263.2 ],
+      "MapCoord": [ 1599, 1311, 0 ]
+    }
+  ]
+}

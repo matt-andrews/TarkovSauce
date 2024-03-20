@@ -103,6 +103,9 @@ namespace TarkovSauce.Client
                 .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lighthouse.json"))
                 .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reserve.json"))
                 .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "labs.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "interchange.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "factory.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ground-zero.json"))
                 ;
 
             builder.Services.AddMauiBlazorWebView();
