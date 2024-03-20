@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
+using Microsoft.JSInterop;
 using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.Utils;
 using TarkovSauce.MapTools;
@@ -16,6 +17,8 @@ namespace TarkovSauce.Client.Components.Pages
         public ISelectedMapProvider SelectedMapProvider { get; set; } = default!;
         [Inject]
         public IScreenshotWatcherProvider ScreenshotWatcherProvider { get; set; } = default!;
+        [Inject]
+        public IJSRuntime JSRuntime { get; set; } = default!;
         private MapTools.IMap? _map;
         private readonly List<string> _debugObjs = [];
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
@@ -29,12 +32,14 @@ namespace TarkovSauce.Client.Components.Pages
             new PosObj() { Coord = new GameCoord(-232.4f, 6.3f, -343.1f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" }
             */
             ];
+        private readonly List<PosObj> _customMarks = [];
         private string _selectedLayer = "Main";
         private bool _mapShowPmcExtract = true;
         private bool _mapShowScavExtract;
         private bool _showCurrentPos = true;
         private bool _showPmcSpawns;
         private bool _showScavSpawns;
+        private bool _showCustomMarks;
         protected override void OnInitialized()
         {
             SelectedMapProvider.OnStateChanged = async () =>
@@ -57,10 +62,9 @@ namespace TarkovSauce.Client.Components.Pages
         }
         private async Task SelectLayer(string layerName)
         {
-            var layer = _map?.Layers.FirstOrDefault(f => f.Name == layerName);
-            if (layer is null) return;
-            _selectedLayer = layer.Name;
-            await RebuildMap(layer.Layer);
+            if (_map is null) return;
+            _selectedLayer = layerName;
+            await RebuildMap();
         }
         private async Task SelectMap(string mapName)
         {
@@ -75,6 +79,7 @@ namespace TarkovSauce.Client.Components.Pages
         }
         private async Task BuildMap(string mapName)
         {
+            _customMarks.Clear();
             if (MapTools.Maps.FirstOrDefault(f => f.NormalizedName.Contains(mapName)) == null)
             {
                 return;
@@ -86,12 +91,13 @@ namespace TarkovSauce.Client.Components.Pages
             FilterType filter = GetFilterType();
             _map = await builder.Build(filter);
         }
-        private async Task RebuildMap(int layer = 0)
+        private async Task RebuildMap()
         {
             if (_map is null) return;
+            var layer = _map.Layers.FirstOrDefault(f => f.Name == _selectedLayer) ?? _map.Layers.First();
             FilterType filter = GetFilterType();
-            var builder = _map.GetBuilder(layer);
-            foreach (var pos in _currentPositions)
+            var builder = _map.GetBuilder(layer.Layer);
+            foreach (var pos in _currentPositions.Concat(_customMarks))
             {
                 builder.WithPos(pos.Coord, pos.Sprite, pos.FilterType);
             }
@@ -111,6 +117,8 @@ namespace TarkovSauce.Client.Components.Pages
                 filter |= FilterType.PmcSpawns;
             if (!_showScavSpawns)
                 filter |= FilterType.ScavSpawns;
+            if (!_showCustomMarks)
+                filter |= FilterType.CustomMarks;
             return filter;
         }
         private async Task OnMapShowPmcExtract(bool val)
@@ -143,7 +151,31 @@ namespace TarkovSauce.Client.Components.Pages
             await RebuildMap();
             StateHasChanged();
         }
-        private void OnMapClick(MouseEventArgs args)
+        private async Task OnShowCustomMarks(bool val)
+        {
+            _showCustomMarks = val;
+            await RebuildMap();
+            StateHasChanged();
+        }
+        private async Task OnMapClick(MouseEventArgs args)
+        {
+            if (_map is null || !_showCustomMarks) return;
+            var imgSize = await JSRuntime.InvokeAsync<float[]>("GetRaidImgSize");
+            var pos = await _map.GetPos(new MapCoord((int)args.OffsetX, (int)args.OffsetY, 0), imgSize);
+            _customMarks.Add(new PosObj()
+            {
+                Coord = pos,
+                Sprite = "sprites/red-x.png",
+                FilterType = FilterType.CustomMarks
+            });
+            await RebuildMap();
+        }
+        private async Task ClearCustomMarks()
+        {
+            _customMarks.Clear();
+            await RebuildMap();
+        }
+        private void OnMapClickDebug(MouseEventArgs args)
         {
             if (_map is null) return;
             System.Diagnostics.Debug.WriteLine($"Map: ({args.OffsetX}, {args.OffsetY})");

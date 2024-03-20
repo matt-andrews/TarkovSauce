@@ -1,6 +1,7 @@
 ﻿using SkiaSharp;
 using System.Drawing;
 using System.Drawing.Drawing2D;
+using System.Reflection.Emit;
 using static TarkovSauce.MapTools.IMap;
 
 namespace TarkovSauce.MapTools
@@ -13,6 +14,7 @@ namespace TarkovSauce.MapTools
         LayerObj[] Layers { get; }
         MapCoord GetPos(GameCoord gameCoord);
         GameCoord GetPos(MapCoord mapCoord);
+        Task<GameCoord> GetPos(MapCoord mapCoord, float[] scaledSize);
         IMapBuilder GetBuilder(int layer = 0);
 
         public interface IMapBuilder
@@ -58,7 +60,7 @@ namespace TarkovSauce.MapTools
             Anchors = anchors;
             if (invertedXZ)
             {
-                foreach(var anchor in Anchors)
+                foreach (var anchor in Anchors)
                 {
                     anchor.Game = anchor.Game.Invert();
                 }
@@ -88,15 +90,7 @@ namespace TarkovSauce.MapTools
             if (_httpClient is null)
                 throw new Exception("Http Client is missing!");
 
-            SKBitmap bitmap;
-            if (Layers.Length > 0)
-            {
-                bitmap = SKBitmap.Decode(await _httpClient.GetImage(Layers.FirstOrDefault(f => f.Layer == layer)?.Map ?? Layers.First().Map));
-            }
-            else
-            {
-                bitmap = SKBitmap.Decode(await _httpClient.GetImage(_baseImage));
-            }
+            SKBitmap bitmap = await GetMap(layer);
 
             var newBitmap = new SKBitmap(bitmap.Width, bitmap.Height);
             using var canvas = new SKCanvas(newBitmap);
@@ -112,6 +106,10 @@ namespace TarkovSauce.MapTools
                     coord = coord.Invert();
                 var mapPos = GetPos(coord);
                 var sprite = SKBitmap.Decode(await _httpClient.GetImage(pos.Sprite));
+                if (pos.FilterType == FilterType.CustomMarks)
+                {
+                    mapPos = mapPos.GetCenter(sprite.Width, sprite.Height);
+                }
                 canvas.DrawBitmap(sprite, new SKPoint(mapPos.X, mapPos.Y - sprite.Height));
                 if (pos.Title is not null)
                 {
@@ -175,6 +173,21 @@ namespace TarkovSauce.MapTools
                     );
             }
         }
+        private async Task<SKBitmap> GetMap(int layer)
+        {
+            if (_httpClient is null)
+                throw new Exception("Http client is null");
+            SKBitmap bitmap;
+            if (Layers.Length > 0)
+            {
+                bitmap = SKBitmap.Decode(await _httpClient.GetImage(Layers.FirstOrDefault(f => f.Layer == layer)?.Map ?? Layers.First().Map));
+            }
+            else
+            {
+                bitmap = SKBitmap.Decode(await _httpClient.GetImage(_baseImage));
+            }
+            return bitmap;
+        }
         internal void AddDefaultPos(IEnumerable<IPos> objs, FilterType filterType)
         {
             foreach (var obj in objs)
@@ -194,6 +207,14 @@ namespace TarkovSauce.MapTools
             if (_invertedXZ)
                 coord = coord.Invert();
             return coord;
+        }
+        public async Task<GameCoord> GetPos(MapCoord mapCoord, float[] scaledSize)
+        {
+            //find scale in percentage, apply to coords, do work?
+            SKBitmap map = await GetMap(0);
+            float xDif = map.Width / scaledSize[0];
+            float yDif = map.Height / scaledSize[1];
+            return GetPos(new MapCoord((int)(mapCoord.X * xDif), (int)(mapCoord.Y * yDif), 0));
         }
         /// <summary>
         /// Get the map coordinates from the game coordinates

@@ -9,5 +9,6 @@
         CurrentPos = 1 << 2,
         PmcSpawns = 1 << 3,
         ScavSpawns = 1 << 4,
+        CustomMarks = 1 << 5,
     }
 }

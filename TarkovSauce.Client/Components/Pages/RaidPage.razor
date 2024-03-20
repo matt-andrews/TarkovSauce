@@ -1,5 +1,9 @@
-﻿<div>
+﻿<div style="display:flex">
     <TSTabButton DataSource="MapTools.Maps.Select(s=>s.Name)" Selection="@_map?.Name" OnSelection="v => SelectMap(v)" />
+    @if (_customMarks.Count > 0)
+    {
+        <TSButton Content="Clear Custom Marks" OnClick="ClearCustomMarks" />
+    }
 </div>
 @if (_map is not null)
 {
@@ -10,7 +14,7 @@
     if (AppData.Debug)
     {
         <TSButton Content="Debug Dump" OnClick="OnDebugDump" />
-        <img src="@ImgSrc" @onclick=OnMapClick />
+        <img src="@ImgSrc" @onclick=OnMapClickDebug />
     }
     else
     {
@@ -20,9 +24,10 @@
             <TSCheckbox Label="Current Position" IsOn=_showCurrentPos IsOnChanged="v => OnMapCurrentPos(v)" />
             <TSCheckbox Label="PMC Spawns" IsOn=_showPmcSpawns IsOnChanged="v => OnShowPmcSpawns(v)" />
             <TSCheckbox Label="Scav Spawns" IsOn=_showScavSpawns IsOnChanged="v => OnShowScavSpawns(v)" />
+            <TSCheckbox Label="Custom Marks" IsOn=_showCustomMarks IsOnChanged="v => OnShowCustomMarks(v)" />
         </div>
         <div class="raid-page">
-            <img src="@ImgSrc" class="@GetImgCss()" />
+            <img src="@ImgSrc" class="@GetImgCss()" @onclick=OnMapClick id="raid-map-img" />
         </div>
     }
 }

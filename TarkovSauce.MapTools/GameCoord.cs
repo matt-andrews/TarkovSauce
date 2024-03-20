@@ -33,6 +33,10 @@ namespace TarkovSauce.MapTools
         {
             return $"({X}, {Y}, {Z})";
         }
+        public MapCoord GetCenter(int width, int height)
+        {
+            return new(X - (width / 2), Y + (height / 2), 0);
+        }
     }
     internal static class CoordExtensions
     {
