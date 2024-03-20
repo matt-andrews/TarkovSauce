@@ -1,4 +1,5 @@
-﻿<div style="display:flex">
+﻿@using TarkovSauce.MapTools
+<div style="display:flex">
     <TSTabButton DataSource="MapTools.Maps.Select(s=>s.Name)" Selection="@_map?.Name" OnSelection="v => SelectMap(v)" />
     @if (_customMarks.Count > 0)
     {
@@ -19,12 +20,12 @@
     else
     {
         <div class="raid-map-toolbar">
-            <TSCheckbox Label="PMC Extracts" IsOn=_mapShowPmcExtract IsOnChanged="v => OnMapShowPmcExtract(v)" />
-            <TSCheckbox Label="Scav Extracts" IsOn=_mapShowScavExtract IsOnChanged="v => OnMapShowScavExtract(v)" />
-            <TSCheckbox Label="Current Position" IsOn=_showCurrentPos IsOnChanged="v => OnMapCurrentPos(v)" />
-            <TSCheckbox Label="PMC Spawns" IsOn=_showPmcSpawns IsOnChanged="v => OnShowPmcSpawns(v)" />
-            <TSCheckbox Label="Scav Spawns" IsOn=_showScavSpawns IsOnChanged="v => OnShowScavSpawns(v)" />
-            <TSCheckbox Label="Custom Marks" IsOn=_showCustomMarks IsOnChanged="v => OnShowCustomMarks(v)" />
+            <TSCheckbox Label="PMC Extracts" IsOn=!_currentFilter.HasFlag(FilterType.PmcExtract) IsOnChanged="_ => ChangeFilter(FilterType.PmcExtract)" />
+            <TSCheckbox Label="Scav Extracts" IsOn=!_currentFilter.HasFlag(FilterType.ScavExtract) IsOnChanged="_ => ChangeFilter(FilterType.ScavExtract)" />
+            <TSCheckbox Label="Current Position" IsOn=!_currentFilter.HasFlag(FilterType.CurrentPos) IsOnChanged="_ => ChangeFilter(FilterType.CurrentPos)" />
+            <TSCheckbox Label="PMC Spawns" IsOn=!_currentFilter.HasFlag(FilterType.PmcSpawns) IsOnChanged="_ => ChangeFilter(FilterType.PmcSpawns)" />
+            <TSCheckbox Label="Scav Spawns" IsOn=!_currentFilter.HasFlag(FilterType.ScavSpawns) IsOnChanged="_ => ChangeFilter(FilterType.ScavSpawns)" />
+            <TSCheckbox Label="Custom Marks" IsOn=!_currentFilter.HasFlag(FilterType.CustomMarks) IsOnChanged="_ => ChangeFilter(FilterType.CustomMarks)" />
         </div>
         <div class="raid-page">
             <img src="@ImgSrc" class="@GetImgCss()" @onclick=OnMapClick id="raid-map-img" />

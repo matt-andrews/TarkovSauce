@@ -24,7 +24,6 @@ namespace TarkovSauce.Client.Components.Pages
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
 
         private readonly List<PosObj> _currentPositions = [
-            
             //new PosObj() { Coord = new GameCoord(0,0,0), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             /*new PosObj() { Coord = new GameCoord(-151.7f, 2.9f, -258.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
             new PosObj() { Coord = new GameCoord(-131.1f, 2.2f, -263.4f), FilterType = FilterType.CurrentPos, Sprite = "sprites/red-yourehere.png" },
@@ -34,12 +33,11 @@ namespace TarkovSauce.Client.Components.Pages
             ];
         private readonly List<PosObj> _customMarks = [];
         private string _selectedLayer = "Main";
-        private bool _mapShowPmcExtract = true;
-        private bool _mapShowScavExtract;
-        private bool _showCurrentPos = true;
-        private bool _showPmcSpawns;
-        private bool _showScavSpawns;
-        private bool _showCustomMarks;
+        private FilterType _currentFilter
+            = FilterType.ScavExtract
+            | FilterType.PmcSpawns
+            | FilterType.ScavSpawns
+            | FilterType.CustomMarks;
         protected override void OnInitialized()
         {
             SelectedMapProvider.OnStateChanged = async () =>
@@ -88,78 +86,33 @@ namespace TarkovSauce.Client.Components.Pages
                 .GetMap(mapName)
                 .GetBuilder();
 
-            FilterType filter = GetFilterType();
-            _map = await builder.Build(filter);
+            _map = await builder.Build(_currentFilter);
         }
         private async Task RebuildMap()
         {
             if (_map is null) return;
-            var layer = _map.Layers.FirstOrDefault(f => f.Name == _selectedLayer) ?? _map.Layers.First();
-            FilterType filter = GetFilterType();
-            var builder = _map.GetBuilder(layer.Layer);
+            var layer = _map.Layers.FirstOrDefault(f => f.Name == _selectedLayer);
+
+            var builder = _map.GetBuilder(layer?.Layer ?? 0);
             foreach (var pos in _currentPositions.Concat(_customMarks))
             {
                 builder.WithPos(pos.Coord, pos.Sprite, pos.FilterType);
             }
-            _map = await builder.Build(filter);
+            _map = await builder.Build(_currentFilter);
             await InvokeAsync(StateHasChanged);
         }
-        private FilterType GetFilterType()
+        private async Task ChangeFilter(FilterType filter)
         {
-            FilterType filter = FilterType.None;
-            if (!_mapShowPmcExtract)
-                filter |= FilterType.PmcExtract;
-            if (!_mapShowScavExtract)
-                filter |= FilterType.ScavExtract;
-            if (!_showCurrentPos)
-                filter |= FilterType.CurrentPos;
-            if (!_showPmcSpawns)
-                filter |= FilterType.PmcSpawns;
-            if (!_showScavSpawns)
-                filter |= FilterType.ScavSpawns;
-            if (!_showCustomMarks)
-                filter |= FilterType.CustomMarks;
-            return filter;
-        }
-        private async Task OnMapShowPmcExtract(bool val)
-        {
-            _mapShowPmcExtract = val;
-            await RebuildMap();
-            StateHasChanged();
-        }
-        private async Task OnMapShowScavExtract(bool val)
-        {
-            _mapShowScavExtract = val;
-            await RebuildMap();
-            StateHasChanged();
-        }
-        private async Task OnMapCurrentPos(bool val)
-        {
-            _showCurrentPos = val;
-            await RebuildMap();
-            StateHasChanged();
-        }
-        private async Task OnShowPmcSpawns(bool val)
-        {
-            _showPmcSpawns = val;
-            await RebuildMap();
-            StateHasChanged();
-        }
-        private async Task OnShowScavSpawns(bool val)
-        {
-            _showScavSpawns = val;
-            await RebuildMap();
-            StateHasChanged();
-        }
-        private async Task OnShowCustomMarks(bool val)
-        {
-            _showCustomMarks = val;
+            if (_currentFilter.HasFlag(filter))
+                _currentFilter &= ~filter;
+            else
+                _currentFilter |= filter;
             await RebuildMap();
             StateHasChanged();
         }
         private async Task OnMapClick(MouseEventArgs args)
         {
-            if (_map is null || !_showCustomMarks) return;
+            if (_map is null || _currentFilter.HasFlag(FilterType.CustomMarks)) return;
             var imgSize = await JSRuntime.InvokeAsync<float[]>("GetRaidImgSize");
             var pos = await _map.GetPos(new MapCoord((int)args.OffsetX, (int)args.OffsetY, 0), imgSize);
             _customMarks.Add(new PosObj()
