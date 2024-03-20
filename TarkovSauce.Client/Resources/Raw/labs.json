@@ -25,50 +25,52 @@
       "MapCoord": [ 357, 313, 0 ]
     }
   ],
-  "Extract": {
+  "Extracts": {
     "Pmc": [
       {
-        "XYZ": [ -429.2211, 0, -230.6423 ],
+        "XYZ": [ -230.513, 0, -428.44366 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Parking Gate",
-        "TitleColor": [ 112, 167, 0 ]
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
       },
       {
-        "XYZ": [ -251.1845, 0, -171.03781 ],
+        "XYZ": [ -170.52065, 0, -251.57323 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Hangar Gate",
-        "TitleColor": [ 112, 167, 0 ]
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
       },
       {
-        "XYZ": [ -410.69183, 0, -111.691925 ],
+        "XYZ": [ -111.691925, 0, -410.04395 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Cargo Elevator",
         "TitleColor": [ 112, 167, 0 ],
         "Layer": 1
       },
       {
-        "XYZ": [ -340.59152, 0, -280.42044 ],
+        "XYZ": [ -280.16187, 0, -340.2028 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Main Elevator",
         "TitleColor": [ 112, 167, 0 ],
         "Layer": 2
       },
       {
-        "XYZ": [ -405.89752, 0, -141.17093 ],
+        "XYZ": [ -139.10222, 0, -398.90045 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Ventilation Shaft",
         "TitleColor": [ 112, 167, 0 ],
         "Layer": 2
       },
       {
-        "XYZ": [ -348.49564, 0, -112.0798 ],
+        "XYZ": [ -112.85556, 0, -345.51538 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Medical Block Elevator",
         "TitleColor": [ 112, 167, 0 ],
         "Layer": 2
       },
       {
-        "XYZ": [ -262.32797, 0, -122.94049 ],
+        "XYZ": [ -116.734375, 0, -259.0886 ],
         "Sprite": "sprites/pmc-extract.png",
         "Title": "Sewage Conduit",
         "TitleColor": [ 112, 167, 0 ],
@@ -79,78 +81,77 @@
   "Spawns": {
     "Pmc": [
       {
-        "XYZ": [ -391.64423, 0, -262.19 ],
-        "Sprite": "sprites/pmc-spawn.png"
+        "XYZ": [ -262.8365, 0, -390.8668 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
       },
       {
-        "XYZ": [ -336.9634, 0, -275.5073 ],
-        "Sprite": "sprites/pmc-spawn.png"
+        "XYZ": [ -277.1881, 0, -335.92682 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
       },
       {
-        "XYZ": [ -420.15082, 0, -169.2277 ],
-        "Sprite": "sprites/pmc-spawn.png"
+        "XYZ": [ -167.93477, 0, -419.89166 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
       },
       {
-        "XYZ": [ -257.14496, 0, -118.285904 ],
-        "Sprite": "sprites/pmc-spawn.png"
+        "XYZ": [ -118.285904, 0, -257.01538 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
       },
       {
-        "XYZ": [ -284.61496, 0, -253.26872 ],
+        "XYZ": [ -109.10605, 0, -417.1706 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 1
       },
       {
-        "XYZ": [ -295.75845, 0, -202.84412 ],
+        "XYZ": [ -123.06978, 0, -338.77747 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 1
       },
       {
-        "XYZ": [ -340.0732, 0, -121.90614 ],
+        "XYZ": [ -205.55928, 0, -295.11057 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 1
       },
       {
-        "XYZ": [ -416.5227, 0, -109.49393 ],
+        "XYZ": [ -260.2506, 0, -285.0037 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 1
       },
       {
-        "XYZ": [ -356.5293, 0, -273.69717 ],
+        "XYZ": [ -274.08505, 0, -357.30676 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       },
       {
-        "XYZ": [ -390.8668, 0, -268.00824 ],
+        "XYZ": [ -269.0426, 0, -390.34848 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       },
       {
-        "XYZ": [ -298.47952, 0, -253.65662 ],
+        "XYZ": [ -253.26872, 0, -298.34995 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       },
       {
-        "XYZ": [ -387.36826, 0, -218.10078 ],
+        "XYZ": [ -165.73677, 0, -345.64496 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       },
       {
-        "XYZ": [ -345.64496, 0, -167.67618 ],
+        "XYZ": [ -115.18286, 0, -399.03003 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       },
       {
-        "XYZ": [ -405.24966, 0, -116.4758 ],
+        "XYZ": [ -116.4758, 0, -326.4678 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       },
       {
-        "XYZ": [ -327.76355, 0, -117.12227 ],
-        "Sprite": "sprites/pmc-spawn.png",
-        "Layer": 2
-      },
-      {
-        "XYZ": [ -268.41803, 0, -131.86177 ],
+        "XYZ": [ -129.66377, 0, -266.86313 ],
         "Sprite": "sprites/pmc-spawn.png",
         "Layer": 2
       }

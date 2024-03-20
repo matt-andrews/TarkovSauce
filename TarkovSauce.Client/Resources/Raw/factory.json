@@ -2,7 +2,6 @@
   "Name": "Factory",
   "NormalizedName": "factory",
   "Map": "maps/factory_1.JPG",
-  "InvertedXZ": true,
   "Layers": [
     {
       "Name": "Level 2",

@@ -103,13 +103,14 @@ namespace TarkovSauce.MapTools
             canvas.DrawBitmap(bitmap, new SKPoint(0, 0));
             foreach (var pos in _defaultPositions.Concat(positions))
             {
+                var coord = pos.Coord;
                 if (filterType != FilterType.None && filterType.HasFlag(pos.FilterType))
                     continue;
                 if (pos.Layer != -1 && pos.Layer != layer)
                     continue;
                 if (_invertedXZ)
-                    pos.Coord = pos.Coord.Invert();
-                var mapPos = GetPos(pos.Coord);
+                    coord = coord.Invert();
+                var mapPos = GetPos(coord);
                 var sprite = SKBitmap.Decode(await _httpClient.GetImage(pos.Sprite));
                 canvas.DrawBitmap(sprite, new SKPoint(mapPos.X, mapPos.Y - sprite.Height));
                 if (pos.Title is not null)
@@ -189,7 +190,10 @@ namespace TarkovSauce.MapTools
             PointF realCoordinate = mapCoord.ToPointF();
             PointF mappedPixelCoordinate = MapCoordinate(realCoordinate, transformationMatrix);
 
-            return mappedPixelCoordinate.ToGameCoord();
+            var coord = mappedPixelCoordinate.ToGameCoord();
+            if (_invertedXZ)
+                coord = coord.Invert();
+            return coord;
         }
         /// <summary>
         /// Get the map coordinates from the game coordinates
