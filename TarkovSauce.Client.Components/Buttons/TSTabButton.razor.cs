@@ -17,12 +17,19 @@ namespace TarkovSauce.Client.Components.Buttons
         public EventCallback<string> OnSelection { get; set; }
         [Parameter]
         public string Help { get; set; } = "";
+        public bool IsExpanded { get; set; }
 
         private async Task OnClick(string val)
         {
             if (val == Selection) return;
+            IsExpanded = false;
             StateHasChanged();
             await OnSelection.InvokeAsync(val);
+        }
+        private void OnExpandClick()
+        {
+            IsExpanded = !IsExpanded;
+            StateHasChanged();
         }
     }
 }
