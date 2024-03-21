@@ -20,6 +20,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\TarkovSauce.Client\TarkovSauce.Client.csproj" />
+    <ProjectReference Include="..\TarkovSauce.MapTools\TarkovSauce.MapTools.csproj" />
   </ItemGroup>
 
   <ItemGroup>

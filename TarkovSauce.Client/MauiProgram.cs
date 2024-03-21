@@ -7,6 +7,7 @@ using TarkovSauce.Client.Data.Providers;
 using TarkovSauce.Client.HttpClients;
 using TarkovSauce.Client.Services;
 using TarkovSauce.Client.Utils;
+using TarkovSauce.MapTools;
 using TarkovSauce.Watcher;
 
 namespace TarkovSauce.Client
@@ -36,7 +37,8 @@ namespace TarkovSauce.Client
             configuration.Bind(appData);
             builder.Configuration.AddConfiguration(configuration);
 
-            ChangeToken.OnChange(() => configuration.GetReloadToken(), () => {
+            ChangeToken.OnChange(() => configuration.GetReloadToken(), () =>
+            {
                 configuration.Bind(appData);
                 stateContainer.MainLayoutHasChanged();
             });
@@ -65,6 +67,7 @@ namespace TarkovSauce.Client
             builder.Services.AddSingleton<ITarkovTrackerProvider, TarkovTrackerProvider>();
             builder.Services.AddSingleton<ISelectedMapProvider, SelectedMapProvider>();
             builder.Services.AddSingleton<ITarkovTrackerLogsProvider, TarkovTrackerLogsProvider>();
+            builder.Services.AddSingleton<IScreenshotWatcherProvider, ScreenshotWatcherProvider>();
 
             builder.Services
                 .AddWatcher(options =>
@@ -90,6 +93,20 @@ namespace TarkovSauce.Client
                     options.AddFile(new WatcherFile("application", "application.log"));
                     options.AddFile(new WatcherFile("notifications", "notifications.log"));
                 });
+
+            builder.Services
+                .AddMapTools("https://tarkovsauce.blob.core.windows.net/static/")
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customs.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "woods.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shoreline.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "streets.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "lighthouse.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "reserve.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "labs.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "interchange.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "factory.json"))
+                .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "ground-zero.json"))
+                ;
 
             builder.Services.AddMauiBlazorWebView();
 

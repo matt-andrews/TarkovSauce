@@ -1,4 +1,7 @@
 ﻿using System.Diagnostics;
+using System.IO;
+using System.IO.Pipes;
+using System.Text.RegularExpressions;
 using System.Timers;
 using TarkovSauce.Watcher.Interfaces;
 
@@ -21,6 +24,8 @@ namespace TarkovSauce.Watcher
         private readonly MonitorOptions _options;
         private readonly System.Timers.Timer _processTimer;
         private FileSystemWatcher _logFileCreateWatcher;
+        private readonly FileSystemWatcher _screenshotWatcher;
+        private readonly string _screenshotPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments), "Escape From Tarkov", "Screenshots");
 
         public Monitor(MonitorOptions options)
         {
@@ -35,6 +40,7 @@ namespace TarkovSauce.Watcher
                 AutoReset = true,
                 Enabled = false
             };
+            _screenshotWatcher = new FileSystemWatcher();
         }
 
         public void RegisterListeners(List<IMessageListener> listeners)
@@ -51,6 +57,7 @@ namespace TarkovSauce.Watcher
             _processTimer.Start();
             UpdateProcess();
             WatchFolders();
+            SetupScreenshotWatcher();
             return this;
         }
 
@@ -75,35 +82,52 @@ namespace TarkovSauce.Watcher
             if (_messageFactory is null)
                 throw new Exception("Cannot go to checkpoint before listeners have been assigned");
             IsLoading = true;
-            IsLoadingChanged?.Invoke(IsLoading);
-            DateTime checkpoint = DateTime.MinValue;
-            if (File.Exists(_options.CheckpointPath))
+            try
             {
-                string txt = File.ReadAllText(_options.CheckpointPath);
-                _ = DateTime.TryParse(txt, out checkpoint);
-            }
-            var folders = new FolderFinder(_options.LogPath).GetLogFoldersNewerThan(checkpoint);
-            foreach (var folder in folders)
-            {
-                var files = Directory.GetFiles(folder);
-                foreach (var file in files)
+                IsLoadingChanged?.Invoke(IsLoading);
+                DateTime checkpoint = DateTime.MinValue;
+                if (File.Exists(_options.CheckpointPath))
                 {
-                    string? name = _options.Files.FirstOrDefault(f => file.Contains(f.File))?.Name;
-                    if (string.IsNullOrWhiteSpace(name))
-                        continue;
-                    string[] contents = File.ReadAllLines(file);
-                    int index = 0;
-                    foreach (var line in contents)
-                    {
-                        string left = line.Split('|')[0];
-                        if (DateTime.TryParse(left, out DateTime linedt) && linedt >= checkpoint)
-                        {
-                            break;
-                        }
-                        index++;
-                    }
-                    _messageFactory?.OnMessage(name, string.Join(Environment.NewLine, contents.Skip(index)));
+                    string txt = File.ReadAllText(_options.CheckpointPath);
+                    _ = DateTime.TryParse(txt, out checkpoint);
                 }
+                var folders = new FolderFinder(_options.LogPath).GetLogFoldersNewerThan(checkpoint);
+                foreach (var folder in folders)
+                {
+                    var files = Directory.GetFiles(folder);
+                    foreach (var file in files)
+                    {
+                        string? name = _options.Files.FirstOrDefault(f => file.Contains(f.File))?.Name;
+                        if (string.IsNullOrWhiteSpace(name))
+                            continue;
+
+                        string[] contents;
+                        using (FileStream stream = new(file, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                        {
+                            using StreamReader reader = new(stream);
+                            string str = reader.ReadToEnd();
+                            contents = str.Split(Environment.NewLine);
+                        }
+
+                        int index = 0;
+                        foreach (var line in contents)
+                        {
+                            string left = line.Split('|')[0];
+                            if (DateTime.TryParse(left, out DateTime linedt) && linedt >= checkpoint)
+                            {
+                                break;
+                            }
+                            index++;
+                        }
+                        _messageFactory?.OnMessage(name, string.Join(Environment.NewLine, contents.Skip(index)));
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                //TODO: log
+                Debug.WriteLine(ex);
+                throw new Exception("Failed to go to checkpoint");
             }
             IsLoading = false;
             IsLoadingChanged?.Invoke(IsLoading);
@@ -185,6 +209,45 @@ namespace TarkovSauce.Watcher
         public void OnError(string name, string message, Exception ex)
         {
             _messageFactory?.OnError(name, message, ex);
+        }
+
+        private void SetupScreenshotWatcher()
+        {
+            try
+            {
+                bool screenshotPathExists = Directory.Exists(_screenshotPath);
+                string watchPath = screenshotPathExists ? _screenshotPath : Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments);
+                _screenshotWatcher.Path = watchPath;
+                _screenshotWatcher.IncludeSubdirectories = !screenshotPathExists;
+                _screenshotWatcher.Created -= ScreenshotWatcher_Created;
+                _screenshotWatcher.Created -= ScreenshotWatcher_FolderCreated;
+                if (screenshotPathExists)
+                {
+                    _screenshotWatcher.Filter = "*.png";
+                    _screenshotWatcher.Created += ScreenshotWatcher_Created;
+                }
+                else
+                {
+                    _screenshotWatcher.Created += ScreenshotWatcher_FolderCreated;
+                }
+                _screenshotWatcher.EnableRaisingEvents = true;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+        }
+        private void ScreenshotWatcher_FolderCreated(object sender, FileSystemEventArgs e)
+        {
+            if (e.FullPath == _screenshotPath)
+            {
+                SetupScreenshotWatcher();
+            }
+        }
+        private void ScreenshotWatcher_Created(object sender, FileSystemEventArgs e)
+        {
+            string filename = e.Name ?? "";
+            _messageFactory?.OnScreenshot(filename);
         }
     }
 }

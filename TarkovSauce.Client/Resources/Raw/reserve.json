@@ -1,0 +1,239 @@
+{
+  "Name": "Reserve",
+  "NormalizedName": "reserve",
+  "Map": "maps/reserve.JPG",
+  "Layers": [
+    {
+      "Name": "Bunker",
+      "Map": "maps/reserve_bunker.JPG",
+      "Layer": 1
+    }
+  ],
+  "Anchors": [
+    {
+      "GameCoord": [ -136.8, 9.1, 166.9 ],
+      "MapCoord": [ 1344, 1370, 0 ]
+    },
+    {
+      "GameCoord": [ 197.3, -5.6, -264.6 ],
+      "MapCoord": [ 344, 88, 0 ]
+    }
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ 61.32126, 0, -242.72209 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Bunker Hermetic Door",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 1
+      },
+      {
+        "XYZ": [ 131.81636, 0, -130.30322 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Armored Train",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 52.634644, 0, 82.41751 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Sewer Manhole",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -5.498749, 0, 219.40698 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Cliff Descent",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -114.415344, 0, 178.34381 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "D-2",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 1
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 71.01016, 0, -243.39526 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Bunker Hermetic Door",
+        "TitleColor": [ 255, 127, 39 ],
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -28.21756, 0, -173.72249 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Heating Pipe",
+        "TitleColor": [ 255, 127, 39 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 133.82097, 0, -138.38123 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Armored Train",
+        "TitleColor": [ 255, 127, 39 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 123.79796, 0, -117.17647 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Depot Hermetic Door",
+        "TitleColor": [ 255, 127, 39 ],
+        "Layer": 1
+      },
+      {
+        "XYZ": [ 48.625458, 0, 87.1297 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Sewer Manhole",
+        "TitleColor": [ 255, 127, 39 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 73.01477, 0, 144.34888 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Checkpoint Fence",
+        "TitleColor": [ 255, 127, 39 ],
+        "Layer": 0
+      }
+    ]
+  },
+  "Spawns": {
+    "Pmc": [
+      {
+        "XYZ": [ 170.90607, 0, -229.93193 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 61.989456, 0, -165.3079 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 177.58807, 0, -160.93231 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 196.63176, 0, -96.98146 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 238.06017, 0, 9.378906 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 148.85547, 0, 38.99826 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 65.664566, 0, 71.98343 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ 29.24765, 0, 14.427673 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -33.897247, 0, 32.26657 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -30.556244, 0, -163.96156 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -125.10654, 0, -119.19597 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -270.4401, 0, -71.40111 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -207.62924, 0, 61.549347 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -77.99844, 0, 210.31924 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -21.86966, 0, 190.7974 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -120.09506, 0, 85.783356 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 1
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 100.07686, 0, -186.17607 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 101.07916, 0, -116.16672 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 173.24477, 0, 11.398407 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 63.994064, 0, 15.437408 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -56.61606, 0, -24.27945 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -41.91565, 0, 24.861755 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -95.70575, 0, 98.23694 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -160.85526, 0, 57.510345 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -115.41763, 0, 42.364075 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -100.38315, 0, 49.432343 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 73.68297, 0, -87.89371 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 55.64157, 0, -167.66399 ],
+        "Sprite": "sprites/scav-spawn.png"
+      }
+    ]
+  }
+}

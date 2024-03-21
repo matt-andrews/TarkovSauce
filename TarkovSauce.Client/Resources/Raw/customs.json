@@ -1,0 +1,343 @@
+{
+  "Name": "Customs",
+  "NormalizedName": "customs",
+  "Map": "maps/customs.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ 620.5, -0.4, 61.5 ],
+      "MapCoord": [ 161, 779, 0 ]
+    },
+    {
+      "GameCoord": [ -336.0, 2.2, -196.4 ],
+      "MapCoord": [ 2257, 215, 0 ]
+    }
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ -300, 0, -210 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Trailer Park",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -315, 0, -75 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Crossroads",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 180, 0, 235 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Dorms V-Ex",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -25, 0, 145 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Smugglers Boat",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 650, 0, -125 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "ZB-1011",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 485, 0, -100 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "ZB-1012",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 325, 0, -175 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Old Gas",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 210, 0, -140 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "ZB-1013",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -5, 0, -115 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "RUAF",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 657.46387, 0, 122.77408 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Military Base CP",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 657.46387, 0, -18.06491 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Scav Checkpoint",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 671.6106, 0, -46.41562 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Administration Gate",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 658.83295, 0, -164.39116 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Factory Far Corner",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 547.0283, 0, 197.76627 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Passage Between Rocks",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 495.00494, 0, 222.91608 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Railroad to Military Base",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 176.93219, 0, 221.08698 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Old Road Gate",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 355.81958, 0, -14.864044 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Warehouse 4",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 225.76114, 0, 15.315735 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Factory Shacks",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 320.681, 0, -180.39558 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Old Gas",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 62.845825, 0, -54.18921 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Warehouse 17",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -5, 0, -115 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "RUAF",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 20.86206, 0, 131.46219 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Sniper Roadblock",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -139.77155, 0, 51.89731 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Railroad to Port",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -151.18018, 0, -211.94717 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Railroad to Tarkov",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -245.18732, 0, -222.46439 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Trailer Park Shack",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -318.65894, 0, -70.193634 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Crossroads",
+        "TitleColor": [ 255, 127, 39 ]
+      }
+    ]
+  },
+  "Spawns": {
+    "Pmc": [
+      {
+        "XYZ": [ 578.0598, 0, 156.61203 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 651.0751, 0, 68.35901 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 563.4567, 0, 54.64093 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 493.17957, 0, 196.39447 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 628.2578, 0, -88.48442 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 581.7106, 0, -109.061554 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 578.0598, 0, -44.586548 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 513.2587, 0, -45.501083 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 489.5288, 0, -72.47998 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 398.2597, 0, -104.488846 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 380.0059, 0, -82.99719 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 305.16525, 0, -183.1392 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 322.96274, 0, -74.30907 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 359.9267, 0, 154.78293 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 104.82959, 0, -100.37343 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 111.218445, 0, 24.003876 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -7.4313965, 0, 115.00049 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 24.512817, 0, -115.92059 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -184.9497, 0, -225.208 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -148.89844, 0, -144.2713 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -205.94159, 0, -141.0704 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -124.2558, 0, 42.751923 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -210.96143, 0, -2.9750366 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -303.59955, 0, -87.11261 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -314.55182, 0, -219.72076 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 623.69434, 0, -75.2236 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 582.16693, 0, -37.72751 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 582.6232, 0, 3.4267273 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 387.76376, 0, -54.18921 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 407.38663, 0, 39.551025 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 334.8277, 0, -167.13477 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 214.35251, 0, -107.68974 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 201.1185, 0, 20.345703 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 229.86826, 0, 49.610962 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 220.74136, 0, 152.03934 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 95.7027, 0, 4.7985535 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 29.076294, 0, 52.354584 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 1.6955566, 0, -116.37785 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -202.7472, 0, -80.25357 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -277.58783, 0, -130.09595 ],
+        "Sprite": "sprites/scav-spawn.png"
+      }
+    ]
+  }
+}

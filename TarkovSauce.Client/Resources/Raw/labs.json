@@ -1,0 +1,161 @@
+{
+  "Name": "The Lab",
+  "NormalizedName": "the-lab",
+  "Map": "maps/labs_main.JPG",
+  "InvertedXZ": true,
+  "Layers": [
+    {
+      "Name": "Level 2",
+      "Map": "maps/labs_2.JPG",
+      "Layer": 1
+    },
+    {
+      "Name": "Basement",
+      "Map": "maps/labs_basement.JPG",
+      "Layer": 2
+    }
+  ],
+  "Anchors": [
+    {
+      "GameCoord": [ -115.7, 1.5, -249.5 ],
+      "MapCoord": [ 1723, 1361, 0 ]
+    },
+    {
+      "GameCoord": [ -251.2, 1.5, -426.5 ],
+      "MapCoord": [ 357, 313, 0 ]
+    }
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ -230.513, 0, -428.44366 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Parking Gate",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -170.52065, 0, -251.57323 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Hangar Gate",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -111.691925, 0, -410.04395 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Cargo Elevator",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -280.16187, 0, -340.2028 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Main Elevator",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -139.10222, 0, -398.90045 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Ventilation Shaft",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -112.85556, 0, -345.51538 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Medical Block Elevator",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -116.734375, 0, -259.0886 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Sewage Conduit",
+        "TitleColor": [ 112, 167, 0 ],
+        "Layer": 2
+      }
+    ]
+  },
+  "Spawns": {
+    "Pmc": [
+      {
+        "XYZ": [ -262.8365, 0, -390.8668 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -277.1881, 0, -335.92682 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -167.93477, 0, -419.89166 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -118.285904, 0, -257.01538 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 0
+      },
+      {
+        "XYZ": [ -109.10605, 0, -417.1706 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -123.06978, 0, -338.77747 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -205.55928, 0, -295.11057 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -260.2506, 0, -285.0037 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 1
+      },
+      {
+        "XYZ": [ -274.08505, 0, -357.30676 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -269.0426, 0, -390.34848 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -253.26872, 0, -298.34995 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -165.73677, 0, -345.64496 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -115.18286, 0, -399.03003 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -116.4758, 0, -326.4678 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      },
+      {
+        "XYZ": [ -129.66377, 0, -266.86313 ],
+        "Sprite": "sprites/pmc-spawn.png",
+        "Layer": 2
+      }
+    ]
+  }
+  
+}

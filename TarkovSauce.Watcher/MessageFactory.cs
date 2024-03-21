@@ -28,6 +28,11 @@ namespace TarkovSauce.Watcher
             }
             File.WriteAllText(checkpointPath, DateTime.Now.ToString());
         }
+        public void OnScreenshot(string filename)
+        {
+            var listener = listeners.FirstOrDefault(listener => listener.Match == "Screenshot");
+            listener?.OnEvent(filename);
+        }
         public void OnError(string name, string message, Exception ex)
         {
             throw ex;

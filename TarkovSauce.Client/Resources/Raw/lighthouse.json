@@ -1,0 +1,216 @@
+{
+  "Name": "Lighthouse",
+  "NormalizedName": "lighthouse",
+  "Map": "maps/lighthouse.JPG",
+  "Anchors": [
+    {
+      "GameCoord": [ -201.2, 6.1, -702.4 ],
+      "MapCoord": [ 546, 250, 0 ]
+    },
+    {
+      "GameCoord": [ 111.3, 1.8, 551.5 ],
+      "MapCoord": [ 314, 1168, 0 ]
+    }
+  ],
+  "Extracts": {
+    "Pmc": [
+      {
+        "XYZ": [ 127.463715, 0, -950.9946 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Northern Checkpoint",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ 10.276184, 0, -860.845 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Armored Train",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -331.85742, 0, -765.2317 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Road to Military Base V-Ex",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -327.81647, 0, -117.79309 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Path to Shoreline",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -143.27985, 0, 16.065552 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Mountain Pass",
+        "TitleColor": [ 112, 167, 0 ]
+      },
+      {
+        "XYZ": [ -256.4264, 0, 429.93445 ],
+        "Sprite": "sprites/pmc-extract.png",
+        "Title": "Southern Road",
+        "TitleColor": [ 112, 167, 0 ]
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 18.358093, 0, -851.2836 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Armored Train",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -133.85095, 0, -769.3294 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Industrial Zone Gates",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 196.15982, 0, -467.46454 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Scav Hideout at the Grotto",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -322.42853, 0, -110.96356 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Path to Shoreline",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ 142.28052, 0, 304.27124 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Hideout Under the Landing Stage",
+        "TitleColor": [ 255, 127, 39 ]
+      },
+      {
+        "XYZ": [ -248.34448, 0, 439.49585 ],
+        "Sprite": "sprites/scav-extract.png",
+        "Title": "Southern Road Landslide",
+        "TitleColor": [ 255, 127, 39 ]
+      }
+    ]
+  },
+  "Spawns": {
+    "Pmc": [
+      {
+        "XYZ": [ -362.838, 0, -497.51447 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -435.57507, 0, -355.4604 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -198.5061, 0, -161.50201 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -162.13757, 0, -52.229675 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 7.5822144, 0, -100.036316 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 144.97449, 0, -147.84296 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 135.5456, 0, 113.04468 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 96.48309, 0, 226.4148 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ 122.075775, 0, 451.78894 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -23.398376, 0, 353.44385 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -104.21735, 0, 514.6206 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      },
+      {
+        "XYZ": [ -131.15698, 0, 285.14868 ],
+        "Sprite": "sprites/pmc-spawn.png"
+      }
+    ],
+    "Scav": [
+      {
+        "XYZ": [ 54.726654, 0, -789.81793 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -73.236755, 0, -732.44995 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -159.4436, 0, -636.8367 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 62.808533, 0, -601.3232 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 33.174927, 0, -455.1714 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -51.684998, 0, -433.31696 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -124.42206, 0, -522.1007 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -197.15912, 0, -326.77643 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -183.68933, 0, -203.84503 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -51.684998, 0, -240.72443 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 22.399048, 0, -187.45416 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -74.58374, 0, -26.277466 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ -113.64624, 0, 110.31287 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 23.746033, 0, 166.31494 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 27.786987, 0, 300.17358 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 140.93353, 0, 290.6123 ],
+        "Sprite": "sprites/scav-spawn.png"
+      },
+      {
+        "XYZ": [ 356.45078, 0, 507.79102 ],
+        "Sprite": "sprites/scav-spawn.png"
+      }
+    ]
+  }
+
+}

@@ -1,0 +1,55 @@
+﻿@using TarkovSauce.MapTools
+<div style="display:flex">
+    <TSTabButton DataSource="MapTools.Maps.Select(s=>s.Name)" Selection="@_map?.Name" OnSelection="v => SelectMap(v)" />
+    @if (_customMarks.Count > 0)
+    {
+        <TSButton Content="Clear Custom Marks" OnClick="ClearCustomMarks" />
+    }
+</div>
+@if (_map is not null)
+{
+    if (_map.Layers.Length > 0)
+    {
+        <TSTabButton DataSource="_map.Layers.Select(s=>s.Name)" Selection="@_selectedLayer" OnSelection="v => SelectLayer(v)" />
+    }
+    if (AppData.Debug)
+    {
+        <TSButton Content="Debug Dump" OnClick="OnDebugDump" />
+        <img src="@ImgSrc" @onclick=OnMapClickDebug />
+    }
+    else
+    {
+        <div class="raid-map-toolbar">
+            <TSCheckbox Label="PMC Extracts" IsOn=!_currentFilter.HasFlag(FilterType.PmcExtract) IsOnChanged="_ => ChangeFilter(FilterType.PmcExtract)" />
+            <TSCheckbox Label="Scav Extracts" IsOn=!_currentFilter.HasFlag(FilterType.ScavExtract) IsOnChanged="_ => ChangeFilter(FilterType.ScavExtract)" />
+            <TSCheckbox Label="Current Position" IsOn=!_currentFilter.HasFlag(FilterType.CurrentPos) IsOnChanged="_ => ChangeFilter(FilterType.CurrentPos)" />
+            <TSCheckbox Label="PMC Spawns" IsOn=!_currentFilter.HasFlag(FilterType.PmcSpawns) IsOnChanged="_ => ChangeFilter(FilterType.PmcSpawns)" />
+            <TSCheckbox Label="Scav Spawns" IsOn=!_currentFilter.HasFlag(FilterType.ScavSpawns) IsOnChanged="_ => ChangeFilter(FilterType.ScavSpawns)" />
+            <TSCheckbox Label="Custom Marks" IsOn=!_currentFilter.HasFlag(FilterType.CustomMarks) IsOnChanged="_ => ChangeFilter(FilterType.CustomMarks)" />
+        </div>
+        <div class="raid-page">
+            <img src="@ImgSrc" class="@GetImgCss()" @onclick=OnMapClick id="raid-map-img" />
+        </div>
+    }
+}
+<style>
+    img.reserve {
+        margin-top: -100px;
+        transform: rotate(-14.7deg);
+    }
+
+    .raid-map-toolbar {
+        width: 100%;
+        display: flex;
+    }
+
+    .raid-page {
+        width: 100%;
+    }
+
+        .raid-page img {
+            max-width: 100%;
+            height: auto;
+            width: auto;
+        }
+</style>

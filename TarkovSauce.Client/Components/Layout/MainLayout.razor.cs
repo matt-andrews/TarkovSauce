@@ -20,7 +20,7 @@ namespace TarkovSauce.Client.Components.Layout
         public ITSToastService ToastService { get; set; } = default!;
         [Inject]
         public ILogger<MainLayout> Logger { get; set; } = default!;
-        private readonly string[] _tabButtons = ["Component Tests", "Logs", "Tasks", "Flea Sales"];
+        private readonly string[] _tabButtons = ["Component Tests", "Logs", "Tasks", "Flea Sales", "Raid"];
         private string _tabSelection = "Component Tests";
         private bool _launchAppIsLoading;
         protected override void OnInitialized()
@@ -56,6 +56,9 @@ namespace TarkovSauce.Client.Components.Layout
                     break;
                 case "Flea Sales":
                     StateContainer.State.Value = State.FleaSales;
+                    break;
+                case "Raid":
+                    StateContainer.State.Value = State.Raid;
                     break;
             }
         }

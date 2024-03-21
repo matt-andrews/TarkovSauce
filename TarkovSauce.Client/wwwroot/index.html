@@ -38,7 +38,12 @@
     </div>
 
     <script src="_framework/blazor.webview.js" autostart="false"></script>
-
+    <script>
+        function GetRaidImgSize() {
+            var img = document.getElementById("raid-map-img");
+            return [img.clientWidth, img.clientHeight];
+        }
+    </script>
 </body>
 
 </html>

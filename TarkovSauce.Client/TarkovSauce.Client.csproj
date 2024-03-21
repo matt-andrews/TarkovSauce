@@ -44,6 +44,19 @@
     </ItemGroup>
 
     <ItemGroup>
+      <Content Remove="resources\raw\customs.json" />
+      <Content Remove="resources\raw\factory.json" />
+      <Content Remove="resources\raw\ground-zero.json" />
+      <Content Remove="resources\raw\interchange.json" />
+      <Content Remove="resources\raw\labs.json" />
+      <Content Remove="resources\raw\lighthouse.json" />
+      <Content Remove="resources\raw\reserve.json" />
+      <Content Remove="resources\raw\shoreline.json" />
+      <Content Remove="resources\raw\streets.json" />
+      <Content Remove="resources\raw\woods.json" />
+    </ItemGroup>
+
+    <ItemGroup>
         <PackageReference Include="Microsoft.Maui.Controls" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.Maui.Controls.Compatibility" Version="$(MauiVersion)" />
         <PackageReference Include="Microsoft.AspNetCore.Components.WebView.Maui" Version="$(MauiVersion)" />
@@ -53,7 +66,23 @@
 
     <ItemGroup>
       <ProjectReference Include="..\TarkovSauce.Client.Components\TarkovSauce.Client.Components.csproj" />
+      <ProjectReference Include="..\TarkovSauce.MapTools\TarkovSauce.MapTools.csproj" />
       <ProjectReference Include="..\TarkovSauce.Watcher\TarkovSauce.Watcher.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <MauiAsset Update="Resources\Raw\customs.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
+      <MauiAsset Update="Resources\Raw\labs.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
+      <MauiAsset Update="Resources\Raw\shoreline.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
+      <MauiAsset Update="Resources\Raw\woods.json">
+        <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+      </MauiAsset>
     </ItemGroup>
 
 </Project>
