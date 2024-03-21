@@ -1,7 +1,9 @@
 ﻿using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop;
+using TarkovSauce.Client.Data.Models.Remote;
 using TarkovSauce.Client.Data.Providers;
+using TarkovSauce.Client.Services;
 using TarkovSauce.Client.Utils;
 using TarkovSauce.MapTools;
 
@@ -19,6 +21,9 @@ namespace TarkovSauce.Client.Components.Pages
         public IScreenshotWatcherProvider ScreenshotWatcherProvider { get; set; } = default!;
         [Inject]
         public IJSRuntime JSRuntime { get; set; } = default!;
+        [Inject]
+        public ITasksService TasksService { get; set; } = default!;
+        private IEnumerable<TaskModel>? _tasks;
         private MapTools.IMap? _map;
         private readonly List<string> _debugObjs = [];
         private string ImgSrc => _map is not null ? string.Format("data:image/png;base64,{0}", Convert.ToBase64String(_map.Image)) : "";
@@ -87,6 +92,7 @@ namespace TarkovSauce.Client.Components.Pages
                 .GetBuilder();
 
             _map = await builder.Build(_currentFilter);
+            _tasks = await TasksService.BuildCurrentQuests(_map.NormalizedName);
         }
         private async Task RebuildMap()
         {
@@ -99,6 +105,7 @@ namespace TarkovSauce.Client.Components.Pages
                 builder.WithPos(pos.Coord, pos.Sprite, pos.FilterType);
             }
             _map = await builder.Build(_currentFilter);
+            _tasks = await TasksService.BuildCurrentQuests(_map.NormalizedName);
             await InvokeAsync(StateHasChanged);
         }
         private async Task ChangeFilter(FilterType filter)

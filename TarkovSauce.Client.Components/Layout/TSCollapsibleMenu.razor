@@ -1,0 +1,44 @@
+﻿@inherits StyleableComponentBase
+
+<div class="tscollapsiblemenu">
+    <div class="expando-button bg">
+        <TarkovSauce.Client.Components.IconButtons.TSListButton OnClick="OnExpandClick" />
+    </div>
+    <div class="expando-content bg @(!IsExpanded ? "hide" : "") @(AlignRight ? "align-right" : "")">
+        @ChildContent
+    </div>
+</div>
+
+<style>
+    .tscollapsiblemenu {
+    }
+
+        .tscollapsiblemenu .bg {
+            background-color: var(--background-l1-90);
+            border: 1px solid var(--border-90);
+            border-radius: var(--border-radius-l1);
+            box-shadow: var(--drop-shadow);
+            width: auto;
+            padding: 1%;
+            z-index: 10000;
+        }
+
+        .tscollapsiblemenu .expando-button {
+            width: 32px;
+            display: flex;
+            padding: 1%;
+        }
+
+        .tscollapsiblemenu .expando-content {
+            display: block;
+            position: absolute;
+        }
+
+            .tscollapsiblemenu .expando-content.align-right {
+                right: 0;
+            }
+
+            .tscollapsiblemenu .expando-content.hide {
+                display: none;
+            }
+</style>

@@ -1,4 +1,5 @@
-﻿@using TarkovSauce.MapTools
+﻿@using System.Text.Json
+@using TarkovSauce.MapTools
 <div style="display:flex">
     <TSTabButton DataSource="MapTools.Maps.Select(s=>s.Name)" Selection="@_map?.Name" OnSelection="v => SelectMap(v)" />
     @if (_customMarks.Count > 0)
@@ -19,15 +20,36 @@
     }
     else
     {
-        <div class="raid-map-toolbar">
-            <TSCheckbox Label="PMC Extracts" IsOn=!_currentFilter.HasFlag(FilterType.PmcExtract) IsOnChanged="_ => ChangeFilter(FilterType.PmcExtract)" />
-            <TSCheckbox Label="Scav Extracts" IsOn=!_currentFilter.HasFlag(FilterType.ScavExtract) IsOnChanged="_ => ChangeFilter(FilterType.ScavExtract)" />
-            <TSCheckbox Label="Current Position" IsOn=!_currentFilter.HasFlag(FilterType.CurrentPos) IsOnChanged="_ => ChangeFilter(FilterType.CurrentPos)" />
-            <TSCheckbox Label="PMC Spawns" IsOn=!_currentFilter.HasFlag(FilterType.PmcSpawns) IsOnChanged="_ => ChangeFilter(FilterType.PmcSpawns)" />
-            <TSCheckbox Label="Scav Spawns" IsOn=!_currentFilter.HasFlag(FilterType.ScavSpawns) IsOnChanged="_ => ChangeFilter(FilterType.ScavSpawns)" />
-            <TSCheckbox Label="Custom Marks" IsOn=!_currentFilter.HasFlag(FilterType.CustomMarks) IsOnChanged="_ => ChangeFilter(FilterType.CustomMarks)" />
-        </div>
         <div class="raid-page">
+            <div class="raid-map-toolbar-container">
+                <div>
+                    <TSCollapsibleMenu>
+                        <div class="raid-map-toolbar">
+                            <TSCheckbox Label="PMC Extracts" IsOn=!_currentFilter.HasFlag(FilterType.PmcExtract) IsOnChanged="_ => ChangeFilter(FilterType.PmcExtract)" />
+                            <TSCheckbox Label="Scav Extracts" IsOn=!_currentFilter.HasFlag(FilterType.ScavExtract) IsOnChanged="_ => ChangeFilter(FilterType.ScavExtract)" />
+                            <TSCheckbox Label="Current Position" IsOn=!_currentFilter.HasFlag(FilterType.CurrentPos) IsOnChanged="_ => ChangeFilter(FilterType.CurrentPos)" />
+                            <TSCheckbox Label="PMC Spawns" IsOn=!_currentFilter.HasFlag(FilterType.PmcSpawns) IsOnChanged="_ => ChangeFilter(FilterType.PmcSpawns)" />
+                            <TSCheckbox Label="Scav Spawns" IsOn=!_currentFilter.HasFlag(FilterType.ScavSpawns) IsOnChanged="_ => ChangeFilter(FilterType.ScavSpawns)" />
+                            <TSCheckbox Label="Custom Marks" IsOn=!_currentFilter.HasFlag(FilterType.CustomMarks) IsOnChanged="_ => ChangeFilter(FilterType.CustomMarks)" />
+                        </div>
+                    </TSCollapsibleMenu>
+                </div>
+                <div class="raid-task-toolbar">
+                    <TSCollapsibleMenu AlignRight=true>
+                        @*add list of tasks for map here*@
+                        @if (_tasks is not null && _tasks.Any())
+                        {
+                            <ul>
+                                @foreach (var task in _tasks)
+                                {
+                                    System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(task));
+                                    <li>@task.Name</li>
+                                }
+                            </ul>
+                        }
+                    </TSCollapsibleMenu>
+                </div>
+            </div>
             <img src="@ImgSrc" class="@GetImgCss()" @onclick=OnMapClick id="raid-map-img" />
         </div>
     }
@@ -38,18 +60,28 @@
         transform: rotate(-14.7deg);
     }
 
+    .raid-map-toolbar-container {
+        position: sticky;
+        top: 50px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .raid-task-toolbar {
+    }
+
     .raid-map-toolbar {
         width: 100%;
-        display: flex;
+        display: block;
     }
 
     .raid-page {
-        width: 100%;
+        position: relative;
     }
 
         .raid-page img {
             max-width: 100%;
-            height: auto;
-            width: auto;
         }
 </style>
