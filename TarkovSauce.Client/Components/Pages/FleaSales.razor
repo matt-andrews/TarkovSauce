@@ -1,4 +1,5 @@
-﻿@if (_runningTotal > 0)
+@using TarkovSauce.Client.Components.MiscComponents
+@if (_runningTotal > 0)
 {
     <div style="width:100%;display:flex;justify-content:end">
         <table class="running-total">
@@ -20,8 +21,6 @@
         </table>
     </div>
 }
-<br />
-
 <div class="tstable">
     <table class="flea-sales-table">
         <tr>
@@ -37,7 +36,7 @@
             <tr>
                 <td>@item.Timestamp.ToString("G")</td>
                 <td>@item.Type</td>
-                <td>@item.ItemName</td>
+                <td> <ItemComponent Item="@item"/></td>
                 <td>@item.Quantity</td>
                 <td>@(item.Currency)@(item.Reward.ToString("###,###,###"))</td>
             </tr>

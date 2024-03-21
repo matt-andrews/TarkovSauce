@@ -28,7 +28,7 @@ namespace TarkovSauce.Client.HttpClients
 
             Dictionary<string, string> content = new()
             {
-                { "query", "{items(ids: [\"" + string.Join("\",\"", ids) + "\"]) { id name }}" }
+                { "query", "{items(ids: [\"" + string.Join("\",\"", ids) + "\"]) { id name shortName description avg24hPrice gridImageLink }}" }
             };
 
             var result = await Post<ItemsGraphQLWrapper>(content);
