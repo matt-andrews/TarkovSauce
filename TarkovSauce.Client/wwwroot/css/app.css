@@ -130,3 +130,48 @@ h1:focus {
 ::-webkit-scrollbar-thumb {
     background-color: var(--primary-90);
 }
+
+.tooltip-wrapper {
+    position: relative;
+    display: inline-block;
+    cursor: help;
+}
+
+.tooltip-line {
+    display: block;
+    margin-bottom: 0px;
+}
+
+.tooltip-wrapper .tooltip-inner-wrapper .tooltip-line {
+    visibility: hidden;
+    width: auto;
+    min-width: 250px;
+    max-width: 400px;
+    background-color: #363636;
+    color: #fff;
+    text-align: left;
+    padding: 5px;
+    border-radius: 0px;
+    z-index: 2;
+    white-space: normal;
+    position: relative;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+.tooltip-wrapper:hover .tooltip-inner-wrapper .tooltip-line {
+    visibility: visible;
+}
+
+.tooltip-wrapper:hover {
+    background-color: #363636;
+}
+
+.tooltip-inner-wrapper {
+    display: block;
+    position: absolute;
+    transform: translateX(26%);
+    z-index: 1;
+}
+
