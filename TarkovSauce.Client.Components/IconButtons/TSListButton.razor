@@ -1,0 +1,23 @@
+﻿@using TarkovSauce.Client.Components.Buttons
+@inherits ButtonBase
+
+<div class="@CssImpl" style="@StyleImpl">
+    <button @onclick="async _ => await OnClick.InvokeAsync()" title="@Label">
+        <i class="bi-list" />
+    </button>
+</div>
+
+<style>
+    .icon-button button i.bi-list:before {
+        animation: popIn 0.5s forwards;
+    }
+
+    .icon-button button:hover i.bi-list:before {
+        animation: popOut 0.5s forwards;
+    }
+
+</style>
+
+@code {
+    protected override string CssImpl => $"tslistbutton icon-button {base.CssImpl}";
+}

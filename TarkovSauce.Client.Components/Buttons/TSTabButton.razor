@@ -5,18 +5,32 @@
             @Placeholder
         }
     </label>
-    <div class="ts-tab-button collection-content" id="@_id">
-        @if (DataSource is not null)
-        {
-            @foreach (var item in DataSource)
+    <div class="expando-container">
+        <div class="expando-button">
+            <TarkovSauce.Client.Components.IconButtons.TSListButton OnClick="OnExpandClick" />
+        </div>
+        <div class="ts-tab-button collection-content @(!IsExpanded ? "hide" : "")" id="@_id">
+            @if (DataSource is not null)
             {
-                <TSButton Content="@item" IsPrimary=true OnClick="_ => OnClick(item)" Css="@(item == Selection ? "selection" : "not-selection")" />
+                @foreach (var item in DataSource)
+                {
+                    <TSButton Content="@item" IsPrimary=true OnClick="_ => OnClick(item)" Css="@(item == Selection ? "selection" : "not-selection")" />
+                }
             }
-        }
+        </div>
     </div>
 </div>
 
 <style>
+    .ts-tab-button .expando-container {
+        display: flex;
+        z-index: 10000;
+    }
+
+    .ts-tab-button .expando-button {
+        display: none;
+    }
+
     .ts-tab-button.collection-content {
         display: flex;
         width: 100%;
@@ -57,4 +71,27 @@
             border-bottom: 3px solid var(--font-l1);
             color: var(--primary-90);
         }
+
+    @@media (max-width: 640.98px) {
+        .ts-tab-button .expando-container,
+        .ts-tab-button .expando-button {
+            display: block;
+        }
+
+        .ts-tab-button.collection-content {
+            display: block;
+            position: absolute;
+            background-color: var(--background-l1);
+            border: 1px solid var(--border-90);
+            border-radius: var(--border-radius-l1);
+            box-shadow: var(--drop-shadow);
+            width: auto;
+            text-align: center;
+            z-index: 10001;
+        }
+
+            .ts-tab-button.collection-content.hide {
+                display: none;
+            }
+    }
 </style>

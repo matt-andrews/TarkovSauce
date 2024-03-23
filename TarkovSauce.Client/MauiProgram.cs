@@ -61,6 +61,7 @@ namespace TarkovSauce.Client
                     provider.GetRequiredService<IConfiguration>(),
                     provider.GetRequiredService<ILogger<TarkovTrackerHttpClient>>()));
             builder.Services.AddSingleton<ISqlService>(sqlService);
+            builder.Services.AddSingleton<ITasksService, TasksService>();
 
             builder.Services.AddSingleton<IRawLogProvider, RawLogProvider>();
             builder.Services.AddSingleton<IFleaSalesProvider, FleaSalesProvider>();
