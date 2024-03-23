@@ -170,7 +170,7 @@ h1:focus {
 .tooltip-inner-wrapper {
     display: block;
     position: absolute;
-    transform: translateX(25%);
+    transform: translateX(26%);
     z-index: 1;
 }
 
