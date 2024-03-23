@@ -36,17 +36,6 @@
                 </div>
                 <div class="raid-task-toolbar">
                     <TSCollapsibleMenu AlignRight=true>
-                        @*add list of tasks for map here*@
-                        @if (_tasks is not null && _tasks.Any())
-                        {
-                            <ul>
-                                @foreach (var task in _tasks)
-                                {
-                                    System.Diagnostics.Debug.WriteLine(JsonSerializer.Serialize(task));
-                                    <li>@task.Name</li>
-                                }
-                            </ul>
-                        }
                     </TSCollapsibleMenu>
                 </div>
             </div>
