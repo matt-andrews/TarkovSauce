@@ -7,6 +7,7 @@ namespace TarkovSauce.Client.Data.Models.Remote
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
         public int MinPlayerLevel { get; set; }
+        public string WikiLink { get; set; } = "";
         public ObjectiveModel[] Objectives { get; set; } = [];
         public TaskRequirementsModel[] TaskRequirements { get; set; } = [];
         public TraderModel Trader { get; set; } = new();
@@ -17,6 +18,7 @@ namespace TarkovSauce.Client.Data.Models.Remote
         public string Id { get; set; } = "";
         public string Name { get; set; } = "";
         public int MinPlayerLevel { get; set; }
+        public string WikiLink { get; set; } = "";
         public string Objectives { get; set; } = "";
         public string TaskRequirements { get; set; } = "";
         public string Trader { get; set; } = "";
@@ -78,6 +80,7 @@ namespace TarkovSauce.Client.Data.Models.Remote
                     Id = task.Id,
                     Name = task.Name,
                     MinPlayerLevel = task.MinPlayerLevel,
+                    WikiLink = task.WikiLink,
                     Objectives = task.Objectives.Serialize(),
                     TaskRequirements = task.TaskRequirements.Serialize(),
                     Trader = task.Trader.Serialize(),
@@ -94,6 +97,7 @@ namespace TarkovSauce.Client.Data.Models.Remote
                     Id = task.Id,
                     Name = task.Name,
                     MinPlayerLevel = task.MinPlayerLevel,
+                    WikiLink = task.WikiLink,
                     Objectives = task.Objectives.Deserialize<ObjectiveModel[]>() ?? [],
                     TaskRequirements = task.TaskRequirements.Deserialize<TaskRequirementsModel[]>() ?? [],
                     Trader = task.Trader.Deserialize<TraderModel>() ?? new(),
