@@ -71,7 +71,7 @@
             for (int i = 0; i < _random.Next(2, 5); i++)
             {
                 Console.Write(GetChar());
-                await Task.Delay(_random.Next(10, 30));
+                await Task.Delay(_random.Next(10, 20));
                 if (_cursorLeft >= Console.BufferWidth)
                 {
                     _cursorLeft = 0;
