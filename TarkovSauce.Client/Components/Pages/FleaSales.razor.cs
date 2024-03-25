@@ -1,21 +1,29 @@
 ﻿using Microsoft.AspNetCore.Components;
 using TarkovSauce.Client.Data.Providers;
+using TarkovSauce.Client.Services;
 
 namespace TarkovSauce.Client.Components.Pages
 {
     public partial class FleaSales
     {
         [Inject]
+        public StateContainer StateContainer { get; set; } = default!;
+        [Inject]
         public IFleaSalesProvider FleaSalesProvider { get; set; } = default!;
         private long _runningTotal;
         protected override void OnInitialized()
         {
+            StateContainer.IsLoading.Value = true;
             FleaSalesProvider.InitCache();
             CalcRunningTotal();
+            StateContainer.IsLoading.Value = false;
             FleaSalesProvider.OnStateChanged = () =>
             {
+                StateContainer.IsLoading.Value = true;
                 CalcRunningTotal();
                 InvokeAsync(StateHasChanged);
+
+                StateContainer.IsLoading.Value = false;
             };
         }
         private void CalcRunningTotal()
