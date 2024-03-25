@@ -20,8 +20,12 @@ namespace TarkovSauce.Client.Components.Layout
         public ITSToastService ToastService { get; set; } = default!;
         [Inject]
         public ILogger<MainLayout> Logger { get; set; } = default!;
-        private readonly string[] _tabButtons = ["Component Tests", "Logs", "Tasks", "Flea Sales", "Raid"];
-        private string _tabSelection = "Component Tests";
+        private readonly string[] _tabButtons = AppDataManager.IsDev
+            ? ["Component Tests", "Home", "Logs", "Tasks", "Flea Sales", "Raid"]
+            : ["Home", "Logs", "Tasks", "Flea Sales", "Raid"];
+        private string _tabSelection = AppDataManager.IsDev
+            ? "Component Tests"
+            : "Home";
         private bool _launchAppIsLoading;
         protected override void OnInitialized()
         {

@@ -11,6 +11,7 @@ namespace TarkovSauce.Client.Utils
     }
     public class AppDataManager : IAppDataManager
     {
+        public static bool IsDev => Environment.GetCommandLineArgs().Contains("--dev");
         public static string SettingsDirectory
         {
             get
