@@ -11,7 +11,18 @@ namespace TarkovSauce.Client.Utils
     }
     public class AppDataManager : IAppDataManager
     {
-        public static string SettingsDirectory => FileSystem.Current.AppDataDirectory;
+        public static string SettingsDirectory
+        {
+            get
+            {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "App Data");
+                if (!Path.Exists(path))
+                {
+                    Directory.CreateDirectory(path);
+                }
+                return path;
+            }
+        }
         public static string SettingsFile => Path.Combine(SettingsDirectory, "settings.json");
         public static string DatabaseFile => Path.Combine(SettingsDirectory, "data.db");
         public static string CheckpointFile => Path.Combine(SettingsDirectory, "checkpoint");
