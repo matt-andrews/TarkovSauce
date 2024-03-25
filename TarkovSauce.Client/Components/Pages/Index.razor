@@ -1,4 +1,5 @@
 ﻿@page "/"
+@using TarkovSauce.Client.Utils
 
 <PageTitle>Tarkov Sauce</PageTitle>
 @if (StateContainer.State.Value == Services.State.Home)
@@ -21,11 +22,14 @@ else if (StateContainer.State.Value == Services.State.Tasks)
 {
     <TasksPage />
 }
-else if(StateContainer.State.Value == Services.State.Logs)
+else if (StateContainer.State.Value == Services.State.Logs)
 {
     <LogsPage />
 }
-else if(StateContainer.State.Value == Services.State.Raid)
+else if (StateContainer.State.Value == Services.State.Raid)
 {
     <RaidPage />
 }
+<footer>
+    <small>@AppDataManager.Version</small>
+</footer>

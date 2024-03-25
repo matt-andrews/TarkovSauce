@@ -28,6 +28,8 @@ namespace TarkovSauce.Client
                 .SetMinimumLevel(LogLevel.Trace)
                 .AddDebug());
 
+            AppDataManager.GetVersion();
+
             // Make statecontainer a thing
             var stateContainer = new StateContainer();
             var appData = new AppDataJson();

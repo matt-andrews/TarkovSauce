@@ -1,6 +1,7 @@
 ﻿using System.Diagnostics;
 using System.Text.Json;
 using System.Text.Json.Serialization;
+using TarkovSauce.Client.Data;
 
 namespace TarkovSauce.Client.Utils
 {
@@ -28,13 +29,33 @@ namespace TarkovSauce.Client.Utils
         public static string DatabaseFile => Path.Combine(SettingsDirectory, "data.db");
         public static string CheckpointFile => Path.Combine(SettingsDirectory, "checkpoint");
         private readonly static JsonSerializerOptions _options = new() { WriteIndented = true };
+        public static string Version { get; private set; } = "N/A";
+        public static void GetVersion()
+        {
+            try
+            {
+                string manifestFile = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "manifest.json");
+                if (File.Exists(manifestFile))
+                {
+                    using var fs = new FileStream(manifestFile, FileMode.Open, FileAccess.Read);
+                    var manifest = JsonSerializer.Deserialize<Manifest>(fs);
+                    Version = manifest?.Version ?? "N/A";
+                }
+            }
+            catch (Exception ex)
+            {
+                Debug.WriteLine(ex);
+            }
+        }
         public AppDataJson GetAppData()
         {
             if (!Directory.Exists(SettingsDirectory) || !Path.Exists(SettingsFile))
             {
                 return new();
             }
+         
             var file = File.ReadAllText(SettingsFile);
+
             try
             {
                 return JsonSerializer.Deserialize<AppDataJson>(file) ?? new();

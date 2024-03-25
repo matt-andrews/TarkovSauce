@@ -64,6 +64,9 @@ namespace TarkovSauce.Client.Components.Layout
                 case "Raid":
                     StateContainer.State.Value = State.Raid;
                     break;
+                case "Home":
+                    StateContainer.State.Value = State.Home;
+                    break;
             }
         }
         private string GetPageTitle()
