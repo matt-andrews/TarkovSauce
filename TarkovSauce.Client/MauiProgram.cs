@@ -30,6 +30,11 @@ namespace TarkovSauce.Client
 
             AppDataManager.GetVersion();
 
+            if(!Environment.GetCommandLineArgs().Contains("--dev") && !Environment.GetCommandLineArgs().Contains("--launcher"))
+            {
+                throw new ApplicationException("Running Tarkov Sauce without the launcher is not supported");
+            }
+
             // Make statecontainer a thing
             var stateContainer = new StateContainer();
             var appData = new AppDataJson();
