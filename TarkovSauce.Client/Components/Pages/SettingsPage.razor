@@ -1,4 +1,5 @@
-﻿@if (AppDataJson is not null)
+﻿@using StaticAppDataManager = TarkovSauce.Client.Utils.AppDataManager;
+@if (AppDataJson is not null)
 {
     <div>
         <TSInput Placeholder="Tarkov Log Path" @bind-Value=AppDataJson.Settings.TarkovPath />
@@ -12,3 +13,6 @@
     <br />
     <TSButton Content="Save" OnClick="OnSaveEvent" IsPrimary=true />
 }
+<footer>
+    <small>v@(StaticAppDataManager.Version)</small>
+</footer>
