@@ -12,6 +12,30 @@
         private Random _random = new();
         private int _cursorLeft = 0;
         private int _cursorTop = 0;
+        public ConsoleKey ReadKey()
+        {
+            Console.CursorVisible = true;
+            var key = Console.ReadKey();
+            Console.CursorVisible = false;
+            return key.Key;
+        }
+
+        public string ReadLine()
+        {
+            Console.CursorVisible = true;
+            var str = Console.ReadLine();
+            Console.CursorVisible = false;
+            _cursorTop++;
+            _cursorLeft = 0;
+            return str ?? "";
+        }
+
+        public void WriteLineFast(string message)
+        {
+            Console.WriteLine(message);
+            _cursorTop++;
+            _cursorLeft = 0;
+        }
         public async Task Write(string message)
         {
             _random = new Random();
