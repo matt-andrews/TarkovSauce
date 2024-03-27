@@ -14,7 +14,7 @@ namespace TarkovSauce.Client.HttpClients
     public class TarkovTrackerHttpClient(HttpClient _httpClient, IConfiguration _config, ILogger<TarkovTrackerHttpClient> _logger)
         : ITarkovTrackerHttpClient
     {
-        private string? AuthToken => _config["Settings:TarkovTrackerKey"];
+        private string? AuthToken => _config["Settings:TarkovTrackerKey"]?.Trim();
         private TokenResponse? _token;
         public async Task<TokenResponse?> TestToken()
         {
