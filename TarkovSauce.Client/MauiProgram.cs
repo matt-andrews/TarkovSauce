@@ -9,6 +9,9 @@ using TarkovSauce.Client.Services;
 using TarkovSauce.Client.Utils;
 using TarkovSauce.MapTools;
 using TarkovSauce.Watcher;
+using Ripe.Sdk.DependencyInjection;
+using System.Text.Json;
+using System.Text.Json.Nodes;
 
 namespace TarkovSauce.Client
 {
@@ -40,6 +43,14 @@ namespace TarkovSauce.Client
             var appData = new AppDataJson();
             var configuration = new ConfigurationBuilder()
                 .AddJsonFile(AppDataManager.SettingsFile, true, true)
+                .AddRipe(builder.Services, (httpClient, options) =>
+                {
+                    var setup = JsonSerializer.Deserialize<JsonObject>(Convert.FromBase64String(File.ReadAllText("ripe.sh")))
+                        ?? throw new JsonException("Failed to pull setup file");
+                    options.Uri = setup["Uri"]?.ToString();
+                    options.ApiKey = setup["ApiKey"]?.ToString();
+                    options.Version = AppDataManager.Version;
+                }, out RipeConfig config)
                 .Build();
             configuration.Bind(appData);
             builder.Configuration.AddConfiguration(configuration);
@@ -58,15 +69,19 @@ namespace TarkovSauce.Client
             var appDataManager = new AppDataManager();
             var tarkovDevHttpClient = new TarkovDevHttpClient(new HttpClient()
             {
-                BaseAddress = new Uri("https://api.tarkov.dev")
+                BaseAddress = new Uri(config.Client.TarkovDevApi)
             }, sqlService);
 
             builder.Services.AddSingleton<IAppDataManager>(appDataManager);
             builder.Services.AddSingleton<ITarkovDevHttpClient>(provider => tarkovDevHttpClient);
             builder.Services.AddSingleton<ITarkovTrackerHttpClient>(provider
-                => new TarkovTrackerHttpClient(new HttpClient(),
+                => new TarkovTrackerHttpClient(new HttpClient()
+                {
+                    BaseAddress = new Uri(config.Client.TarkovTrackerApi)
+                },
                     provider.GetRequiredService<IConfiguration>(),
                     provider.GetRequiredService<ILogger<TarkovTrackerHttpClient>>()));
+
             builder.Services.AddSingleton<ISqlService>(sqlService);
             builder.Services.AddSingleton<ITasksService, TasksService>();
 
@@ -103,7 +118,7 @@ namespace TarkovSauce.Client
                 });
 
             builder.Services
-                .AddMapTools("https://tarkovsauce.blob.core.windows.net/static/")
+                .AddMapTools(config.Client.BlobSource)
                 .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "customs.json"))
                 .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "woods.json"))
                 .AddMap(Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "shoreline.json"))

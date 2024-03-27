@@ -1,4 +1,4 @@
-﻿<Project Sdk="Microsoft.NET.Sdk">
+<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <OutputType>Exe</OutputType>
@@ -7,4 +7,14 @@
     <Nullable>enable</Nullable>
     <AssemblyName>Tarkov Sauce Launcher</AssemblyName>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Update="ripe.sh">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Ripe.Sdk.Core" Version="1.0.0" />
+  </ItemGroup>
 </Project>

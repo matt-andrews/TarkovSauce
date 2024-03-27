@@ -1,19 +1,30 @@
-﻿using System.Diagnostics;
+﻿using Ripe.Sdk.Core;
+using System.Diagnostics;
 using System.Text.Json;
+using System.Text.Json.Nodes;
 using TarkovSauce.Launcher;
 
-string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, "Sauce App", "win10-x64");
-string exe = Path.Combine(path, "TarkovSauce.Client.Exe");
-string manifest = Path.Combine(path, "manifest.json");
+RipeSdk<Config> ripeSdk = new(options =>
+{
+    var setup = JsonSerializer.Deserialize<JsonObject>(Convert.FromBase64String(File.ReadAllText("ripe.sh"))) 
+        ?? throw new JsonException("Failed to pull setup file");
+    options.Uri = setup["Uri"]?.ToString();
+    options.ApiKey = setup["ApiKey"]?.ToString();
+    options.Version = typeof(Program).Assembly.GetName().Version?.ToString() ?? "0.0.0.0";
+});
+Config config = await ripeSdk.HydrateAsync();
+
+string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, config.Launcher.AppParentFolder, config.Launcher.AppChildFolder);
+string exe = Path.Combine(path, config.Launcher.AppExe);
+string manifest = Path.Combine(path, config.Launcher.Manifest);
 
 var httpClient = new BuildHttpClient();
 
 var jumbler = new ConsoleJumbler();
-await jumbler.WriteLine("Welcome to Tarkov Sauce");
-
+jumbler.WriteLineFast("Tarkov Sauce");
 await jumbler.Write("Checking for updates");
 
-Manifest remoteManifest = await jumbler.Load(() => httpClient.Get<Manifest>("manifest.json"));
+Manifest remoteManifest = await jumbler.Load(() => httpClient.Get<Manifest>(config.Launcher.Manifest));
 
 bool update = false;
 bool isFresh = false;
@@ -38,13 +49,12 @@ if (update)
     await jumbler.Load(() => httpClient.DownloadZip($"Sauce App.{remoteManifest.Version}.zip"));
     if (isFresh)
     {
-        await jumbler.WriteLine("Fresh install detected... Do you have a Tarkov Tracker API Key? (y/n)");
-        var askApiKey = Console.ReadKey();
-        if (askApiKey.Key == ConsoleKey.Y)
+        await jumbler.WriteLine("Fresh install detected... Do you have a Tarkov Tracker API Key? (Y/N)");
+        var askApiKey = jumbler.ReadKey();
+        if (askApiKey == ConsoleKey.Y)
         {
             await jumbler.WriteLine("Enter your Tarkov Tracker API Key:");
-            var apiKey = Console.ReadLine();
-            await jumbler.WriteLine();
+            var apiKey = jumbler.ReadLine();
             if (!string.IsNullOrWhiteSpace(apiKey))
             {
                 string settingsFileData = "{\"Settings\": {\"TarkovTrackerKey\": \" " + apiKey + "\"}}";

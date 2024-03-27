@@ -1,7 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.Logging;
 using System.Text;
-using System.Text.Json;
 using TarkovSauce.Client.Data.Models.Remote;
 
 namespace TarkovSauce.Client.HttpClients
@@ -15,7 +14,6 @@ namespace TarkovSauce.Client.HttpClients
     public class TarkovTrackerHttpClient(HttpClient _httpClient, IConfiguration _config, ILogger<TarkovTrackerHttpClient> _logger)
         : ITarkovTrackerHttpClient
     {
-        private readonly static string _baseUri = "https://tarkovtracker.io/api/v2";
         private string? AuthToken => _config["Settings:TarkovTrackerKey"];
         private TokenResponse? _token;
         public async Task<TokenResponse?> TestToken()
@@ -25,7 +23,7 @@ namespace TarkovSauce.Client.HttpClients
             if (_token is not null && _token.Token == AuthToken)
                 return _token;
 
-            HttpRequestMessage request = CreateRequest(HttpMethod.Get, _baseUri + "/token");
+            HttpRequestMessage request = CreateRequest(HttpMethod.Get, "/token");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -43,7 +41,7 @@ namespace TarkovSauce.Client.HttpClients
         {
             if (_token is null && await TestToken() is null)
                 return null;
-            HttpRequestMessage request = CreateRequest(HttpMethod.Get, _baseUri + "/progress");
+            HttpRequestMessage request = CreateRequest(HttpMethod.Get, "/progress");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -60,7 +58,7 @@ namespace TarkovSauce.Client.HttpClients
         {
             if (_token is null && await TestToken() is null)
                 return null;
-            HttpRequestMessage request = CreateRequest(HttpMethod.Post, _baseUri + "/progress/tasks");
+            HttpRequestMessage request = CreateRequest(HttpMethod.Post, "/progress/tasks");
             request.Content = new StringContent(body.Serialize(), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
