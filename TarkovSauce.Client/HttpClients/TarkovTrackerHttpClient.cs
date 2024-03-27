@@ -14,7 +14,7 @@ namespace TarkovSauce.Client.HttpClients
     public class TarkovTrackerHttpClient(HttpClient _httpClient, IConfiguration _config, ILogger<TarkovTrackerHttpClient> _logger)
         : ITarkovTrackerHttpClient
     {
-        private string? AuthToken => _config["Settings:TarkovTrackerKey"];
+        private string? AuthToken => _config["Settings:TarkovTrackerKey"]?.Trim();
         private TokenResponse? _token;
         public async Task<TokenResponse?> TestToken()
         {
@@ -23,7 +23,7 @@ namespace TarkovSauce.Client.HttpClients
             if (_token is not null && _token.Token == AuthToken)
                 return _token;
 
-            HttpRequestMessage request = CreateRequest(HttpMethod.Get, "/token");
+            HttpRequestMessage request = CreateRequest(HttpMethod.Get, "api/v2/token");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -34,14 +34,14 @@ namespace TarkovSauce.Client.HttpClients
             else
             {
                 _logger.LogError(resultString);
-                return null;
+                throw new Exception(resultString);
             }
         }
         public async Task<ProgressResponse?> GetProgress()
         {
             if (_token is null && await TestToken() is null)
                 return null;
-            HttpRequestMessage request = CreateRequest(HttpMethod.Get, "/progress");
+            HttpRequestMessage request = CreateRequest(HttpMethod.Get, "api/v2/progress");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
             if (response.IsSuccessStatusCode)
@@ -51,14 +51,14 @@ namespace TarkovSauce.Client.HttpClients
             else
             {
                 _logger.LogError(resultString);
-                return null;
+                throw new Exception(resultString);
             }
         }
         public async Task<string?> SetTaskStatusBatch(List<TaskStatusBody> body)
         {
             if (_token is null && await TestToken() is null)
                 return null;
-            HttpRequestMessage request = CreateRequest(HttpMethod.Post, "/progress/tasks");
+            HttpRequestMessage request = CreateRequest(HttpMethod.Post, "api/v2/progress/tasks");
             request.Content = new StringContent(body.Serialize(), Encoding.UTF8, "application/json");
             HttpResponseMessage response = await _httpClient.SendAsync(request);
             string resultString = await response.Content.ReadAsStringAsync();
@@ -69,7 +69,7 @@ namespace TarkovSauce.Client.HttpClients
             else
             {
                 _logger.LogError(resultString);
-                return null;
+                throw new Exception(resultString);
             }
         }
         private HttpRequestMessage CreateRequest(HttpMethod method, string uri)
