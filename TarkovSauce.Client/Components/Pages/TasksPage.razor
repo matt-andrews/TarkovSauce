@@ -3,8 +3,6 @@
     <div class="tasks-container">
         @foreach (var task in _tasks.OrderBy(task => task.Objectives.Any(objectives => objectives.Maps.Any())))
         {
-            if (TasksService.TestForMap(task, SelectedMapProvider.Map))
-            {
                 <TSCard>
                     <HeaderContent>
                         <div class="task-header">
@@ -25,7 +23,6 @@
                         </ul>
                     </ChildContent>
                 </TSCard>
-            }
         }
     </div>
 }

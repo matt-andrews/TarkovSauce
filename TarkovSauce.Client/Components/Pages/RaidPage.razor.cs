@@ -12,6 +12,8 @@ namespace TarkovSauce.Client.Components.Pages
     public partial class RaidPage
     {
         [Inject]
+        public StateContainer StateContainer { get; set; } = default!;
+        [Inject]
         public AppDataJson AppData { get; set; } = default!;
         [Inject]
         public IMapTools MapTools { get; set; } = default!;
@@ -67,13 +69,19 @@ namespace TarkovSauce.Client.Components.Pages
         {
             if (_map is null) return;
             _selectedLayer = layerName;
+            StateContainer.IsLoading.Value = true;
             await RebuildMap();
+            StateContainer.IsLoading.Value = false;
         }
         private async Task SelectMap(string mapName)
         {
             var normal = MapTools.Maps.FirstOrDefault(f => f.Name == mapName)?.NormalizedName;
             if (!string.IsNullOrWhiteSpace(normal))
+            {
+                StateContainer.IsLoading.Value = true;
                 await BuildMap(normal);
+                StateContainer.IsLoading.Value = false;
+            }
         }
         private string GetImgCss()
         {

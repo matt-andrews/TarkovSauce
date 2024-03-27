@@ -5,7 +5,7 @@ namespace TarkovSauce.Client.Services
 {
     public class StateContainer
     {
-        public ObservableValue<State> State { get; set; } = new(Services.State.ComponentTests);
+        public ObservableValue<State> State { get; set; } = new(AppDataManager.IsDev ? Services.State.ComponentTests : Services.State.Home);
         public ObservableValue<bool> IsLoading { get; set; } = new(false);
         public event Action? MainLayoutChangedEvent;
         public TasksGraphQLWrapper? TasksCache { get; set; }
