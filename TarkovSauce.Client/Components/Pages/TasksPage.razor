@@ -1,4 +1,5 @@
-﻿@if (_tasks is not null)
+﻿@using TarkovSauce.Client.Components.MiscComponents
+@if (_tasks is not null)
 {
     <div class="tasks-container">
         @foreach (var task in _tasks.OrderBy(task => task.Objectives.Any(objectives => objectives.Maps.Any())))
@@ -18,7 +19,15 @@
                         <ul>
                             @foreach (var objective in task.Objectives)
                             {
-                                <li>@objective.Description</li>
+                                if(objective.RequiredKeys?.Length > 0)
+                                {
+                                    foreach (var key in objective.RequiredKeys.SelectMany(s => s))
+                                    {
+                                        <ItemComponent Item="key"/>
+                                    }
+                                }
+
+                            <li>@objective.Description</li>
                             }
                         </ul>
                     </ChildContent>

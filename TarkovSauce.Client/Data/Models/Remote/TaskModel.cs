@@ -41,6 +41,7 @@ namespace TarkovSauce.Client.Data.Models.Remote
         public MapModel[] Maps { get; set; } = [];
         public ItemModel Item { get; set; } = new();
         public ItemModel[] Items { get; set; } = [];
+        public ItemModel[][]? RequiredKeys { get; set; } = [];
         public int Count { get; set; }
         public bool FoundInRaid { get; set; }
     }

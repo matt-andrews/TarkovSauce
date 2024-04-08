@@ -2,6 +2,7 @@
 using TarkovSauce.Client.Data.EventArgs;
 using TarkovSauce.Client.HttpClients;
 using TarkovSauce.Client.Services;
+using TarkovSauce.Client.Data.Models;
 
 namespace TarkovSauce.Client.Data.Providers
 {
@@ -38,7 +39,7 @@ namespace TarkovSauce.Client.Data.Providers
             var ev = new FleaEventModel()
             {
                 Type = FleaEventType.Expired,
-                ItemName = item?.Name ?? "_NOT FOUND_",
+                ItemName = item?.ItemName ?? "_NOT FOUND_",
                 ShortName = item?.ShortName ?? "_NOT FOUND_",
                 Description = item?.Description ?? "_NOT FOUND_",
                 Avg24hPrice = item?.Avg24hPrice ?? 0,
@@ -60,7 +61,7 @@ namespace TarkovSauce.Client.Data.Providers
             {
                 Type = FleaEventType.Sale,
                 Buyer = args.Buyer,
-                ItemName = soldItem?.Name ?? "_NOT FOUND_",
+                ItemName = soldItem?.ItemName ?? "_NOT FOUND_",
                 ShortName = soldItem?.ShortName ?? "_NOT FOUND_",
                 Description = soldItem?.Description ?? "_NOT FOUND_",
                 Avg24hPrice = soldItem?.Avg24hPrice ?? 0,
@@ -75,7 +76,7 @@ namespace TarkovSauce.Client.Data.Providers
             OnStateChanged?.Invoke();
         }
     }
-    public class FleaEventModel
+    public class FleaEventModel : IItemModel
     {
         [PrimaryKey, AutoIncrement]
         public int Id { get; set; }
