@@ -1,9 +1,8 @@
 ﻿<div class="tooltip-wrapper">
     <div class="tooltip-inner-wrapper">
         <div class="tooltip-line"><b>Name:</b> @Name (@ShortName)</div>
-        <div class="tooltip-line"><b>Avg Price (24h):</b> ₽@Avg24hPrice</div>
+        <div class="tooltip-line"><b>Avg Price (24h):</b> ₽@Avg24hPrice.ToString("###,###,###")</div>
         <div class="tooltip-line"><b>Description:</b> <i>@Description</i></div>
     </div>
     @ChildContent
 </div>
-

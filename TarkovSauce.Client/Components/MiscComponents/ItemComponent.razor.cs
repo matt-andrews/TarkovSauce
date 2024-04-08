@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using TarkovSauce.Client.Data.Models;
 using TarkovSauce.Client.Data.Models.Remote;
 using TarkovSauce.Client.Data.Providers;
 
@@ -13,6 +14,6 @@ namespace TarkovSauce.Client.Components.MiscComponents
     {
         [Parameter]
         [EditorRequired]
-        public FleaEventModel Item { get; set; } = default!;
+        public IItemModel Item { get; set; } = default!;
     }
 }
